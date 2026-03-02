@@ -13,5 +13,14 @@ namespace LeaveManagementSystem.Admin
         {
 
         }
+
+        protected void btnLogout_Click(object sender, EventArgs e)
+        {
+            Session.Clear();
+            Session.Abandon();
+
+            //Redirect to login
+            Response.Redirect("~/Account/Login.aspx");
+        }
     }
 }

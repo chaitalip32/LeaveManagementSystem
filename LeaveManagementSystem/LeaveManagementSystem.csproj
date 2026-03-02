@@ -99,12 +99,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Admin\Add_Employee.aspx" />
+    <Content Include="Admin\Content\dashboard_summary_cards.css" />
+    <Content Include="Employee\ApplyLeave.aspx" />
+    <Content Include="Employee\LeaveApplicationForm.aspx" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Shared\Site.master" />
     <Content Include="Admin\AdminMaster.master" />
+    <Content Include="Employee\EmployeeMaster.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -163,12 +167,33 @@
     </Compile>
     <Compile Include="BLL\UserBLL.cs" />
     <Compile Include="DAL\UserDAL.cs" />
+    <Compile Include="Employee\ApplyLeave.aspx.cs">
+      <DependentUpon>ApplyLeave.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Employee\ApplyLeave.aspx.designer.cs">
+      <DependentUpon>ApplyLeave.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Employee\Dashboard.aspx.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Employee\Dashboard.aspx.designer.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Employee\EmployeeMaster.Master.cs">
+      <DependentUpon>EmployeeMaster.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Employee\EmployeeMaster.Master.designer.cs">
+      <DependentUpon>EmployeeMaster.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Employee\LeaveApplicationForm.aspx.cs">
+      <DependentUpon>LeaveApplicationForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Employee\LeaveApplicationForm.aspx.designer.cs">
+      <DependentUpon>LeaveApplicationForm.aspx</DependentUpon>
     </Compile>
     <Compile Include="GenerateHash.aspx.cs">
       <DependentUpon>GenerateHash.aspx</DependentUpon>
@@ -210,9 +235,7 @@
       <DependentUpon>Unauthorized.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Admin\Content\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
