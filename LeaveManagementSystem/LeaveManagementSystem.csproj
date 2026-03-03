@@ -102,6 +102,7 @@
     <Content Include="Admin\Content\dashboard_summary_cards.css" />
     <Content Include="Employee\ApplyLeave.aspx" />
     <Content Include="Employee\LeaveApplicationForm.aspx" />
+    <Content Include="Employee\Styles.css" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

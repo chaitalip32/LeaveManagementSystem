@@ -5,38 +5,36 @@
 <head runat="server">
     <title>Admin - Leave Management System</title>
 
-    <meta charset="utf-8" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Admin Panel - Employee Leave Management System" />
-    <meta name="author" content="Chaitali Pednekar"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="<%= ResolveUrl("~/Admin/Content/dashboard_summary_cards.css") %>" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+
     <asp:ContentPlaceHolder ID="HeadContent" runat="server" />
 
     <style>
-
-        /*----------Global-----------*/
-        body {  
-            background-color: #F5ECF5;*/
-            /*background-color: #F1F5F9;   CEA8D0 E1CDE2*/
+        /* ================= GLOBAL ================= */
+        body {
+            background-color: #F5ECF5;
             font-family: 'Segoe UI', sans-serif;
             color: #111827;
+            overflow-x: hidden;
         }
 
-        .required::after{
-            content: " *";
-            color: red;
-        }
-
-        /*----------Sidebar--------*/
+        /* ================= SIDEBAR ================= */
         .sidebar {
             width: 250px;
             min-height: calc(100vh - 60px);
-            /*background: linear-gradient(to bottom, #312E81, #524b96);*/
             background: linear-gradient(to bottom, #773CA2, #9557C2);
             color: white;
-}
+            transition: all 0.3s ease;
+        }
+
+        .sidebar.collapsed {
+            width: 70px;
+        }
 
         .sidebar .nav-link {
             color: #FFFFFF;
@@ -54,24 +52,31 @@
             border-left: 4px solid #FFFFFF;
         }
 
-        /*----------Header--------*/
+        .sidebar.collapsed .nav-text {
+            display: none;
+        }
+
+        /* ================= TOPBAR ================= */
         .topbar {
-            /**/
-            /*background-color: #773CA2;*/
             background: linear-gradient(to bottom, #773CA2, #9557C2);
             height: 60px;
         }
 
         .role-badge {
-           /* background-color: #6366F1; */
-           background-color: #EFB54A;
+            background-color: #EFB54A;
             color: white;
             padding: 6px 14px;
             border-radius: 6px;
             font-size: 13px;
         }
 
-        /*----------Card-----------*/
+        /* ================= CONTENT ================= */
+        .content-wrapper {
+            flex-grow: 1;
+            transition: margin-left 0.3s ease;
+        }
+
+        /* ================= CARD ================= */
         .card {
             border: 1px solid #E5E7EB;
             border-radius: 10px;
@@ -85,84 +90,119 @@
             border-bottom: 1px solid #E5E7EB;
         }
 
-
-        /*------Buttons-----------*/
+        /* ================= BUTTON ================= */
         .btn-theme {
             background-color: #EFB54A;
             border-color: #EFB54A;
             color: white;
         }
 
-        .btn-theme:hover,
-        .btn-theme:focus,
-        .btn-theme:active {
+        .btn-theme:hover {
             background-color: #F9B12B;
             border-color: #F9B12B;
             color: white;
-            box-shadow: none;
         }
-
-        .btn-cancel {
-            background-color: #6B7280;
-            color: white;
-        }
-
-        .form-label {
-            font-weight: 500;
-            font-size: 14px;
-        }
-
-        .form-control, .form-select {
-            border: 1px solid #E5E7EB;
-        }
-
     </style>
- </head>
+</head>
+
 <body>
 <form runat="server">
 
-    <!--ScrptManager-->
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
-    <!-- ================= TOPBAR (FULL WIDTH) ================= -->
+    <!-- ================= TOPBAR ================= -->
     <div class="topbar d-flex justify-content-between align-items-center px-4 text-white">
 
-        <h6 class="mb-0">Employee Leave Management System</h6>
-
+        <!-- Left Section -->
         <div class="d-flex align-items-center gap-3">
-            <span class="role-badge">Admin</span>
+            <!-- Hamburger -->
+            <button type="button" class="btn btn-sm btn-light" onclick="toggleSidebar()">
+                <i class="bi bi-list"></i>
+            </button>
 
-            <asp:LinkButton 
-                ID="btnLogout" 
-                runat="server"
-                CssClass="btn btn-sm btn-danger" OnClick="btnLogout_Click"
-                >Logout</asp:LinkButton>
+            <h6 class="mb-0">Employee Leave Management System</h6>
         </div>
 
+        <!-- Right Section -->
+        <div class="d-flex align-items-center gap-3">
+
+            <span class="role-badge">Admin</span>
+
+            <!-- Profile Dropdown -->
+            <div class="dropdown">
+                <a class="text-white text-decoration-none dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                    <i class="bi bi-person-circle"></i> Profile
+                </a>
+
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item" href="AdminProfile.aspx">My Profile</a></li>
+                    <li>
+                        <asp:LinkButton 
+                            ID="btnLogout" 
+                            runat="server"
+                            CssClass="dropdown-item text-danger"
+                            OnClick="btnLogout_Click">
+                            Logout
+                        </asp:LinkButton>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
     </div>
 
-    <!-- ================= MAIN WRAPPER ================= -->
+    <!-- ================= MAIN LAYOUT ================= -->
     <div class="d-flex">
 
-        <!--------Sidebar---------->
-        <div class="sidebar p-5">
-            <h5 class="text-center mb-4">Leave System</h5>
+        <!-- Sidebar -->
+        <div id="sidebar" class="sidebar">
+
+            <div class="text-center py-4 fw-bold">
+                <span class="nav-text">Leave System</span>
+            </div>
 
             <nav class="nav flex-column">
-                <a class="nav-link" href="Dashboard.aspx">dashboard</a>
-                <a class="nav-link" href="Add_Employee.aspx">Add Employee</a>
+                <a class="nav-link" href="Dashboard.aspx">
+                    <i class="bi bi-speedometer2 me-2"></i>
+                    <span class="nav-text">Dashboard</span>
+                </a>
+
+                <a class="nav-link" href="Add_Employee.aspx">
+                    <i class="bi bi-person-plus me-2"></i>
+                    <span class="nav-text">Add Employee</span>
+                </a>
+
+                <a class="nav-link" href="ManageLeaves.aspx">
+                    <i class="bi bi-calendar-check me-2"></i>
+                    <span class="nav-text">Manage Leaves</span>
+                </a>
+
+                <a class="nav-link" href="Reports.aspx">
+                    <i class="bi bi-bar-chart me-2"></i>
+                    <span class="nav-text">Reports</span>
+                </a>
             </nav>
         </div>
 
-        <!--Page content-->
-        <div class="flex-grow-1">
+        <!-- Content -->
+        <div class="content-wrapper">
             <div class="container-fluid p-4">
-                <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
+                <asp:ContentPlaceHolder ID="MainContent" runat="server" />
             </div>
         </div>
+
     </div>
-    
+
 </form>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    function toggleSidebar() {
+        document.getElementById("sidebar").classList.toggle("collapsed");
+    }
+</script>
 
 </body>
 </html>
