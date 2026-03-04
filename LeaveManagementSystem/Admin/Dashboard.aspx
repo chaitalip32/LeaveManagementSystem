@@ -1,11 +1,35 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Admin/AdminMaster.master" AutoEventWireup="true" CodeBehind="Dashboard.aspx.cs" Inherits="LeaveManagementSystem.Admin.Dashboard" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+
+
 
     <div class="container-fluid">
 
-        <!-- ================= SUMMARY CARDS ================= -->
+        <!-- ================= Quick Buttons ================= -->
+        <div class="row mb-4">
+            <div class="col-md-2">
+                <a href="Add_Employee.aspx" class="btn btn-primary w-100">
+                    Add Employee
+                </a>
+            </div>
+
+            <div class="col-md-3">
+                <a href="Manage_Departments.aspx" class="btn btn-primary w-100">
+                    Add Department
+                </a>
+            </div>
+
+            <div class="col-md-2">
+                <a href="" class="btn btn-primary w-100">
+                    Add Leave Type
+                </a>
+            </div>
+        </div>
+
         <div class="row g-4 mb-4">
 
+            <!-- ================= SUMMARY CARDS ================= -->
             <!-- Total Employees -->
             <div class="col-xl-3 col-lg-6 col-md-6">
                 <div class="card shadow-sm text-center p-3">
@@ -46,6 +70,37 @@
                 </div>
             </div>
 
+            <!-- Rejected Leaves -->
+            <div class="col-xl-3 col-lg-6 col-md-6">
+                <div class="card shadow-sm text-center p-3">
+                    <h6 class="text-muted">Rejected Leaves</h6>
+                    <h3 class="fw-bold text-primary">
+                        <asp:Label ID="Label1" runat="server" Text="0"></asp:Label>
+                    </h3>
+                </div>
+            </div>
+
+            <!-- Total Departments -->
+            <div class="col-xl-3 col-lg-6 col-md-6">
+                <div class="card shadow-sm text-center p-3">
+                    <h6 class="text-muted">Total Departments</h6>
+                    <h3 class="fw-bold text-success">
+                        <asp:Label ID="lblTotalDepartments" runat="server"></asp:Label>
+                    </h3>
+                </div>
+            </div>
+
+            <!-- Total Leaves Types -->
+            <div class="col-xl-3 col-lg-6 col-md-6">
+                <div class="card shadow-sm text-center p-3">
+                    <h6 class="text-muted">Total Leave Types</h6>
+                    <h3 class="fw-bold text-warning">
+                        <asp:Label ID="Label3" runat="server" Text="0"></asp:Label>
+                    </h3>
+                </div>
+            </div>
+
+           
         </div>
 
 
