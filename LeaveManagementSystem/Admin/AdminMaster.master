@@ -17,7 +17,7 @@
     <style>
         /* ================= GLOBAL ================= */
         body {
-            background-color: #F5ECF5;
+            background-color: #F8F9FC;
             font-family: 'Segoe UI', sans-serif;
             color: #111827;
             overflow-x: hidden;
@@ -83,23 +83,35 @@
         }
 
         .card-header-theme {
-            background-color: #EEF2FF;
+            background-color: #F3E8FF;
             font-weight: 600;
             font-size: 14px;
-            color: #4338CA;
+            color: #773CA2;
             border-bottom: 1px solid #E5E7EB;
         }
 
         /* ================= BUTTON ================= */
         .btn-theme {
-            background-color: #EFB54A;
-            border-color: #EFB54A;
+            background-color: #E2A63A;
+            border-color: #E2A63A;
             color: white;
         }
 
         .btn-theme:hover {
             background-color: #F9B12B;
             border-color: #F9B12B;
+            color: white;
+        }
+
+        .btn-purple {
+            background-color: #773CA2;
+            border-color: #773CA2;
+            color: white;
+        }
+
+        .btn-purple:hover {
+            background-color: #6A3394;
+            border-color: #6A3394;
             color: white;
         }
     </style>

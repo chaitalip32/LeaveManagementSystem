@@ -26,17 +26,6 @@
                 <div class="row g-3">
 
                     <div class="col-md-6">
-                        <label class="form-label required">Username</label>
-                        <asp:TextBox ID="txtUsername" runat="server" CssClass="form-control"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="rfvUsername" runat="server"
-                            ControlToValidate="txtUsername"
-                            CssClass="text-danger"
-                            Display="Dynamic"
-                            ErrorMessage="Username is required"
-                            ValidationGroup="EmployeeForm" />
-                    </div>
-
-                    <div class="col-md-6">
                         <label class="form-label required">Email</label>
                         <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="rfvtxtEmail" runat="server"
@@ -68,20 +57,7 @@
                             ErrorMessage="Role is required"
                             ValidationGroup="EmployeeForm" />
                     </div>
-
-                    <div class="col-md-6">
-                        <label class="form-label required">Temporary Password</label>
-                        <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" CssClass="form-control"></asp:TextBox>
-                        <asp:RequiredFieldValidator 
-                            ID="rfvPassword"
-                            runat="server"
-                            ControlToValidate="txtPassword"
-                            CssClass="text-danger"
-                            Display="Dynamic"
-                            ErrorMessage="Password is required"
-                            ValidationGroup="EmployeeForm" />
-                    </div>
-
+ 
                 </div>
             </div>
         </div>

@@ -10,7 +10,7 @@
 
         <!-- Add Department Card-->
         <div class="card shadow-sm mb-4">
-            <div class="card-header bg-primary text-white">
+            <div class="card-header card-header-theme">
                 Add New department
             </div>
 
@@ -21,17 +21,33 @@
                         <asp:TextBox ID="txtDepartmentName" runat="server"
                             CssClass="form-control">
                         </asp:TextBox>
+
+                        <asp:RequiredFieldValidator ID="rfvDepartment" 
+                            ControlToValidate="txtDepartmentName"
+                            CssClass="text-danger"
+                            runat="server" 
+                            ErrorMessage="Department name is required">
+                        </asp:RequiredFieldValidator>
+
                     </div>
 
                     <div class="col-md-6">
                         <asp:TextBox ID="txtDescription" runat="server"
                             CssClass="form-control">
                         </asp:TextBox>
+
+                        <asp:RequiredFieldValidator ID="rfvDescription" 
+                            ControlToValidate="txtDescription"
+                            CssClass="text-danger"
+                            runat="server" 
+                            ErrorMessage="Description is required">
+                        </asp:RequiredFieldValidator>
+
                     </div>
 
                     <div class="col-md-3">
                         <asp:Button ID="btnAddepartment" runat="server" Text="Add Department"
-                            CssClass="btn btn-primary w-100" OnClick="btnAddepartment_Click" />
+                            CssClass="btn btn-theme w-100" OnClick="btnAddepartment_Click" />
                     </div>
                 </div>
 
@@ -43,7 +59,7 @@
 
         <!-- Department Grid -->
         <div class="card shadow-sm">
-            <div class="card-header bg-dark text-white">
+            <div class="card-header card-header-theme">
                 Department List
             </div>
 
@@ -94,7 +110,8 @@
                              <ItemTemplate>
                                 <asp:LinkButton ID="btnEdit" runat="server"
                                     CommandName="Edit"
-                                    CssClass="btn btn-primary btn-sm me-2">
+                                    CssClass="btn btn-purple btn-sm me-2"
+                                    CausesValidation="false">
                                     Edit
                                 </asp:LinkButton>
 
@@ -110,7 +127,8 @@
                             <EditItemTemplate>
                                 <asp:LinkButton ID="btnUpdate" runat="server"
                                     CommandName="Update"
-                                    CssClass="btn btn-success btn-sm me-2">
+                                    CausesValidation="false"
+                                    CssClass="btn btn-theme btn-sm me-2">
                                     Update
                                 </asp:LinkButton>
 

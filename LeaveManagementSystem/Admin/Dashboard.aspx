@@ -9,19 +9,19 @@
         <!-- ================= Quick Buttons ================= -->
         <div class="row mb-4">
             <div class="col-md-2">
-                <a href="Add_Employee.aspx" class="btn btn-primary w-100">
+                <a href="Add_Employee.aspx" class="btn btn-purple w-100">
                     Add Employee
                 </a>
             </div>
 
             <div class="col-md-3">
-                <a href="Manage_Departments.aspx" class="btn btn-primary w-100">
+                <a href="Manage_Departments.aspx" class="btn btn-purple w-100">
                     Add Department
                 </a>
             </div>
 
             <div class="col-md-2">
-                <a href="" class="btn btn-primary w-100">
+                <a href="ManageLeaves.aspx" class="btn btn-purple w-100">
                     Add Leave Type
                 </a>
             </div>

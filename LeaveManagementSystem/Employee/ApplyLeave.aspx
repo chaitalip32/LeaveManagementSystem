@@ -14,8 +14,6 @@
                 HeaderText="Please fix the following errors:"
                 ValidationGroup="LeaveForm"/>
 
-           
-                
             <div class="card-header card-header-theme">
                 Leave Details
             </div>
