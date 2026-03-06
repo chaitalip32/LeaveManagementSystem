@@ -5,8 +5,7 @@ using System.Web;
 using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
-using LeaveManagementSystem.Models
-    ;
+using LeaveManagementSystem.Models;
 
 namespace LeaveManagementSystem.DAL
 {
@@ -51,7 +50,7 @@ namespace LeaveManagementSystem.DAL
             using (SqlConnection con = new SqlConnection(cs))
             {
                 string query = @"SELECT * FROM LeaveTypes
-                                WHERE LeaveTypeId=@LeaveTyepeId";
+                                WHERE LeaveTypeId=@LeaveTypeId";
 
                 SqlCommand cmd = new SqlCommand(query, con);
                 cmd.Parameters.AddWithValue("@LeaveTypeId", id);
@@ -61,7 +60,7 @@ namespace LeaveManagementSystem.DAL
 
                 if(dr.Read())
                 {
-                    leave.LeaveTypeId = Convert.ToInt32(dr["LeavetypeId"]);
+                    leave.LeaveTypeId = Convert.ToInt32(dr["LeaveTypeId"]);
                     leave.LeaveTypeName = dr["LeaveTypeName"].ToString();
                     leave.DefaultDays = Convert.ToInt32(dr["DefaultDays"]);
                     leave.Description = dr["Description"].ToString();

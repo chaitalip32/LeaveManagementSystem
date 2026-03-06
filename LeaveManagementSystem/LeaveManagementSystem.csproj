@@ -183,10 +183,14 @@
       <DependentUpon>Manage_Departments.aspx</DependentUpon>
     </Compile>
     <Compile Include="BLL\DepartmentBLL.cs" />
+    <Compile Include="BLL\EmployeeBLL.cs" />
     <Compile Include="BLL\LeaveTypeBLL.cs" />
+    <Compile Include="BLL\LookupBLL.cs" />
     <Compile Include="BLL\UserBLL.cs" />
     <Compile Include="DAL\DepartmentDAL.cs" />
+    <Compile Include="DAL\EmployeeDAL.cs" />
     <Compile Include="DAL\LeaveTypeDAL.cs" />
+    <Compile Include="DAL\LookupDAL.cs" />
     <Compile Include="DAL\UserDAL.cs" />
     <Compile Include="Employee\ApplyLeave.aspx.cs">
       <DependentUpon>ApplyLeave.aspx</DependentUpon>
@@ -223,6 +227,7 @@
     <Compile Include="GenerateHash.aspx.designer.cs">
       <DependentUpon>GenerateHash.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\EmailHelper.cs" />
     <Compile Include="Helpers\PasswordHelper.cs" />
     <Compile Include="Helpers\SessionHelper.cs" />
     <Compile Include="HR\Dashboard.aspx.cs">
@@ -240,6 +245,7 @@
       <DependentUpon>Dashboard.aspx</DependentUpon>
     </Compile>
     <Compile Include="Models\Department.cs" />
+    <Compile Include="Models\EmployeeModel.cs" />
     <Compile Include="Models\LeaveType.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

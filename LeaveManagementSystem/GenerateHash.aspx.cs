@@ -11,7 +11,7 @@ namespace LeaveManagementSystem
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            string hash = BCrypt.Net.BCrypt.HashPassword("Manager@123");
+            string hash = BCrypt.Net.BCrypt.HashPassword("manager@123");
 
             Response.Write("<h3>" + hash + "</h3>");
         }

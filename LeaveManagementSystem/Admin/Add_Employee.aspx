@@ -300,13 +300,14 @@
             </div>
         </div>
 
+        <asp:Label ID="lblMessage" runat="server" Text="Label" Visible="false"></asp:Label>
 
         <!-- Buttons -->
         <div class="text-end mb-5">
             <asp:Button ID="btnSave" runat="server"
                 Text="Save Employee"
                 ValidationGroup="EmployeeForm"
-                CssClass="btn btn-theme px-4 me-2" />
+                CssClass="btn btn-theme px-4 me-2" OnClick="btnSave_Click" />
 
             <asp:Button ID="btnCancel" runat="server"
                 Text="Cancel"

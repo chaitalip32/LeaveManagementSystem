@@ -4,17 +4,65 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data;
+using LeaveManagementSystem.BLL;
+using System.IO;
+using LeaveManagementSystem.Models;
+using LeaveManagementSystem.Helpers;
 
 namespace LeaveManagementSystem.Admin
 {
     public partial class Add_Employee : System.Web.UI.Page
     {
+        LookupBLL lookupBLL = new LookupBLL();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if(!IsPostBack)
             {
                 LoadStates();
+                LoadRoles();
+                LoadDepartments();
+                LoadManagers();
             }
+        }
+
+        private void LoadRoles()
+        {
+            DataTable dt = lookupBLL.GetRoles();
+
+            ddlRole.DataSource = dt;
+
+            ddlRole.DataTextField = "RoleName";
+            ddlRole.DataValueField = "RoleId";
+            ddlRole.DataBind();
+
+            ddlRole.Items.Insert(0, new ListItem("-- Select Role --", ""));
+        }
+
+        private void LoadDepartments()
+        {
+            DataTable dt = lookupBLL.GetDepartments();
+
+            ddlDepartment.DataSource = dt;
+
+            ddlDepartment.DataTextField = "DepartmentName";
+            ddlDepartment.DataValueField = "DepartmentId";
+            ddlDepartment.DataBind();
+
+            ddlDepartment.Items.Insert(0, new ListItem("-- Select Department --", ""));
+        }
+
+        private void LoadManagers()
+        {
+            DataTable dt = lookupBLL.GetManagers();
+
+            ddlManager.DataSource = dt;
+            ddlManager.DataTextField = "ManagerName";
+            ddlManager.DataValueField = "EmployeeId";
+            ddlManager.DataBind();
+
+            ddlManager.Items.Insert(0, new ListItem("-- Select Manager --", ""));
         }
 
         private void LoadStates()
@@ -43,6 +91,80 @@ namespace LeaveManagementSystem.Admin
             {
                 ddlCity.Items.Add(new ListItem("Ahmedabad", "1"));
                 ddlCity.Items.Add(new ListItem("Surat", "2"));
+            }
+        }
+
+        protected void btnSave_Click(object sender, EventArgs e)
+        {
+            if (!Page.IsValid)
+                return;
+
+            try
+            {
+                string imagepath = "";
+
+                if(FileUpload1.HasFile)
+                {
+                    string folder = Server.MapPath("~/Uploads/ProfileImages/");
+
+                    if (!Directory.Exists(folder))
+                        Directory.CreateDirectory(folder);
+
+                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(FileUpload1.FileName);
+
+                    string fullPath = folder + fileName;
+
+                    FileUpload1.SaveAs(fullPath);
+
+                    imagepath = "~/Uploads/ProfileImages/" + fileName;   
+                }
+
+                string token = Guid.NewGuid().ToString();
+
+                EmployeeModel emp = new EmployeeModel
+                {
+                    Email = txtEmail.Text.Trim(),
+                    RoleId = Convert.ToInt32(ddlRole.SelectedValue),
+
+                    DepartmentId = Convert.ToInt32(ddlDepartment.SelectedValue),
+                    ManagerId = string.IsNullOrEmpty(ddlManager.SelectedValue) ? (int?)null : Convert.ToInt32(ddlManager.SelectedValue),
+
+                    EmployeeCode = txtEmployeeCode.Text.Trim(),
+
+                    FirstName = txtFirstName.Text.Trim(),
+                    LastName = txtLastName.Text.Trim(),
+
+                    Gender = rblgender.SelectedValue,
+
+                    DateOfBirth = Convert.ToDateTime(txtDOB.Text),
+                    DateOfJoining = Convert.ToDateTime(txtDOJ.Text),
+
+                    PhoneNumber = txtPhone.Text.Trim(),
+
+                    Address = txtAddress.Text.Trim(),
+
+                    State = ddlState.SelectedItem.Text,
+                    City = ddlCity.SelectedItem.Text,
+
+                    ProfileImagePath = imagepath,
+
+                    PasswordToken = token,
+                    TokenExpiry = DateTime.Now.AddHours(24)
+                };
+
+                EmployeeBLL bll = new EmployeeBLL();
+
+                bll.AddEmployee(emp);
+
+                EmailHelper.SendPasswordSetupEmail(emp.Email, token);
+
+                lblMessage.Text = "Employee added successfully. Password setup email sent.";
+                lblMessage.CssClass = "text-success";
+                lblMessage.Visible = true;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error while saving the employeee: " + ex.Message);
             }
         }
     }
