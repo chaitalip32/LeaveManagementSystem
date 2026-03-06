@@ -23,7 +23,7 @@ insert into Roles(RoleName) values
 
 select * from Roles;
 
--- DEPARTMENTS TABLE
+-- DEPARTMENTS TABLE--
 create table Departments (
 	DepartmentId int identity(1,1) primary key,
 	DepartmentName varchar(50) not null unique,
@@ -87,7 +87,14 @@ UPDATE Users
 SET PasswordHash = '$2a$11$U/zOG5nWTHqIyEhnEG5LPuRbI.wYElK97qk2dVjTOYRvFGR24FgdS' --Manager@123
 WHERE Email = 'chaitalip785@gmail.com';
 
+
+ALTER TABLE Users
+ALTER COLUMN PasswordHash varchar(255) NULL;
 select * from Users;
+
+ALTER TABLE Users
+ADD PasswordSetupToken varchar(100) NULL,
+TokenExpiry datetime NULL;
 
 -- Employees Table 
 create table Employees(
@@ -164,10 +171,136 @@ where DepartmentName = 'Finance';
 select * from Departments;
 ____________________________________
 
+--Leave Types Table--
+create table LeaveTypes(
+	LeaveTypeId int identity(1,1) primary key,
+	LeaveTypeName varchar(50) not null unique,
+	DefaultDays int not null check(DefaultDays>=0),
+	Description varchar(255),
+	IsActive bit not null default 1,
+	CreatedDate datetime not null default getdate(),
+	CreatedBy int null,
+	UpdatedDate datetime null,
+	UpdatedBy int null
+); 
+
+-- Holidays Table--
+create table Holidays(
+	HolidayId int identity(1,1) primary key,
+	HolidayDate date not null unique,
+	HolidayName varchar(100) not null,
+	Description varchar(255) null,
+	IsActive bit not null default 1,
+	CreatedDate datetime not null default getdate(),
+	CreatedBy int null,
+	UpdatedDate datetime not null default getdate(),
+	UpdatedBy int null
+);
+
+create table LeaveBalance(
+	LeaveBalanceId int identity(1,1) primary key,
+	EmployeeId int not null,
+	LeaveTypeId int not null,
+	AllocatedDays int not null check(AllocatedDays>=0),
+	UsedDays int not null Default 0 Check(UsedDays>=0),
+	RemainingDays AS (AllocatedDays-UsedDays) persisted,
+	IsActive bit not null default 1,
+	CreatedDate datetime not null default getdate(),
+	CreatedBy int null,
+	UpdatedDate datetime not null default getdate(),
+	UpdatedBy int null
+
+	Constraint FK_LeaveBalances_Employees
+		foreign key (EmployeeId) references Employees(EmployeeId),
+	
+	Constraint FK_LeaveBalances_LeaveTypes
+		foreign key (LeaveTypeId) references LeaveTypes(LeaveTypeId),
+
+	Constraint UQ_Employee_LeaveType UNIQUE (EmployeeId,LeaveTypeId)
+);
+
+-- Leave Applications table--
+create table LeaveApplications (
+	LeaveApplicationId int identity(1,1) primary key,
+	EmployeeId int not null,
+	LeaveTypeId int not null,
+	FromDate date not null,
+	ToDate date not null,
+	TotalDays int not null Check (TotalDays>0),
+	Reason varchar(300) not null,
+	Status varchar(30) not null default 'Pending_Manager',
+	ManagerId int null,
+	ManagerRemarks varchar(255) null,
+	ManagerActiondate datetime null,
+	HRId int null,
+	HRRemarks varchar(255) null,
+	HRActionDate datetime null,
+	AppliedDate datetime not null default getdate(),
+	LastUpdatedDate datetime null,
+	CreatedBy int null,
+	UpdatedBy int null,
+	PublicId uniqueidentifier NOT NULL DEFAULT NEWID()
+
+	Constraint FK_LeaveApplications_Employees
+		foreign key (EmployeeId) references Employees(EmployeeId),
+
+	Constraint FK_LeaveApplications_LeaveTypes
+		foreign key (LeaveTypeId) references LeaveTypes(LeaveTypeid),
+
+	Constraint FK_LeaveApplications_Manager
+		foreign key (ManagerId) references Employees(EmployeeId),
+
+	Constraint FK_LeaveApplications_HR
+		foreign key (HRId) references Employees(EmployeeId),
+	
+	Constraint CHK_Leavedates check (FromDate <= ToDate),
+
+	Constraint CHK_LeaveStatus Check (Status in 
+	('Pending_Manager','Pending_HR','Approved','Rejected','Cancelled'))
+);
+
+-- Audit Logs Table--
+create table AuditLogs(
+	AuditLogId int identity(1,1) primary key,
+	UserId int not null,
+	ActionType varchar(50) not null,
+	ModuleName varchar(50) not null,
+	RecordId int null,
+	Description varchar(255) null,
+	ActionDateTime datetime not null default getdate(),
+
+	constraint FK_AuditLogs_Users
+		foreign key (UserId) references Users(UserId)
+);
+
+------GUID Added------
+alter table Users
+add PublicId uniqueidentifier not null default NEWID();
+
+alter table Users
+add constraint UQ_Users_PublicId unique (PublicId);
+_____ Employees____________
+
+alter table Employees 
+add PublicId uniqueidentifier not null default NEWID();
+
+alter table Employees
+add constraint UQ_Employees_PublicId unique (publicId);
+
+--Departments--
+alter table Departments 
+Add PublicId UniqueIdentifier not null default NEWID();
+
+alter table Departments 
+add constraint UQ_Departments_PublicId unique (PublicId);
+
+
 select * from Roles;
 select * from Users;
 select * from Departments;
 select * from Employees;
-
-
-
+select * from LeaveTypes;
+select * from Holidays;
+select * from LeaveBalance;
+select * from LeaveApplications;
+select * from AuditLogs;

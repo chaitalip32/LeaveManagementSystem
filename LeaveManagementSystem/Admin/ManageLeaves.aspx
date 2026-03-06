@@ -124,7 +124,7 @@
         <asp:Button ID="btnSaveLeaveType"
             runat="server"
             Text="Save Leave Type"
-            CssClass="btn btn-theme px-4 me-2"
+            CssClass="btn btn-purple px-4 me-2"
             ValidationGroup="LeaveTypeForm" OnClick="btnSaveLeaveType_Click"/>
 
         <asp:Button ID="btnCancel"
@@ -183,27 +183,76 @@
                 AutoGenerateColumns="false"
                 CssClass="table table-bordered"
                 DataKeyNames="LeaveTypeId"
-                EmptyDataText="No leave types found">
+                EmptyDataText="No leave types found" OnRowCancelingEdit="gvLeaveTypes_RowCancelingEdit" OnRowDeleting="gvLeaveTypes_RowDeleting" OnRowEditing="gvLeaveTypes_RowEditing" OnRowUpdating="gvLeaveTypes_RowUpdating">
 
                 <Columns>
 
-                    <asp:BoundField 
-                        DataField="LeaveTypeName"
-                        HeaderText="Leave Type"/>
+                    <asp:TemplateField HeaderText="Leave Type">
+                        <ItemTemplate>
+                            <%# Eval("LeaveTypeName") %>
+                        </ItemTemplate>
 
-                    <asp:BoundField 
-                        DataField="DefaultDays"
-                        HeaderText="Default Days"/>
+                        <EditItemTemplate>
+                            <asp:TextBox 
+                                ID="txtEditLeaveType"
+                                runat="server"
+                                CssClass="form-control"
+                                Text='<%# Bind("LeaveTypeName") %>'>
+                            </asp:TextBox>
+                        </EditItemTemplate>
+                    </asp:TemplateField>
 
-                    <asp:BoundField 
-                        DataField="Description"
-                        HeaderText="Description"/>
+                    <asp:TemplateField HeaderText="Default Days">
+                        <ItemTemplate>
+                            <%# Eval("DefaultDays") %>
+                        </ItemTemplate>
 
-                    <asp:TemplateField
-                        HeaderText="Status">
+                        <EditItemTemplate>
+                            <asp:TextBox 
+                                ID="txtEditDefaultDays"
+                                runat="server"
+                                CssClass="form-control"
+                                Text='<%# Bind("DefaultDays") %>'>
+                            </asp:TextBox>
+                        </EditItemTemplate>
+                    </asp:TemplateField>
+
+                    <asp:TemplateField HeaderText="Description">
+                        <ItemTemplate>
+                            <%# Eval("Description") %>
+                        </ItemTemplate>
+
+                        <EditItemTemplate>
+                            <asp:TextBox 
+                                ID="txtEditDescription"
+                                runat="server"
+                                CssClass="form-control"
+                                Text='<%# Bind("Description") %>'>
+                            </asp:TextBox>
+                        </EditItemTemplate>
+                    </asp:TemplateField>
+
+                    <asp:TemplateField HeaderText="Status">
+
                         <ItemTemplate>
                             <%# Convert.ToBoolean(Eval("IsActive")) ? "Active" : "Inactive"%>
                         </ItemTemplate>
+
+                        <EditItemTemplate>
+                            <asp:RadioButtonList 
+                                ID="rblEditStatus"
+                                runat="server"
+                                RepeatDirection="Horizontal"
+                                CssClass="d-flex gap-3"
+                                SelectedValue='<%# Bind("IsActive") %>'>
+
+                                <asp:ListItem Text="Active" Value="True"></asp:ListItem>
+                                <asp:ListItem Text="Inactive" Value="False"></asp:ListItem>
+
+                            </asp:RadioButtonList>
+
+                        </EditItemTemplate>
+
                     </asp:TemplateField>
 
                     <asp:BoundField 
@@ -213,28 +262,48 @@
 
                     <asp:TemplateField HeaderText="Action">
 
-                        <ItemTemplate>
-                            <asp:LinkButton 
-                                ID="btnEdit" 
-                                runat="server"
-                                Text="Edit"
-                                CssClass="btn btn-sm btn-purple me-2"
-                                CommandName="EditLeaveType"
-                                CommandArgument='<%# Eval("LeaveTypeId") %>' />
-                           
-                            <asp:LinkButton 
-                                ID="btnDelete" 
-                                runat="server"
-                                Text="Delete"
-                                CssClass="btn btn-sm btn-danger"
-                                CommandName="DeleteLeaveType"
-                                CommandArgument='<%# Eval("LeaveTypeId") %>'
-                                OnClientClick="return confirm('Are you sure you want to delete this leave type?');" />
-                       
-                             </ItemTemplate>
+                    <ItemTemplate>
+
+                        <asp:LinkButton 
+                            ID="btnEdit"
+                            runat="server"
+                            Text="Edit"
+                            CssClass="btn btn-sm btn-purple me-2"
+                            CommandName="Edit"
+                            CausesValidation="false" />
+
+                        <asp:LinkButton 
+                            ID="btnDelete"
+                            runat="server"
+                            Text="Delete"
+                            CssClass="btn btn-sm btn-danger"
+                            CommandName="Delete"
+                            CausesValidation="false"
+                            OnClientClick="return confirm('Are you sure you want to delete this leave type?');" />
+
+                    </ItemTemplate>
+
+                    <EditItemTemplate>
+
+                        <asp:LinkButton 
+                            ID="btnUpdate"
+                            runat="server"
+                            Text="Update"
+                            CssClass="btn btn-sm btn-theme me-2"
+                            CommandName="Update"
+                            CausesValidation="false" />
+
+                        <asp:LinkButton 
+                            ID="btnCancel"
+                            runat="server"
+                            Text="Cancel"
+                            CssClass="btn btn-sm btn-secondary"
+                            CommandName="Cancel"
+                            CausesValidation="false" />
+
+                    </EditItemTemplate>
 
                     </asp:TemplateField>
-
                 </Columns>
                 
             </asp:GridView>

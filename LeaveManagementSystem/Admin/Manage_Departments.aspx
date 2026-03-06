@@ -47,7 +47,7 @@
 
                     <div class="col-md-3">
                         <asp:Button ID="btnAddepartment" runat="server" Text="Add Department"
-                            CssClass="btn btn-theme w-100" OnClick="btnAddepartment_Click" />
+                            CssClass="btn btn-purple w-100" OnClick="btnAddepartment_Click" />
                     </div>
                 </div>
 

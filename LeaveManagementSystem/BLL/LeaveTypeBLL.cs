@@ -18,9 +18,24 @@ namespace LeaveManagementSystem.BLL
             return dal.GetLeaveTypes(search);
         }
 
+        public LeaveType GetLeaveTypeById(int id)
+        {
+            return dal.GetLeaveTypeById(id);
+        }
+
         public void AddLeaveType(LeaveType model)
         {
             dal.InsertLeaveTypes(model);
+        }
+
+        public int UpdateLeaveType(LeaveType model)
+        {
+            return dal.UpdateLeaveType(model);
+        }
+
+        public int DeleteLeaveType(int id)
+        {
+            return dal.DeleteLeaveType(id);
         }
     }
 }

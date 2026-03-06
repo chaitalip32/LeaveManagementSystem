@@ -114,6 +114,11 @@
             border-color: #6A3394;
             color: white;
         }
+
+        .btn-add {
+            width: 140px;
+            height: 40px;
+        }
     </style>
 </head>
 
