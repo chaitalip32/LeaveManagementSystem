@@ -156,10 +156,21 @@ namespace LeaveManagementSystem.Admin
 
                 bll.AddEmployee(emp);
 
-                EmailHelper.SendPasswordSetupEmail(emp.Email, token);
+                string emailError;
 
-                lblMessage.Text = "Employee added successfully. Password setup email sent.";
-                lblMessage.CssClass = "text-success";
+                bool emailSent= EmailHelper.SendPasswordSetupEmail(emp.Email, token,out emailError);
+
+                if(emailSent)
+                {
+                    lblMessage.Text = "Employee added successfully. Password setup email sent.";
+                    lblMessage.CssClass = "text-success";
+                }
+                else
+                {
+                    lblMessage.Text = "Employee added but email could not be sent. "+emailError;
+                    lblMessage.CssClass = "text-warning";  
+                }
+
                 lblMessage.Visible = true;
             }
             catch(Exception ex)

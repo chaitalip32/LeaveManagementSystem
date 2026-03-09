@@ -30,5 +30,45 @@ namespace LeaveManagementSystem.BLL
 
             return user;
         }
+
+        public bool ResetPassword(string token, string password)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(password))
+                    throw new Exception("Password cannot be empty");
+
+                if (password.Length < 6)
+                    throw new Exception("Password must be at lease 6 characters.");
+
+                //Bcrypt hashing
+                string hashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
+                return dal.ResetPassword(token, hashedPassword);
+            }
+            catch(Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public bool GeneratePasswordResetToken(string email)
+        {
+            var user = dal.GetUsersByEmail(email);
+
+            if (user == null)
+                return false;
+
+            string token = Guid.NewGuid().ToString();
+
+            DateTime expiry = DateTime.Now.AddMinutes(30);
+
+            dal.SaveResetToken(user.UserId, token, expiry);
+
+            string error;
+
+            EmailHelper.SendPasswordSetupEmail(email, token, out error);
+
+            return true;
+        }
     }
 }

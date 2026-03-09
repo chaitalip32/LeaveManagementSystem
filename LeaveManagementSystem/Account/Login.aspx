@@ -72,6 +72,9 @@
                                onclick="togglePassword()">
                             </i>
 
+                            <div class="text-end mb-3">
+                                <a href="ForgotPassword.aspx">Forgot Password</a>
+                            </div>
                         <asp:RequiredFieldValidator 
                             ID="rfvPassword"
                             runat="server"
@@ -80,6 +83,8 @@
                             CssClass="text-danger">
                         </asp:RequiredFieldValidator>
                     </div>
+
+                    
 
                     <!-- Button -->
                     <div class="d-grid">

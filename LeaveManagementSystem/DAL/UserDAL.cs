@@ -42,6 +42,33 @@ namespace LeaveManagementSystem.DAL
             return user;
         }
 
+        public void SaveResetToken(int userId,string token,DateTime expiry)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(cs))
+                {
+                    string query = @"UPDATE Users
+                                   SET PasswordSetupToken=@Token,
+                                       TokenExpiry=@Expiry
+                                   WHERE UserId=@UserId";
+
+                    SqlCommand cmd = new SqlCommand(query, con);
+
+                    cmd.Parameters.AddWithValue("@Token", token);
+                    cmd.Parameters.AddWithValue("@Expiry", expiry);
+                    cmd.Parameters.AddWithValue("@UserId", userId);
+
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public void UpdateLastLogin(int userId)
         {
             using (SqlConnection con = new SqlConnection(cs))
@@ -53,6 +80,45 @@ namespace LeaveManagementSystem.DAL
 
                 con.Open();
                 cmd.ExecuteNonQuery();
+            }
+        }
+
+        public bool ResetPassword(string token, string passwordHash)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(cs))
+                {
+                    string query = @"UPDATE Users
+                                   SET PasswordHash=@PasswordHash,
+                                       PasswordSetupToken=NULL,
+                                       TokenExpiry=NULL,
+                                       IsFirstLogin=0,
+                                       UpdatedDate=GETDATE()
+                                   WHERE PasswordSetupToken=@Token
+                                   AND TokenExpiry > GETDATE()
+                                   AND IsActive=1";
+
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.Parameters.Add("@PasswordHash", System.Data.SqlDbType.VarChar, 255).Value= passwordHash;
+                        cmd.Parameters.Add("@Token", System.Data.SqlDbType.VarChar, 100).Value = token;
+
+                        con.Open();
+
+                        int rows = cmd.ExecuteNonQuery();
+
+                        return rows > 0;
+                    }
+                }
+            }
+            catch(SqlException ex)
+            {
+                throw new Exception("Database error while resetting password.", ex);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Unexpected error in ResetPassword DAL.", ex);
             }
         }
 
