@@ -29,8 +29,8 @@ namespace LeaveManagementSystem.Admin
             }
             catch(Exception ex)
             {
-                lblMessage.Text = ex.Message;
-                lblMessage.CssClass = "alert alert-danger";
+                ScriptManager.RegisterStartupScript(this, GetType(), "toast",
+                    "toastr.error('Something went wrong');", true);
                 lblMessage.Visible = true;
             }
         }
@@ -54,8 +54,9 @@ namespace LeaveManagementSystem.Admin
                 bll.AddLeaveType(lt);
                 LoadLeaveTypes();
 
-                lblMessage.Text = "Leave type added successfully";
-                lblMessage.CssClass = "alert alert-success";
+                ScriptManager.RegisterStartupScript(this, GetType(), "toastMessage",
+                    "toastr.success('Leave Type saved successfully');", true);
+
                 lblMessage.Visible = true;
 
                 txtLeaveType.Text = "";
@@ -64,8 +65,8 @@ namespace LeaveManagementSystem.Admin
             }
             catch(Exception ex)
             {
-                lblMessage.Text = ex.Message;
-                lblMessage.CssClass = "alert alert-danger";
+                ScriptManager.RegisterStartupScript(this, GetType(), "toast",
+                    "toastr.error('Something went wrong');", true);
                 lblMessage.Visible = true;
             }
         }
@@ -79,8 +80,8 @@ namespace LeaveManagementSystem.Admin
             }
             catch(Exception ex)
             {
-                lblMessage.Text = ex.Message;
-                lblMessage.CssClass = "alert alert-danger";
+                ScriptManager.RegisterStartupScript(this, GetType(), "toast",
+                    "toastr.error('Something went wrong');", true);
                 lblMessage.Visible = true;
             }
         }
@@ -99,7 +100,7 @@ namespace LeaveManagementSystem.Admin
             btnSaveLeaveType.Text = "Update Leave Type";
         }*/
 
-        protected void gvLeaveTypes_RowCommdand(object sender, GridViewCommandEventArgs e)
+        protected void gvLeaveTypes_RowCommadand(object sender, GridViewCommandEventArgs e)
         {
             int id = Convert.ToInt32(e.CommandArgument);
 
@@ -154,14 +155,19 @@ namespace LeaveManagementSystem.Admin
                 gvLeaveTypes.EditIndex = -1;
                 LoadLeaveTypes();
 
-                lblMessage.Text = "Leave type updated successfully";
-                lblMessage.CssClass = "alert alert-success";
+                ScriptManager.RegisterStartupScript(this, GetType(), "toastMessage",
+                   "toastr.info('Leave Type updated successfully');", true);
+
+                //ScriptManager.RegisterStartupScript(Page, Page.GetType(), "toast",
+//"showToast('Leave Type updated successfully','info');", true);
+
+
                 lblMessage.Visible = true;
             }
             catch(Exception ex)
             {
-                lblMessage.Text = ex.Message;
-                lblMessage.CssClass = "alert alert-danger";
+                ScriptManager.RegisterStartupScript(this, GetType(), "toast",
+                    "toastr.error('Something went wrong');", true);
                 lblMessage.Visible = true;
             }
         }
@@ -176,14 +182,14 @@ namespace LeaveManagementSystem.Admin
 
                 LoadLeaveTypes();
 
-                lblMessage.Text = "Leave type deleted successfully";
-                lblMessage.CssClass = "alert alert-success";
+                ScriptManager.RegisterStartupScript(this, GetType(), "toast",
+                    "toastr.warning('Leave Type deleted successfully');", true);
                 lblMessage.Visible = true;
             }
             catch(Exception ex)
             {
-                lblMessage.Text = ex.Message;
-                lblMessage.CssClass = "alert alert-danger";
+                ScriptManager.RegisterStartupScript(this, GetType(), "toast",
+                    "toastr.error('Something went wrong');", true);
                 lblMessage.Visible = true;
             }
         }
