@@ -163,7 +163,7 @@
                         <label class="form-label required">Gender</label>
                         <asp:RadioButtonList ID="rblgender" runat="server" RepeatDirection="Horizontal" 
                             CssClass="d-flex gap-3">
-                            <asp:ListItem Text="Male" Value="Male"></asp:ListItem>
+                            <asp:ListItem Text="Male" Value="Male" class="me-4"></asp:ListItem>
                             <asp:ListItem Text="Female" Value="Female"></asp:ListItem>
                         </asp:RadioButtonList>
                     
@@ -232,7 +232,7 @@
                     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                         <ContentTemplate>
 
-                            <div class="col-md-6">
+                            <div class="col-md-6 mb-3">
                                 <label class="form-label required">State</label>
                                 <asp:DropDownList ID="ddlState" 
                                     runat="server" 

@@ -100,6 +100,9 @@
   <ItemGroup>
     <Content Include="Account\ForgotPassword.aspx" />
     <Content Include="Account\SetPassword.aspx" />
+    <Content Include="Account\login.jpg" />
+    <Content Include="Account\WebForm1.aspx" />
+    <Content Include="Account\WebForm2.aspx" />
     <Content Include="Admin\ManageLeaves.aspx" />
     <Content Include="Admin\Add_Employee.aspx" />
     <Content Include="Admin\Content\dashboard_summary_cards.css" />
@@ -107,6 +110,7 @@
     <Content Include="Employee\ApplyLeave.aspx" />
     <Content Include="Employee\LeaveApplicationForm.aspx" />
     <Content Include="Employee\Styles.css" />
+    <Content Include="Images\login.jpg" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -162,6 +166,20 @@
     </Compile>
     <Compile Include="Account\SetPassword.aspx.designer.cs">
       <DependentUpon>SetPassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\WebForm2.aspx.cs">
+      <DependentUpon>WebForm2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\WebForm2.aspx.designer.cs">
+      <DependentUpon>WebForm2.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\ManageLeaves.aspx.cs">
       <DependentUpon>ManageLeaves.aspx</DependentUpon>

@@ -4,15 +4,16 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
     <div class="container-fluid">
-        <h4 class="mb-4 fw-semibold text-center">Apply for Leave</h4>
-        <div class="card shadow-sm mb-4">
 
-            <asp:ValidationSummary 
+        <asp:ValidationSummary 
                 ID="ValidationSummary1" 
                 runat="server" 
-                CssClass="alter alter-danger"
+                CssClass="alert alert-danger"
                 HeaderText="Please fix the following errors:"
                 ValidationGroup="LeaveForm"/>
+
+        <h4 class="mb-4 fw-semibold text-center">Apply for Leave</h4>
+        <div class="card shadow-sm mb-4">
 
             <div class="card-header card-header-theme">
                 Leave Details
