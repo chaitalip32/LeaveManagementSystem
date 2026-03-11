@@ -69,6 +69,6 @@ namespace LeaveManagementSystem.BLL
             EmailHelper.SendPasswordSetupEmail(email, token, out error);
 
             return true;
-        }
+        }      
     }
 }

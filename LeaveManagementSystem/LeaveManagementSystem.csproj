@@ -43,6 +43,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AjaxControlToolkit, Version=20.1.0.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <HintPath>..\packages\AjaxControlToolkit.20.1.0\lib\net40\AjaxControlToolkit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="BCrypt.Net-Next, Version=4.1.0.0, Culture=neutral, PublicKeyToken=1e11be04b6288443, processorArchitecture=MSIL">
       <HintPath>..\packages\BCrypt.Net-Next.4.1.0\lib\net35\BCrypt.Net-Next.dll</HintPath>
       <Private>True</Private>
@@ -109,6 +113,7 @@
     <Content Include="Admin\Manage_Departments.aspx" />
     <Content Include="Employee\ApplyLeave.aspx" />
     <Content Include="Employee\LeaveApplicationForm.aspx" />
+    <Content Include="Employee\NewLeaveForm.aspx" />
     <Content Include="Employee\Styles.css" />
     <Content Include="Images\login.jpg" />
     <Content Include="Images\login2.png" />
@@ -254,6 +259,13 @@
     </Compile>
     <Compile Include="Employee\LeaveApplicationForm.aspx.designer.cs">
       <DependentUpon>LeaveApplicationForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Employee\NewLeaveForm.aspx.cs">
+      <DependentUpon>NewLeaveForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Employee\NewLeaveForm.aspx.designer.cs">
+      <DependentUpon>NewLeaveForm.aspx</DependentUpon>
     </Compile>
     <Compile Include="GenerateHash.aspx.cs">
       <DependentUpon>GenerateHash.aspx</DependentUpon>

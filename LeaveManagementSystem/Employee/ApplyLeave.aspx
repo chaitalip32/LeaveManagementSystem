@@ -24,6 +24,38 @@
 
                     <!--Leave type-->
                     <div class="col-md-6">
+                        <label class="form-label required">Subject</label>
+                        <asp:TextBox ID="txtSubject" 
+                            runat="server"
+                            CssClass="form-control"></asp:TextBox>
+
+                        <asp:RequiredFieldValidator ID="rfvSubject" 
+                            runat="server" 
+                            InitialValue=""
+                            CssClass="text-danger"
+                            ErrorMessage="Subject is required"
+                            ControlToValidate="txtSubject"></asp:RequiredFieldValidator>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label required" runat="server">CC Email</label>
+                        <asp:DropDownList 
+                            ID="ddlCCEmail" 
+                            runat="server"
+                            CssClass="form-select">
+                        </asp:DropDownList>
+
+                        <asp:RequiredFieldValidator 
+                            Id="rfvCCEmail"
+                            runat="server"
+                            ControlToValidate="ddlCCEmail"
+                            InitialValue=""
+                            CssClass="text-danger"
+                            ErrorMessage="Please select a manager"
+                            ValidationGroup="LeaveForm"/>
+                    </div>
+
+                    <div class="col-md-6">
                         <label class="form-label required" runat="server">Leave Type</label>
                         <asp:DropDownList 
                             ID="ddlLeaveType" 
@@ -39,6 +71,17 @@
                             CssClass="text-danger"
                             ErrorMessage="Please select a leave type"
                             ValidationGroup="LeaveForm"/>
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <asp:RadioButtonList ID="rblLeaveDay" 
+                            RepeatDirection="Horizontal"
+                            runat="server">
+                            <asp:ListItem Value="Half Day" Selected="True" class="me-4">&nbsp;&nbsp;Hald Day</asp:ListItem>
+                            <asp:ListItem Value="Full Day" Selected="False">&nbsp;&nbsp;Full Day</asp:ListItem>
+                        </asp:RadioButtonList>
+
                     </div>
 
                     <!--Form Date-->
@@ -81,6 +124,14 @@
                             CssClass="text-danger"
                             ErrorMessage="To date must be greater than or equal to From Date"
                             ValidationGroup="LeaveForm"/>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">No of days leave taken</label>
+
+                        <asp:TextBox ID="txtNoOfDays" 
+                            CssClass="form-control"
+                            runat="server"></asp:TextBox>
                     </div>
 
                     <!--Reason-->

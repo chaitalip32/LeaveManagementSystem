@@ -10,7 +10,25 @@
 namespace LeaveManagementSystem.Employee {
     
     
-    public partial class ApplyLeave {
+    public partial class NewLeaveForm {
+        
+        /// <summary>
+        /// form1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        
+        /// <summary>
+        /// ScriptManager1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager ScriptManager1;
         
         /// <summary>
         /// ValidationSummary1 control.
@@ -40,22 +58,13 @@ namespace LeaveManagementSystem.Employee {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvSubject;
         
         /// <summary>
-        /// ddlCCEmail control.
+        /// cblCCEmail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlCCEmail;
-        
-        /// <summary>
-        /// rfvCCEmail control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCCEmail;
+        protected global::System.Web.UI.WebControls.CheckBoxList cblCCEmail;
         
         /// <summary>
         /// ddlLeaveType control.
@@ -94,6 +103,15 @@ namespace LeaveManagementSystem.Employee {
         protected global::System.Web.UI.WebControls.TextBox txtFromDate;
         
         /// <summary>
+        /// calFromDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender calFromDate;
+        
+        /// <summary>
         /// rfvFromDate control.
         /// </summary>
         /// <remarks>
@@ -110,6 +128,15 @@ namespace LeaveManagementSystem.Employee {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtToDate;
+        
+        /// <summary>
+        /// calToDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender calToDate;
         
         /// <summary>
         /// rfvToDate control.
@@ -157,13 +184,13 @@ namespace LeaveManagementSystem.Employee {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvReason;
         
         /// <summary>
-        /// btnApply control.
+        /// btnSubmit control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnApply;
+        protected global::System.Web.UI.WebControls.Button btnSubmit;
         
         /// <summary>
         /// btnCancel control.

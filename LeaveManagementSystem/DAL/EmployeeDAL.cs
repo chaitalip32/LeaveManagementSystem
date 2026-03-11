@@ -89,5 +89,64 @@ namespace LeaveManagementSystem.DAL
                 }
             }
         }
+
+        // Manager and HR List in CC Email field for leave application
+        public DataTable GetManagersAndHR()
+        {
+            DataTable dt = new DataTable();
+
+            try
+            {
+                using (SqlConnection con = new SqlConnection(cs))
+                {
+                    string query = @"SELECT E.EmployeeId, 
+                                    CONCAT(E.FirstName, ' ',E.LastName) AS Name,
+                                    U.Email
+                                    FROM Employees E
+                                    INNER JOIN USERS U ON E.UserId=U.UserId
+                                    WHERE U.RoleId IN (2,3)
+                                    AND E.IsActive=1";
+
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        SqlDataAdapter da = new SqlDataAdapter(cmd);
+                        da.Fill(dt);
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error fetching Managers and HR", ex);
+            }
+
+            return dt;
+        }
+
+        public DataTable GetLeaveTypes()
+        {
+            DataTable dt = new DataTable();
+
+            try
+            {
+                using (SqlConnection con = new SqlConnection(cs))
+                {
+                    string query = @"SELECT LeaveTypeName,
+                                    LeaveTypeId FROM LeaveTypes Where IsActive=1
+                                    Order by LeaveTypeName";
+
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        SqlDataAdapter da = new SqlDataAdapter(cmd);
+                        da.Fill(dt);
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("BLL Error fetching leave types: ", ex);
+            }
+
+            return dt;
+        }
     }
 }
