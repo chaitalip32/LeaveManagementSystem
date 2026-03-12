@@ -42,6 +42,30 @@ namespace LeaveManagementSystem.DAL
             return user;
         }
 
+        // for session storage getting employee id
+        public int GetEmployeeIdByUserId(int userId)
+        {
+            int employeeId = 0;
+
+            using (SqlConnection con = new SqlConnection(cs))
+            {
+                string query = "SELECT EmployeeId FROM Employees WHERE UserId=@UserId";
+
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@UserId", userId);
+
+                con.Open();
+                object result = cmd.ExecuteScalar();
+
+                if (result != null)
+                {
+                    employeeId = Convert.ToInt32(result);
+                }
+            }
+
+            return employeeId;
+        }
+
         public void SaveResetToken(int userId,string token,DateTime expiry)
         {
             try

@@ -31,6 +31,12 @@ namespace LeaveManagementSystem.BLL
             return user;
         }
 
+        public int GetEmployeeIdByUserId(int userId)
+        {
+            UserDAL dal = new UserDAL();
+            return dal.GetEmployeeIdByUserId(userId);
+        }
+
         public bool ResetPassword(string token, string password)
         {
             try

@@ -112,6 +112,7 @@
     <Content Include="Admin\Content\dashboard_summary_cards.css" />
     <Content Include="Admin\Manage_Departments.aspx" />
     <Content Include="Employee\ApplyLeave.aspx" />
+    <Content Include="Employee\Cards.aspx" />
     <Content Include="Employee\LeaveApplicationForm.aspx" />
     <Content Include="Employee\NewLeaveForm.aspx" />
     <Content Include="Employee\Styles.css" />
@@ -224,11 +225,13 @@
     </Compile>
     <Compile Include="BLL\DepartmentBLL.cs" />
     <Compile Include="BLL\EmployeeBLL.cs" />
+    <Compile Include="BLL\LeaveApplicationBLL.cs" />
     <Compile Include="BLL\LeaveTypeBLL.cs" />
     <Compile Include="BLL\LookupBLL.cs" />
     <Compile Include="BLL\UserBLL.cs" />
     <Compile Include="DAL\DepartmentDAL.cs" />
     <Compile Include="DAL\EmployeeDAL.cs" />
+    <Compile Include="DAL\LeaveApplicationDAL.cs" />
     <Compile Include="DAL\LeaveTypeDAL.cs" />
     <Compile Include="DAL\LookupDAL.cs" />
     <Compile Include="DAL\UserDAL.cs" />
@@ -238,6 +241,13 @@
     </Compile>
     <Compile Include="Employee\ApplyLeave.aspx.designer.cs">
       <DependentUpon>ApplyLeave.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Employee\Cards.aspx.cs">
+      <DependentUpon>Cards.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Employee\Cards.aspx.designer.cs">
+      <DependentUpon>Cards.aspx</DependentUpon>
     </Compile>
     <Compile Include="Employee\Dashboard.aspx.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
@@ -293,6 +303,7 @@
     </Compile>
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\EmployeeModel.cs" />
+    <Compile Include="Models\LeaveApplication.cs" />
     <Compile Include="Models\LeaveType.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

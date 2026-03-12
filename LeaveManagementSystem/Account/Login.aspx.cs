@@ -47,8 +47,12 @@ namespace LeaveManagementSystem.Account
             Session["Email"] = user.Email;
             Session["RoleId"] = user.RoleId;
 
+            //for employees while applying leave
+            int employeeId = bll.GetEmployeeIdByUserId(user.UserId);
+            Session["EmployeeId"] = employeeId;
+
             // Role based redirection
-            switch(user.RoleId)
+            switch (user.RoleId)
             {
                 case 1:
                     /*Admin RoleId = 1*/

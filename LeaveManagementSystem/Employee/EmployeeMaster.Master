@@ -115,6 +115,41 @@
             border-color: #6A3394;
             color: white;
         }
+
+        /*css of NewApply Leave form*/
+        body{
+            font-family: 'Inter', sans-serif;
+        }
+
+        .dropdown-menu{
+            border-radius:8px;
+        }   
+             
+        .form-control{
+            border-radius: 0;
+        }
+
+        .dropdown-menu{
+            border-radius:0;
+        }
+
+        .form-select{
+            border-radius: 0;
+        }
+
+        .form-check input {
+            margin-right: 8px;
+        }
+        .required{
+            color: red;
+        }
+        
+        .text-danger{
+            font-size: 13px;
+            display: block;
+            margin-top:3px;
+        }
+
     </style>
 </head>
 
@@ -174,7 +209,7 @@
                     <span class="nav-text">Dashboard</span>
                 </a>
 
-                <a class="nav-link" href="ApplyLeave.aspx">
+                <a class="nav-link" href="NewLeaveForm.aspx">
                     <span class="nav-text">Apply Leave</span>
                 </a>
 

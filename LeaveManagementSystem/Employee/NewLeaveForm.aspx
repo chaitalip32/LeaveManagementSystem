@@ -1,58 +1,9 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="NewLeaveForm.aspx.cs" Inherits="LeaveManagementSystem.Employee.NewLeaveForm" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Employee/EmployeeMaster.master" CodeBehind="NewLeaveForm.aspx.cs" Inherits="LeaveManagementSystem.Employee.NewLeaveForm" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
-<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title>Employee - Leave Management System</title>
-
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <!-- Bootstrap 5 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
-    
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-
-    <style>
-        body{
-            font-family: 'Inter', sans-serif;
-        }
-
-        .dropdown-menu{
-            border-radius:8px;
-        }   
-             
-        .form-control{
-            border-radius: 0;
-        }
-
-        .dropdown-menu{
-            border-radius:0;
-        }
-
-        .form-select{
-            border-radius: 0;
-        }
-
-        .form-check input {
-            margin-right: 8px;
-        }
-        .required{
-            color: red;
-        }
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
         
-        .text-danger{
-            font-size: 13px;
-            display: block;
-            margin-top:3px;
-        }
-    </style>
-</head>
-<body>
-    <form id="form1" runat="server">
-        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+        
     <div class="container mt-5">
 
             <div class="row justify-content-center">
@@ -139,73 +90,107 @@
                                     ID="rblLeaveDay" 
                                     RepeatLayout="Flow"
                                     RepeatDirection="Horizontal"
+                                    AutoPostBack="true"
                                     runat="server"
-                                    CssClass="d-flex align-items-center">
-                                    <asp:ListItem Value="Half Day" Selected="True" class="me-4">&nbsp;Half Day</asp:ListItem>
+                                    CssClass="d-flex align-items-center" OnSelectedIndexChanged="rblLeaveDay_SelectedIndexChanged">
+                                    <asp:ListItem Value="Half Day" class="me-4">&nbsp;Half Day</asp:ListItem>
                                     <asp:ListItem Value="Full Day">&nbsp;Full Day</asp:ListItem>
                                 </asp:RadioButtonList>
 
                             </div>
 
                             <!--Form Date-->
-                            <div class="col-md-6">
-                                <label class="form-label" runat="server">From Date <span class="required">*</span></label>
-                                <asp:TextBox ID="txtFromDate" runat="server" 
-                                    CssClass="form-control"></asp:TextBox>
+                            <asp:Panel ID="pnlFullDay" runat="server" CssClass="row">
+                                <div class="col-md-6">
+                                    <label class="form-label" runat="server">Leave From Date <span class="required">*</span></label>
+                                    <asp:TextBox ID="txtFromDate" runat="server" 
+                                        CssClass="form-control"
+                                        onchange="calculateFays()"></asp:TextBox>
 
-                                <ajaxToolkit:CalendarExtender 
-                                    ID="calFromDate"
-                                    runat="server"
-                                    TargetControlId="txtFromDate"
-                                    Format="yyyy-mm-dd"/>
+                                    <ajaxToolkit:CalendarExtender 
+                                        ID="calFromDate"
+                                        runat="server"
+                                        TargetControlId="txtFromDate"
+                                        Format="yyyy-MM-dd"/>
                         
-                                <asp:RequiredFieldValidator 
-                                    Id="rfvFromDate"
-                                    runat="server"
-                                    ControlToValidate="txtFromDate"
-                                    CssClass="text-danger"
-                                    ErrorMessage="From Date is required"
-                                    ValidationGroup="LeaveForm"/>
-                            </div>
+                                    <asp:RequiredFieldValidator 
+                                        Id="rfvFromDate"
+                                        runat="server"
+                                        ControlToValidate="txtFromDate"
+                                        CssClass="text-danger"
+                                        ErrorMessage="From Date is required"
+                                        ValidationGroup="LeaveForm"
+                                        />
+                                </div>
 
-                            <!-- To Date-->
-                            <div class="col-md-6">
-                                <label class="form-label" runat="server">To Date <span class="required">*</span></label>
-                                <asp:TextBox ID="txtToDate" runat="server" 
-                                    CssClass="form-control"></asp:TextBox>
+                                <!-- To Date-->
+                                <div class="col-md-6">
+                                    <label class="form-label" runat="server">Leave To Date <span class="required">*</span></label>
+                                    <asp:TextBox ID="txtToDate" runat="server" 
+                                        CssClass="form-control"
+                                        onchange="calculateFays()"></asp:TextBox>
                             
-                                <ajaxToolkit:CalendarExtender
-                                    runat="server"
-                                    ID="calToDate"
-                                    TargetControlId="txtToDate" />
+                                    <ajaxToolkit:CalendarExtender
+                                        runat="server"
+                                        ID="calToDate"
+                                        TargetControlId="txtToDate"
+                                        Format="yyyy-MM-dd" />
                                 
-                                <asp:RequiredFieldValidator 
-                                    Id="rfvToDate"
-                                    runat="server"
-                                    ControlToValidate="txtToDate"
-                                    CssClass="text-danger"
-                                    ErrorMessage="To Date is required"
-                                    ValidationGroup="LeaveForm"/>
+                                    <asp:RequiredFieldValidator 
+                                        Id="rfvToDate"
+                                        runat="server"
+                                        ControlToValidate="txtToDate"
+                                        CssClass="text-danger"
+                                        ErrorMessage="To Date is required"
+                                        ValidationGroup="LeaveForm"/>
 
-                                <!--Date Compare Validator-->
-                                <asp:CompareValidator 
-                                    ID="cvDates" 
-                                    runat="server" 
-                                    ControlToValidate="txtToDate"
-                                    ControlToCompare="txtFromDate"
-                                    Operator="GreaterThanEqual"
-                                    Type="Date"
-                                    CssClass="text-danger"
-                                    ErrorMessage="To date must be greater than or equal to From Date"
-                                    ValidationGroup="LeaveForm"/>
-                            </div>
+                                    <!--Date Compare Validator-->
+                                    <asp:CompareValidator 
+                                        ID="cvDates" 
+                                        runat="server" 
+                                        ControlToValidate="txtToDate"
+                                        ControlToCompare="txtFromDate"
+                                        Operator="GreaterThanEqual"
+                                        Type="Date"
+                                        CssClass="text-danger"
+                                        ErrorMessage="To date must be greater than or equal to From Date"
+                                        ValidationGroup="LeaveForm"/>
+                                </div>
+                            </asp:Panel>
+
+
+                            <asp:Panel ID="pnlHalfDay" runat="server" CssClass="row">
+                                <div class="col-md-6">
+                                    <label class="form-label">Date</label>
+                                    <asp:TextBox ID="txtHalfDayDate"
+                                        CssClass="form-control" runat="server"
+                                        onchange="calculateFays()"></asp:TextBox>
+                                
+                                    <ajaxToolkit:CalendarExtender 
+                                        ID="calhalfDate"
+                                        runat="server"
+                                        TargetControlId="txtHalfDayDate"
+                                        Format="yyyy-MM-dd"/>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Day Type</label>
+                                    <asp:DropDownList ID="ddlDayType" runat="server"
+                                        CssClass="form-select">
+                                        <asp:ListItem Text="Select" Value=""></asp:ListItem>
+                                        <asp:ListItem Text="First Half" Value="First Half"></asp:ListItem>
+                                        <asp:ListItem Text="Second Half" Value="Second Half"></asp:ListItem>
+                                    </asp:DropDownList>
+                                </div>
+                            </asp:Panel>
 
                             <div class="col-md-6">
                                 <label class="form-label">No of days leave taken</label>
 
                                 <asp:TextBox ID="txtNoOfDays" 
                                     CssClass="form-control"
-                                    runat="server"></asp:TextBox>
+                                    runat="server"
+                                    ReadOnly="true"></asp:TextBox>
                             </div>
 
                             <!--Reason-->
@@ -237,7 +222,7 @@
                             runat="server" 
                             Text="Submit"
                             CssClass="btn btn-success px-4 w-25 me-2"
-                            ValidationGroup="LeaveForm" />
+                            ValidationGroup="LeaveForm" OnClick="btnSubmit_Click" />
 
                         <asp:Button ID="btnCancel"
                             runat="server"
@@ -248,7 +233,38 @@
             </div>
         </div>
     </div>
-    </form>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+    <script>
+        function calculateFays() {
+
+            //for half fay
+            var leavetype = document.querySelector('input[name="<%= rblLeaveDay.UniqueID %>"]:checked').value;
+            if (leavetype == "Half Day")
+            {
+                document.getElementById('<%=txtNoOfDays.ClientID%>').value = 0.5;
+                return;
+            }
+
+            //full day calculation
+            var fromDate = document.getElementById('<%= txtFromDate.ClientID %>').value;
+            var toDate = document.getElementById('<%= txtToDate.ClientID %>').value;
+                       
+            if(fromDate !=="" && toDate !=="")
+            {
+
+                var start = new Date(fromDate);
+                var end = new Date(toDate);
+                
+                var timeDiff = end-start;
+
+                var diffDays = timeDiff / (1000 * 60 * 60 * 24) + 1;
+
+                if (diffDays >= 0)
+                    document.getElementById('<%= txtNoOfDays.ClientID %>').value = diffDays;
+                else
+                    document.getElementById('<%= txtNoOfDays.ClientID %>').value = "";
+            }          
+
+        }
+    </script>
+</asp:Content>
+    
