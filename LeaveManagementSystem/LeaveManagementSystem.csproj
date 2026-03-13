@@ -118,6 +118,7 @@
     <Content Include="Employee\Styles.css" />
     <Content Include="Images\login.jpg" />
     <Content Include="Images\login2.png" />
+    <Content Include="Manager\ManagerLeaveRequests.aspx" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -300,6 +301,13 @@
     </Compile>
     <Compile Include="Manager\Dashboard.aspx.designer.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\ManagerLeaveRequests.aspx.cs">
+      <DependentUpon>ManagerLeaveRequests.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Manager\ManagerLeaveRequests.aspx.designer.cs">
+      <DependentUpon>ManagerLeaveRequests.aspx</DependentUpon>
     </Compile>
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\EmployeeModel.cs" />

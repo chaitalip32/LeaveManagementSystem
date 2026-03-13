@@ -51,7 +51,7 @@ namespace LeaveManagementSystem.BLL
                 string hashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
                 return dal.ResetPassword(token, hashedPassword);
             }
-            catch(Exception ex)
+            catch(Exception)
             {
                 throw;
             }

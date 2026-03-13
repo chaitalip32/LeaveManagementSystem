@@ -32,7 +32,7 @@ namespace LeaveManagementSystem.Admin
             {
                 lblTotalDepartments.Text = deptBll.GetDepartmentCount().ToString();
             }
-            catch(Exception ex)
+            catch(Exception)
             {
                 lblTotalDepartments.Text = "0";
             }

@@ -27,6 +27,10 @@ namespace LeaveManagementSystem.Employee
                 BindManagersAndHR();
                 BindLeaveTypes();
                 ToggleLeavePanels();
+
+                txtFromDate.Attributes.Add("onchange", "calculateDays()");
+                txtToDate.Attributes.Add("onchange", "calculateDays()");
+                txtHalfDayDate.Attributes.Add("onchange", "calculateDays()");
             }
         }
             
@@ -62,7 +66,7 @@ namespace LeaveManagementSystem.Employee
                 cblCCEmail.DataValueField = "Email";
                 cblCCEmail.DataBind();              
             }
-            catch(Exception ex)
+            catch(Exception)
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(),
         "error", "alert('Error loading managers');", true);
@@ -98,7 +102,7 @@ namespace LeaveManagementSystem.Employee
                 LeaveApplication leave = new LeaveApplication();
 
                 // for checking sesion id
-                Response.Write("EmployeeId Session: " + Session["EmployeeId"]);
+                //Response.Write("EmployeeId Session: " + Session["EmployeeId"]);
 
                 leave.EmployeeId = Convert.ToInt32(Session["EmployeeId"]);
                 leave.LeaveTypeId = Convert.ToInt32(ddlLeaveType.SelectedValue);
@@ -119,9 +123,11 @@ namespace LeaveManagementSystem.Employee
                     leave.FromDate = fromDate;
                     leave.ToDate = toDate;
 
-                    leave.TotalDays = Convert.ToDecimal(txtNoOfDays.Text);
 
-                    leave.DayType = null;
+                    //  leave.TotalDays = Convert.ToDecimal(txtNoOfDays.Text);
+                    leave.TotalDays = (leave.ToDate - leave.FromDate).Days + 1;
+
+                      leave.DayType = null;
                 }
                 else
                 {
@@ -145,6 +151,19 @@ namespace LeaveManagementSystem.Employee
                 leave.ManagerId = GetManagerId(leave.EmployeeId);
 
                 LeaveApplicationBLL leavebll = new LeaveApplicationBLL();
+
+                //getting employee name and department to send in email
+                DataTable empdt = leavebll.GetEmployeeDetails(leave.EmployeeId);
+
+                string employeeName = "";
+                string departmentName = "";
+
+                if(empdt.Rows.Count>0)
+                {
+                    employeeName = empdt.Rows[0]["Name"].ToString();
+                    departmentName = empdt.Rows[0]["DepartmentName"].ToString();
+                }
+
                 leavebll.ApplyLeave(leave);
                
                 // Emails of the managers and HR
@@ -164,6 +183,8 @@ namespace LeaveManagementSystem.Employee
 
                 string body = "A new leave request has been submitted.<br/><br/>" +
                     "Employee ID: " + leave.EmployeeId + "<br/>" +
+                    "Employee Name: "+ employeeName +"<br/>"+
+                    "Employee Department: "+ departmentName +"<br/>"+ 
                     "Leave type:" + ddlLeaveType.SelectedItem.Text+"<br/>"+
                     "From Date: "+leave.FromDate+"<br/>"+
                     "To Date:"+leave.ToDate+"<br/>"+
@@ -179,7 +200,7 @@ namespace LeaveManagementSystem.Employee
                     Response.Write("<script>alert('Leave applied and email sent successfully')</script>");
                 }
                 else
-                {
+               { 
                     Response.Write("<script>alert('Leave applied but email failed:+"+ error +"')</script>");
                 }
             }
@@ -200,9 +221,9 @@ namespace LeaveManagementSystem.Employee
                     managerId = Convert.ToInt32(dt.Rows[0]["ManagerId"]);
                 }
             }
-            catch(Exception ex)
+            catch(Exception)
             {
-                throw ex;
+                throw;
             }
             return managerId;
         }

@@ -93,7 +93,7 @@
                                     AutoPostBack="true"
                                     runat="server"
                                     CssClass="d-flex align-items-center" OnSelectedIndexChanged="rblLeaveDay_SelectedIndexChanged">
-                                    <asp:ListItem Value="Half Day" class="me-4">&nbsp;Half Day</asp:ListItem>
+                                    <asp:ListItem Value="Half Day" class="me-3">&nbsp;Half Day</asp:ListItem>
                                     <asp:ListItem Value="Full Day">&nbsp;Full Day</asp:ListItem>
                                 </asp:RadioButtonList>
 
@@ -104,8 +104,7 @@
                                 <div class="col-md-6">
                                     <label class="form-label" runat="server">Leave From Date <span class="required">*</span></label>
                                     <asp:TextBox ID="txtFromDate" runat="server" 
-                                        CssClass="form-control"
-                                        onchange="calculateFays()"></asp:TextBox>
+                                        CssClass="form-control"></asp:TextBox>
 
                                     <ajaxToolkit:CalendarExtender 
                                         ID="calFromDate"
@@ -120,15 +119,14 @@
                                         CssClass="text-danger"
                                         ErrorMessage="From Date is required"
                                         ValidationGroup="LeaveForm"
-                                        />
+                                        StartDate="<%# DateTime.Today %>"/>
                                 </div>
 
                                 <!-- To Date-->
                                 <div class="col-md-6">
                                     <label class="form-label" runat="server">Leave To Date <span class="required">*</span></label>
                                     <asp:TextBox ID="txtToDate" runat="server" 
-                                        CssClass="form-control"
-                                        onchange="calculateFays()"></asp:TextBox>
+                                        CssClass="form-control"></asp:TextBox>
                             
                                     <ajaxToolkit:CalendarExtender
                                         runat="server"
@@ -163,8 +161,7 @@
                                 <div class="col-md-6">
                                     <label class="form-label">Date</label>
                                     <asp:TextBox ID="txtHalfDayDate"
-                                        CssClass="form-control" runat="server"
-                                        onchange="calculateFays()"></asp:TextBox>
+                                        CssClass="form-control" runat="server"></asp:TextBox>
                                 
                                     <ajaxToolkit:CalendarExtender 
                                         ID="calhalfDate"
@@ -234,9 +231,9 @@
         </div>
     </div>
     <script>
-        function calculateFays() {
+        function calculateDays() {
 
-            //for half fay
+            //for half day
             var leavetype = document.querySelector('input[name="<%= rblLeaveDay.UniqueID %>"]:checked').value;
             if (leavetype == "Half Day")
             {

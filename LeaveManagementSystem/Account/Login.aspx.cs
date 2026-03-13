@@ -66,7 +66,7 @@ namespace LeaveManagementSystem.Account
 
                 case 3:
                     /*manager RoleId = 3*/
-                    Response.Redirect("~/Manager/Dashboard.aspx");
+                    Response.Redirect("~/Manager/ManagerLeaveRequests.aspx");
                     break;
 
                 case 4:

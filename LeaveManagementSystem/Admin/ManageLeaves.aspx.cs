@@ -27,7 +27,7 @@ namespace LeaveManagementSystem.Admin
                 gvLeaveTypes.DataSource = bll.GetLeaveTypes(search);
                 gvLeaveTypes.DataBind();
             }
-            catch(Exception ex)
+            catch(Exception)
             {
                 ScriptManager.RegisterStartupScript(this, GetType(), "toast",
                     "toastr.error('Something went wrong');", true);
@@ -63,7 +63,7 @@ namespace LeaveManagementSystem.Admin
                 txtDefaultDays.Text = "";
                 txtDescription.Text = "";
             }
-            catch(Exception ex)
+            catch(Exception)
             {
                 ScriptManager.RegisterStartupScript(this, GetType(), "toast",
                     "toastr.error('Something went wrong');", true);
@@ -78,7 +78,7 @@ namespace LeaveManagementSystem.Admin
                 string search = txtSearchLeaveType.Text.Trim();
                 LoadLeaveTypes(search);
             }
-            catch(Exception ex)
+            catch(Exception)
             {
                 ScriptManager.RegisterStartupScript(this, GetType(), "toast",
                     "toastr.error('Something went wrong');", true);
@@ -164,7 +164,7 @@ namespace LeaveManagementSystem.Admin
 
                 lblMessage.Visible = true;
             }
-            catch(Exception ex)
+            catch(Exception)
             {
                 ScriptManager.RegisterStartupScript(this, GetType(), "toast",
                     "toastr.error('Something went wrong');", true);
@@ -186,7 +186,7 @@ namespace LeaveManagementSystem.Admin
                     "toastr.warning('Leave Type deleted successfully');", true);
                 lblMessage.Visible = true;
             }
-            catch(Exception ex)
+            catch(Exception)
             {
                 ScriptManager.RegisterStartupScript(this, GetType(), "toast",
                     "toastr.error('Something went wrong');", true);

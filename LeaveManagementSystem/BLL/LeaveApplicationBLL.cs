@@ -21,5 +21,15 @@ namespace LeaveManagementSystem.BLL
         {
             return dal.GetManagerByEmployee(employeeId);
         }
+
+        public DataTable GetEmployeeDetails(int employeeId)
+        {
+            return dal.GetEmployeeDetails(employeeId); 
+        }
+
+        public DataTable GetManagerLeaveRequests(int managerId)
+        {
+            return dal.GetManagerLeaveRequests(managerId);
+        }
     }
 }

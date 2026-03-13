@@ -72,5 +72,80 @@ namespace LeaveManagementSystem.DAL
                 throw new Exception("Error fetching ManagerId"+ ex.Message);
             }
         }
+
+        public DataTable GetEmployeeDetails(int employeeId)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(cs))
+                {
+                    string query = @" Select CONCAT(e.FirstName,' ',e.LastName) As Name,
+                                    d.DepartmentName
+                                    FROM Employees e
+                                    LEFT JOIN Departments d
+                                    ON e.DepartmentId=d.DepartmentId
+                                    Where e.EmployeeId=@EmployeeId";
+
+                    SqlCommand cmd = new SqlCommand(query, con);
+                    cmd.Parameters.AddWithValue("@EmployeeId", employeeId);
+
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+
+                    return dt;
+                }
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error while fetching name and department of employee" + ex.Message);   
+            }
+        }
+
+        // Function to get all leave applications data in datatable
+        public DataTable GetManagerLeaveRequests(int managerId)
+        {
+            DataTable dt = new DataTable();
+
+            try
+            {
+                using (SqlConnection con = new SqlConnection(cs))
+                {
+                    string query = @"SELECT 
+            LA.LeaveApplicationId,
+            CONCAT(E.FirstName,' ',E.LastName) AS EmployeeName,
+            D.DepartmentName,
+            LT.LeaveTypeName,
+            LA.FromDate,
+            LA.ToDate,
+            LA.TotalDays,
+            CASE
+                WHEN LA.DayType IS NULL THEN 'Full Day'
+                ELSE 'Half Day (' + LA.DayType + ')'
+            END AS DayType,
+            LA.Reason,
+            LA.Status
+            FROM LeaveApplications LA
+            INNER JOIN Employees E ON LA.EmployeeId = E.EmployeeId
+            INNER JOIN Departments D ON E.DepartmentId = D.DepartmentId
+            INNER JOIN LeaveTypes LT ON LA.LeaveTypeId = LT.LeaveTypeId
+            WHERE LA.ManagerId = @ManagerId
+            AND LA.Status = 'Pending_Manager'
+            ORDER BY LA.AppliedDate DESC";
+
+                    SqlCommand cmd = new SqlCommand(query, con);
+                    cmd.Parameters.AddWithValue("@ManagerId", managerId);
+
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    da.Fill(dt);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return dt;
+        }
     }
 }
