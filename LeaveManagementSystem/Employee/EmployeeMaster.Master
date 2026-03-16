@@ -16,7 +16,7 @@
     <asp:ContentPlaceHolder ID="HeadContent" runat="server" />
 
     <style>
-        /* ================= GLOBAL ================= */
+        /*  GLOBAL  */
         body {
             background-color: #F8F9FC;
             font-family: 'Segoe UI', sans-serif;
@@ -24,7 +24,7 @@
             overflow-x: hidden;
         }
 
-        /* ================= SIDEBAR ================= */
+        /*  SIDEBAR  */
         .sidebar {
             width: 250px;
             min-height: calc(100vh - 60px);
@@ -57,7 +57,7 @@
             display: none;
         }
 
-        /* ================= TOPBAR ================= */
+        /*  TOPBAR  */
         .topbar {
             background: linear-gradient(to bottom, #773CA2, #9557C2);
             height: 60px;
@@ -71,13 +71,13 @@
             font-size: 13px;
         }
 
-        /* ================= CONTENT ================= */
+        /*  CONTENT  */
         .content-wrapper {
             flex-grow: 1;
             transition: margin-left 0.3s ease;
         }
 
-        /* ================= CARD ================= */
+        /*  CARD  */
         .card {
             border: 1px solid #E5E7EB;
             border-radius: 10px;
@@ -91,7 +91,7 @@
             border-bottom: 1px solid #E5E7EB;
         }
 
-        /* ================= BUTTON ================= */
+        /*  BUTTON  */
         .btn-theme {
             background-color: #E2A63A;
             border-color: #E2A63A;
@@ -158,7 +158,7 @@
 
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
-    <!-- ================= TOPBAR ================= -->
+    <!--  TOPBAR  -->
     <div class="topbar d-flex justify-content-between align-items-center px-4 text-white">
 
         <!-- Left Section -->
@@ -198,7 +198,7 @@
         </div>
     </div>
 
-    <!-- ================= MAIN LAYOUT ================= -->
+    <!--  MAIN LAYOUT  -->
     <div class="d-flex">
 
         <!-- Sidebar -->
@@ -213,9 +213,13 @@
                     <span class="nav-text">Apply Leave</span>
                 </a>
 
-                <a class="nav-link" href="">
+                <a class="nav-link" href="EmployeeLeaveHistory.aspx">
                     <span class="nav-text">Leave History</span>
-                </a>          
+                </a>      
+                
+                <a class="nav-link" href="LeaveBalance.aspx">
+                    <span class="nav-text">Leave Balance</span>
+                </a>      
             </nav>
         </div>
 

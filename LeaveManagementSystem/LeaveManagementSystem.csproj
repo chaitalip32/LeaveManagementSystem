@@ -113,7 +113,9 @@
     <Content Include="Admin\Manage_Departments.aspx" />
     <Content Include="Employee\ApplyLeave.aspx" />
     <Content Include="Employee\Cards.aspx" />
+    <Content Include="Employee\EmployeeLeaveHistory.aspx" />
     <Content Include="Employee\LeaveApplicationForm.aspx" />
+    <Content Include="Employee\LeaveBalance.aspx" />
     <Content Include="Employee\NewLeaveForm.aspx" />
     <Content Include="Employee\Styles.css" />
     <Content Include="Images\login.jpg" />
@@ -257,6 +259,13 @@
     <Compile Include="Employee\Dashboard.aspx.designer.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Employee\EmployeeLeaveHistory.aspx.cs">
+      <DependentUpon>EmployeeLeaveHistory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Employee\EmployeeLeaveHistory.aspx.designer.cs">
+      <DependentUpon>EmployeeLeaveHistory.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Employee\EmployeeMaster.Master.cs">
       <DependentUpon>EmployeeMaster.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -270,6 +279,13 @@
     </Compile>
     <Compile Include="Employee\LeaveApplicationForm.aspx.designer.cs">
       <DependentUpon>LeaveApplicationForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Employee\LeaveBalance.aspx.cs">
+      <DependentUpon>LeaveBalance.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Employee\LeaveBalance.aspx.designer.cs">
+      <DependentUpon>LeaveBalance.aspx</DependentUpon>
     </Compile>
     <Compile Include="Employee\NewLeaveForm.aspx.cs">
       <DependentUpon>NewLeaveForm.aspx</DependentUpon>

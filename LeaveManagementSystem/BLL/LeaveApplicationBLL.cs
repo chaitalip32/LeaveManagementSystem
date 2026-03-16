@@ -24,12 +24,27 @@ namespace LeaveManagementSystem.BLL
 
         public DataTable GetEmployeeDetails(int employeeId)
         {
-            return dal.GetEmployeeDetails(employeeId); 
+            return dal.GetEmployeeDetails(employeeId);
         }
 
         public DataTable GetManagerLeaveRequests(int managerId)
         {
             return dal.GetManagerLeaveRequests(managerId);
+        }
+
+        public void UpdateManagerLeaveStatus(int leaveId, string status, string comment, int managerId)
+        {
+            dal.UpdateManagerLeaveStatus(leaveId, status, comment, managerId);
+        }
+
+        public DataTable GetEmployeeLeaveHistory(int employeeId)
+        {
+            return dal.GetEmployeeLeaveHistory(employeeId);
+        }
+
+        public DataTable GetEmployeeLeaveBalance(int employeeId)
+        {
+            return dal.GetEmployeeLeaveBalance(employeeId);
         }
     }
 }

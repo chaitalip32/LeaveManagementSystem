@@ -147,5 +147,106 @@ namespace LeaveManagementSystem.DAL
 
             return dt;
         }
+
+        public void UpdateManagerLeaveStatus(int leaveId,string status, string comment, int managerId)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(cs))
+                {
+                    string query = @"Update LeaveApplications 
+                                        SET Status=@Status,
+                                        ManagerRemarks= @Remarks,
+                                        ManagerActiondate=GETDATE(),
+                                        LastUpdatedDate=GETDATE()
+                                    WHERE LeaveApplicationId=@LeaveId
+                                    AND ManagerId=@ManagerID";
+
+                    SqlCommand cmd = new SqlCommand(query, con);
+
+                    cmd.Parameters.AddWithValue("@Status",status);
+                    cmd.Parameters.AddWithValue("@Remarks", comment);
+                    cmd.Parameters.AddWithValue("@LeaveId", leaveId);
+                    cmd.Parameters.AddWithValue("@ManagerId", managerId);
+
+                    con.Open();
+                    cmd.ExecuteNonQuery();                                 
+                }
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error updating leave request "+ex.Message);
+            }
+        }
+
+        public DataTable GetEmployeeLeaveHistory(int employeeId)
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+
+                using (SqlConnection con = new SqlConnection(cs))
+                {
+                    string query = @"Select 
+                                    LT.LeaveTypeName,
+                                    LA.FromDate,
+                                    LA.ToDate,
+                                    LA.TotalDays,
+                                    LA.Status,
+                                    LA.ManagerRemarks,
+                                    LA.HRRemarks
+                                    FROM LeaveApplications LA
+                                    Inner Join LeaveTypes LT
+                                    ON LA.LeaveTypeId=LT.LeaveTypeId
+                                    WHERE LA.EmployeeId=@EmployeeId
+                                    ORDER BY LA.AppliedDate DESC";
+
+                    SqlCommand cmd = new SqlCommand(query, con);
+                    cmd.Parameters.AddWithValue("@EmployeeId", employeeId);
+
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    da.Fill(dt);
+                }
+                return dt;
+            }
+
+            catch(Exception ex)
+            {
+                throw new Exception("Error in loading leave records " + ex.Message);
+            }
+        }
+
+        public DataTable GetEmployeeLeaveBalance(int employeeId)
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+
+                using (SqlConnection con = new SqlConnection(cs))
+                {
+                    string query = @"SELECT     
+                                    LT.LeaveTypeName,
+                                    LB.AllocatedDays,
+                                    LB.UsedDays,
+                                    LB.RemainingDays
+                                    FROM LeaveBalance LB
+                                    INNER JOIN LeaveTypes LT
+                                        ON LB.LeaveTypeId=LT.LeaveTypeId
+                                    WHERE LB.EmployeeId=@EmployeeId
+                                    ORDER BY LT.LeaveTypeName";
+
+                    SqlCommand cmd = new SqlCommand(query, con);
+                    cmd.Parameters.AddWithValue("@EmployeeId", employeeId);
+
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    da.Fill(dt);
+                }
+                return dt;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error in fetching leave balance " + ex.Message);
+            }
+        }
     }
 }
