@@ -84,6 +84,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DataVisualization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -111,15 +112,14 @@
     <Content Include="Admin\Add_Employee.aspx" />
     <Content Include="Admin\Content\dashboard_summary_cards.css" />
     <Content Include="Admin\Manage_Departments.aspx" />
-    <Content Include="Employee\ApplyLeave.aspx" />
-    <Content Include="Employee\Cards.aspx" />
+    <Content Include="Employee\Dashboard.aspx" />
+    <Content Include="Employee\dummy_dashboard.aspx" />
     <Content Include="Employee\EmployeeLeaveHistory.aspx" />
-    <Content Include="Employee\LeaveApplicationForm.aspx" />
     <Content Include="Employee\LeaveBalance.aspx" />
     <Content Include="Employee\NewLeaveForm.aspx" />
-    <Content Include="Employee\Styles.css" />
     <Content Include="Images\login.jpg" />
     <Content Include="Images\login2.png" />
+    <Content Include="Images\profile.jpg" />
     <Content Include="Manager\ManagerLeaveRequests.aspx" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
@@ -127,7 +127,9 @@
     </Content>
     <Content Include="Shared\Site.master" />
     <Content Include="Admin\AdminMaster.master" />
-    <Content Include="Employee\EmployeeMaster.Master" />
+    <Content Include="Employee\EmpMaster.Master" />
+    <Content Include="Manager\Site1.Master" />
+    <Content Include="Employee\Site1.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -139,12 +141,14 @@
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Logout.aspx" />
     <Content Include="Admin\Dashboard.aspx" />
-    <Content Include="Employee\Dashboard.aspx" />
     <Content Include="GenerateHash.aspx" />
     <Content Include="HR\Dashboard.aspx" />
     <Content Include="Manager\Dashboard.aspx" />
     <Content Include="scripts\ai.0.22.9-build00167.js" />
     <Content Include="scripts\ai.0.22.9-build00167.min.js" />
+    <Content Include="Styles\forms.css" />
+    <Content Include="Styles\GridViewStyle.css" />
+    <Content Include="Styles\site.css" />
     <Content Include="Unauthorized.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -226,38 +230,35 @@
     <Compile Include="Admin\Manage_Departments.aspx.designer.cs">
       <DependentUpon>Manage_Departments.aspx</DependentUpon>
     </Compile>
+    <Compile Include="BLL\AdminDashboardBLL.cs" />
+    <Compile Include="BLL\DashboardBLL.cs" />
     <Compile Include="BLL\DepartmentBLL.cs" />
     <Compile Include="BLL\EmployeeBLL.cs" />
     <Compile Include="BLL\LeaveApplicationBLL.cs" />
     <Compile Include="BLL\LeaveTypeBLL.cs" />
     <Compile Include="BLL\LookupBLL.cs" />
     <Compile Include="BLL\UserBLL.cs" />
+    <Compile Include="DAL\AdminDashboardDAL.cs" />
+    <Compile Include="DAL\DashboardDAL.cs" />
     <Compile Include="DAL\DepartmentDAL.cs" />
     <Compile Include="DAL\EmployeeDAL.cs" />
     <Compile Include="DAL\LeaveApplicationDAL.cs" />
     <Compile Include="DAL\LeaveTypeDAL.cs" />
     <Compile Include="DAL\LookupDAL.cs" />
     <Compile Include="DAL\UserDAL.cs" />
-    <Compile Include="Employee\ApplyLeave.aspx.cs">
-      <DependentUpon>ApplyLeave.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Employee\ApplyLeave.aspx.designer.cs">
-      <DependentUpon>ApplyLeave.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Employee\Cards.aspx.cs">
-      <DependentUpon>Cards.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Employee\Cards.aspx.designer.cs">
-      <DependentUpon>Cards.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Employee\Dashboard.aspx.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Employee\Dashboard.aspx.designer.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Employee\dummy_dashboard.aspx.cs">
+      <DependentUpon>dummy_dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Employee\dummy_dashboard.aspx.designer.cs">
+      <DependentUpon>dummy_dashboard.aspx</DependentUpon>
     </Compile>
     <Compile Include="Employee\EmployeeLeaveHistory.aspx.cs">
       <DependentUpon>EmployeeLeaveHistory.aspx</DependentUpon>
@@ -266,19 +267,12 @@
     <Compile Include="Employee\EmployeeLeaveHistory.aspx.designer.cs">
       <DependentUpon>EmployeeLeaveHistory.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Employee\EmployeeMaster.Master.cs">
-      <DependentUpon>EmployeeMaster.Master</DependentUpon>
+    <Compile Include="Employee\EmpMaster.Master.cs">
+      <DependentUpon>EmpMaster.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Employee\EmployeeMaster.Master.designer.cs">
-      <DependentUpon>EmployeeMaster.Master</DependentUpon>
-    </Compile>
-    <Compile Include="Employee\LeaveApplicationForm.aspx.cs">
-      <DependentUpon>LeaveApplicationForm.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Employee\LeaveApplicationForm.aspx.designer.cs">
-      <DependentUpon>LeaveApplicationForm.aspx</DependentUpon>
+    <Compile Include="Employee\EmpMaster.Master.designer.cs">
+      <DependentUpon>EmpMaster.Master</DependentUpon>
     </Compile>
     <Compile Include="Employee\LeaveBalance.aspx.cs">
       <DependentUpon>LeaveBalance.aspx</DependentUpon>
@@ -293,6 +287,13 @@
     </Compile>
     <Compile Include="Employee\NewLeaveForm.aspx.designer.cs">
       <DependentUpon>NewLeaveForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Employee\Site1.Master.cs">
+      <DependentUpon>Site1.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Employee\Site1.Master.designer.cs">
+      <DependentUpon>Site1.Master</DependentUpon>
     </Compile>
     <Compile Include="GenerateHash.aspx.cs">
       <DependentUpon>GenerateHash.aspx</DependentUpon>
@@ -324,6 +325,13 @@
     </Compile>
     <Compile Include="Manager\ManagerLeaveRequests.aspx.designer.cs">
       <DependentUpon>ManagerLeaveRequests.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\Site1.Master.cs">
+      <DependentUpon>Site1.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Manager\Site1.Master.designer.cs">
+      <DependentUpon>Site1.Master</DependentUpon>
     </Compile>
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\EmployeeModel.cs" />

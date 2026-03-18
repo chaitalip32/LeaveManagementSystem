@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace LeaveManagementSystem.Employee
 {
-    public partial class Cards : System.Web.UI.Page
+    public partial class dummy_dashboard : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

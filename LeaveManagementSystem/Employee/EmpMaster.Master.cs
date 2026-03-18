@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace LeaveManagementSystem.Employee
 {
-    public partial class EmployeeMaster : System.Web.UI.MasterPage
+    public partial class EmpMaster : System.Web.UI.MasterPage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

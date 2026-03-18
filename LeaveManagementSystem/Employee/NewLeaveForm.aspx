@@ -1,10 +1,77 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Employee/EmployeeMaster.master" CodeBehind="NewLeaveForm.aspx.cs" Inherits="LeaveManagementSystem.Employee.NewLeaveForm" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Employee/Site1.master" CodeBehind="NewLeaveForm.aspx.cs" Inherits="LeaveManagementSystem.Employee.NewLeaveForm" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
+<asp:Content ContentPlaceHolderID="HeadContent" runat="server">
+    <style>
+        /*  BUTTON  */
+ 
+        .form-card{
+            background:white;
+        }
+        .btn-theme 
+        {
+            background-color: #E2A63A;
+            border-color: #E2A63A;
+            color: white;
+        }
+
+        .btn-theme:hover {
+            background-color: #F9B12B;
+            border-color: #F9B12B;
+            color: white;
+        }
+
+        .btn-purple {
+            background-color: #773CA2;
+            border-color: #773CA2;
+            color: white;
+        }
+
+        .btn-purple:hover {
+            background-color: #6A3394;
+            border-color: #6A3394;
+            color: white;
+        }
+
+        /*css of NewApply Leave form*/
+        body{
+            font-family: 'Inter', sans-serif;
+        }
+
+        .dropdown-menu{
+            border-radius:8px;
+        }   
+             
+        .form-control{
+            border-radius: 0;
+        }
+
+        .dropdown-menu{
+            border-radius:0;
+        }
+
+        .form-select{
+            border-radius: 0;
+        }
+
+        .form-check input {
+            margin-right: 8px;
+        }
+        .required{
+            color: red;
+        }
+        
+        .text-danger{
+            font-size: 13px;
+            display: block;
+            margin-top:3px;
+        }
+    </style>
+</asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
         
         
-    <div class="container mt-5">
+    <div class="container mt-3">
 
             <div class="row justify-content-center">
 

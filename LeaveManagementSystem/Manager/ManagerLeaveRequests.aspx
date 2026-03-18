@@ -1,25 +1,7 @@
-﻿    <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ManagerLeaveRequests.aspx.cs" Inherits="LeaveManagementSystem.Manager.ManagerLeaveRequests" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Manager/Site1.Master" CodeBehind="ManagerLeaveRequests.aspx.cs" Inherits="LeaveManagementSystem.Manager.ManagerLeaveRequests" %>
 
-    <!DOCTYPE html>
-    <html xmlns="http://www.w3.org/1999/xhtml">
-    <head runat="server">
-        <title>Manager Leave Requests</title>
-
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"/>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-        <!-- JS -->
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
-
-        <style>
-
-            h3{
-                font-weight:600;
-                font-size:18px;
-                text-align:center;
-            }
+<asp:Content ContentPlaceHolderID="HeadContent" runat="server">
+<style>
 
             .table th{
                 background:#343a40;
@@ -38,21 +20,17 @@
                 text-overflow:ellipsis;
             }
 
-            .form-control{
-                border: 0;
-            }
         </style>
+</asp:Content>
 
-    </head>
+<asp:Content ContentPlaceHolderID="MainContent" runat="server">
+    
 
-    <body>
+    <div class="container mt-3">        
 
-    <form id="form1" runat="server">
-
-    <div class="container mt-5">
-
-
-            <h3>Pending Leave Requests</h3>
+       
+            <h4 class="mb-4 fw-semibold text-center">Pending Leave Requests</h4>
+ 
 
                 <div class="table-responsive">
 
@@ -244,7 +222,8 @@
             </div>
 
         </div>
-    </form>
+</asp:Content>
 
-    </body>
-    </html>
+        
+
+        

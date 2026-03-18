@@ -13,6 +13,15 @@ namespace LeaveManagementSystem.Admin {
     public partial class Dashboard {
         
         /// <summary>
+        /// lblTotalDepartments control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTotalDepartments;
+        
+        /// <summary>
         /// lblTotalEmployees control.
         /// </summary>
         /// <remarks>
@@ -31,57 +40,48 @@ namespace LeaveManagementSystem.Admin {
         protected global::System.Web.UI.WebControls.Label lblActiveEmployees;
         
         /// <summary>
-        /// lblPendingLeaves control.
+        /// lblTypes control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPendingLeaves;
+        protected global::System.Web.UI.WebControls.Label lblTypes;
         
         /// <summary>
-        /// lblApprovedLeaves control.
+        /// lblTotalRequests control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblApprovedLeaves;
+        protected global::System.Web.UI.WebControls.Label lblTotalRequests;
         
         /// <summary>
-        /// Label1 control.
+        /// lblApproved control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.Label lblApproved;
         
         /// <summary>
-        /// lblTotalDepartments control.
+        /// lblPending control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTotalDepartments;
+        protected global::System.Web.UI.WebControls.Label lblPending;
         
         /// <summary>
-        /// Label3 control.
+        /// lblRejected control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label3;
-        
-        /// <summary>
-        /// gvEmployees control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvEmployees;
+        protected global::System.Web.UI.WebControls.Label lblRejected;
     }
 }
