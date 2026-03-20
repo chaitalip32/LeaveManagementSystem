@@ -143,10 +143,81 @@ namespace LeaveManagementSystem.DAL
             }
             catch(Exception ex)
             {
-                throw new Exception("BLL Error fetching leave types: ", ex);
+                throw new Exception("DAL Error fetching leave types: ", ex);
             }
 
             return dt;
+        }
+
+        public DataTable GetEmployeeList()
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+
+                using (SqlConnection con = new SqlConnection(cs))
+                {
+                    string query = @"SELECT
+                                    E.EmployeeId,
+                                    E.EmployeeCode,
+                                    CONCAT(E.FirstName,' ',E.LastName) AS FullName,
+                                    D.DepartmentName,
+                                    CONCAT(M.FirstName,' ',M.LastName) AS ManagerName,
+                                    U.Email,
+                                    E.PhoneNumber,
+                                    E.City,
+                                    E.DateOfJoining,
+                                        CASE
+                                            WHEN E.IsActive=1 THEN 'Active'
+                                            ELSE 'Inactive'
+                                        END AS Status
+                                    FROM Employees E
+                                    INNER JOIN Users U on U.UserId=E.UserId
+                                    INNER JOIN Departments  D on D.DepartmentId=E.DepartmentId
+                                    LEFT JOIN Employees M ON E.ManagerId=M.EmployeeID
+                                    ORDER BY E.CreatedDate DESC;
+                                    ";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        SqlDataAdapter da = new SqlDataAdapter(cmd);
+                        da.Fill(dt);
+                    }
+                }
+                return dt;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error fetching employee list " + ex.Message);
+            }
+        }
+
+        public DataTable GetEmployeeCountByDepartment()
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+
+                using(SqlConnection con=new SqlConnection(cs))
+                {
+                    string query = @"SELECT D.DepartmentName ,
+                                    count(E.EmployeeId) AS TotalEmployees
+                                    from Departments D
+                                    LEFT JOIN Employees E
+                                        ON D.DepartmentId=E.DepartmentId
+                                    GROUP BY D.DepartmentName";
+
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        SqlDataAdapter da = new SqlDataAdapter(cmd);
+                        da.Fill(dt);
+                    }                    
+                }
+                return dt;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error fetching department count " + ex.Message);
+            }
         }
     }
 }

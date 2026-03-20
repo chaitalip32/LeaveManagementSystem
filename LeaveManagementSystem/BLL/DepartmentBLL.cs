@@ -36,5 +36,10 @@ namespace LeaveManagementSystem.BLL
         {
             return dal.getDepartmentCount();
         }
+
+        public DataTable GetDepartmentById(int id)
+        {
+            return dal.GetDepartmentById(id); 
+        }
     }
 }

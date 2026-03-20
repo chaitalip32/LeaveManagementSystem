@@ -7,90 +7,108 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LeaveManagementSystem.Admin {
+namespace LeaveManagementSystem.HR {
     
     
-    public partial class Dashboard {
+    public partial class Holiday {
         
         /// <summary>
-        /// lblTotalDepartments control.
+        /// ValidationSummary1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTotalDepartments;
+        protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummary1;
         
         /// <summary>
-        /// lblTotalEmployees control.
+        /// txtHolidayName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTotalEmployees;
+        protected global::System.Web.UI.WebControls.TextBox txtHolidayName;
         
         /// <summary>
-        /// lblActiveEmployees control.
+        /// rfvSubject control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblActiveEmployees;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvSubject;
         
         /// <summary>
-        /// lblTypes control.
+        /// txtHolidayDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTypes;
+        protected global::System.Web.UI.WebControls.TextBox txtHolidayDate;
         
         /// <summary>
-        /// lblTotalRequests control.
+        /// calHolidayDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTotalRequests;
+        protected global::AjaxControlToolkit.CalendarExtender calHolidayDate;
         
         /// <summary>
-        /// lblApproved control.
+        /// rfvFromDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblApproved;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvFromDate;
         
         /// <summary>
-        /// lblPending control.
+        /// txtDescription control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPending;
+        protected global::System.Web.UI.WebControls.TextBox txtDescription;
         
         /// <summary>
-        /// lblRejected control.
+        /// rfvReason control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblRejected;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvReason;
         
         /// <summary>
-        /// chartDept control.
+        /// rblStatus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.DataVisualization.Charting.Chart chartDept;
+        protected global::System.Web.UI.WebControls.RadioButtonList rblStatus;
+        
+        /// <summary>
+        /// btnSubmit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSubmit;
+        
+        /// <summary>
+        /// btnCancel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancel;
     }
 }

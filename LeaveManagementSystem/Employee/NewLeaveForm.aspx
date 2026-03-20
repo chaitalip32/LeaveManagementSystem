@@ -177,7 +177,8 @@
                                         ID="calFromDate"
                                         runat="server"
                                         TargetControlId="txtFromDate"
-                                        Format="yyyy-MM-dd"/>
+                                        Format="yyyy-MM-dd"
+                                        StartDate="<%# DateTime.Today %>"/>
                         
                                     <asp:RequiredFieldValidator 
                                         Id="rfvFromDate"
@@ -199,7 +200,9 @@
                                         runat="server"
                                         ID="calToDate"
                                         TargetControlId="txtToDate"
-                                        Format="yyyy-MM-dd" />
+                                        Format="yyyy-MM-dd"
+                                        StartDate="<%# DateTime.Today %>"
+                                         />
                                 
                                     <asp:RequiredFieldValidator 
                                         Id="rfvToDate"
@@ -234,7 +237,8 @@
                                         ID="calhalfDate"
                                         runat="server"
                                         TargetControlId="txtHalfDayDate"
-                                        Format="yyyy-MM-dd"/>
+                                        Format="yyyy-MM-dd"
+                                        StartDate="<%# DateTime.Today %>"/>
                                 </div>
 
                                 <div class="col-md-6">
@@ -298,6 +302,16 @@
         </div>
     </div>
     <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            let today = new Date().toISOString().split('T')[0];
+
+            document.getElementById('<%= txtFromDate.ClientID%>').setAttribute("min", today);
+            document.getElementById('<%= txtToDate.ClientID %>').setAttribute("min", today);
+            document.getElementById('<%= txtHalfDayDate.ClientID %>').setAttribute("min", today);
+        });
+
         function calculateDays() {
 
             //for half day

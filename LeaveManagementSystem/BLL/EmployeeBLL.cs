@@ -37,7 +37,31 @@ namespace LeaveManagementSystem.BLL
             }
             catch(Exception ex)
             {
-                throw new Exception("BLL Error while fetching leave types"+ex.Message);
+                throw new Exception("BLL Error while fetching leave types "+ex.Message);
+            }
+        }
+
+        public DataTable GetEmployeeList()
+        {
+            try
+            {
+                return dal.GetEmployeeList();
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("BLL error while fetching employee records "+ex.Message);
+            }
+        }
+
+        public DataTable GetEmployeeCountByDepartment()
+        {
+            try
+            {
+                return dal.GetEmployeeCountByDepartment();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("BLL error while department and employee count " + ex.Message);
             }
         }
     }

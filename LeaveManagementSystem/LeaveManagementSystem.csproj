@@ -108,6 +108,7 @@
     <Content Include="Account\login.jpg" />
     <Content Include="Account\WebForm1.aspx" />
     <Content Include="Account\WebForm2.aspx" />
+    <Content Include="Admin\EmployeeList.aspx" />
     <Content Include="Admin\ManageLeaves.aspx" />
     <Content Include="Admin\Add_Employee.aspx" />
     <Content Include="Admin\Content\dashboard_summary_cards.css" />
@@ -117,6 +118,8 @@
     <Content Include="Employee\EmployeeLeaveHistory.aspx" />
     <Content Include="Employee\LeaveBalance.aspx" />
     <Content Include="Employee\NewLeaveForm.aspx" />
+    <Content Include="HR\Holiday.aspx" />
+    <Content Include="HR\HolidayList.aspx" />
     <Content Include="Images\login.jpg" />
     <Content Include="Images\login2.png" />
     <Content Include="Images\profile.jpg" />
@@ -130,6 +133,7 @@
     <Content Include="Employee\EmpMaster.Master" />
     <Content Include="Manager\Site1.Master" />
     <Content Include="Employee\Site1.Master" />
+    <Content Include="HR\Site1.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -195,6 +199,13 @@
     <Compile Include="Account\WebForm2.aspx.designer.cs">
       <DependentUpon>WebForm2.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\EmployeeList.aspx.cs">
+      <DependentUpon>EmployeeList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\EmployeeList.aspx.designer.cs">
+      <DependentUpon>EmployeeList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\ManageLeaves.aspx.cs">
       <DependentUpon>ManageLeaves.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -234,6 +245,7 @@
     <Compile Include="BLL\DashboardBLL.cs" />
     <Compile Include="BLL\DepartmentBLL.cs" />
     <Compile Include="BLL\EmployeeBLL.cs" />
+    <Compile Include="BLL\HolidayBLL.cs" />
     <Compile Include="BLL\LeaveApplicationBLL.cs" />
     <Compile Include="BLL\LeaveTypeBLL.cs" />
     <Compile Include="BLL\LookupBLL.cs" />
@@ -242,6 +254,7 @@
     <Compile Include="DAL\DashboardDAL.cs" />
     <Compile Include="DAL\DepartmentDAL.cs" />
     <Compile Include="DAL\EmployeeDAL.cs" />
+    <Compile Include="DAL\HolidayDAL.cs" />
     <Compile Include="DAL\LeaveApplicationDAL.cs" />
     <Compile Include="DAL\LeaveTypeDAL.cs" />
     <Compile Include="DAL\LookupDAL.cs" />
@@ -312,6 +325,27 @@
     <Compile Include="HR\Dashboard.aspx.designer.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
     </Compile>
+    <Compile Include="HR\Holiday.aspx.cs">
+      <DependentUpon>Holiday.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HR\Holiday.aspx.designer.cs">
+      <DependentUpon>Holiday.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HR\HolidayList.aspx.cs">
+      <DependentUpon>HolidayList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HR\HolidayList.aspx.designer.cs">
+      <DependentUpon>HolidayList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HR\Site1.Master.cs">
+      <DependentUpon>Site1.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HR\Site1.Master.designer.cs">
+      <DependentUpon>Site1.Master</DependentUpon>
+    </Compile>
     <Compile Include="Manager\Dashboard.aspx.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -335,6 +369,7 @@
     </Compile>
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\EmployeeModel.cs" />
+    <Compile Include="Models\Holidays.cs" />
     <Compile Include="Models\LeaveApplication.cs" />
     <Compile Include="Models\LeaveType.cs" />
     <Compile Include="Models\UserModel.cs" />

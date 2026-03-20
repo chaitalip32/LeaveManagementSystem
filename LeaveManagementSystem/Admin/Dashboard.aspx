@@ -32,18 +32,13 @@
             font-weight:500;
         }
         .chart-container{
-            background: #ffffff;
-            position:relative;
-            height:300px;
-            width:100%;
-            margin-top:20px;
-            padding:15px;
-            border-radius:12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.04);
-        }
+    width:100%;
+    height:350px;
+    position:relative;
+}
 
         @media(max-width: 768px){
-            .chart-container{
+            #<%= chartDept.ClientID %>{
                 height:220px;
             }
         }
@@ -156,14 +151,49 @@
             </div>
         </div>
 
+        <div class="chart-container w-100 mt-4">
+            <asp:Chart ID="chartDept" runat="server" Height="300px" Width="600px">
+    
+            <Series>
+                <asp:Series 
+                    Name="Departments"
+                    ChartType="Column"  
+                    XValueMember="DepartmentName"
+                    YValueMembers="TotalEmployees"
+                    IsValueShownAsLabel="true"
+                    Color="#2563eb"
+                    Font="Segoe UI, 10pt, style=Bold">
+                </asp:Series>
+            </Series>
+
+            <ChartAreas>
+                <asp:ChartArea Name="ChartArea1">
+            
+                    <AxisX>
+                        <MajorGrid Enabled="false" />
+                        <LabelStyle Font="Segoe UI, 9pt" />
+                    </AxisX>
+
+                    <AxisY>
+                        <MajorGrid LineColor="#e5e7eb" />
+                        <LabelStyle Font="Segoe UI, 9pt" />
+                    </AxisY>
+
+                </asp:ChartArea>
+    </ChartAreas>
+
+    <Legends>
+        <asp:Legend Enabled="false" />
+    </Legends>
+
+</asp:Chart>
+        </div>
+
 
         <div class=" chart-container">
             <canvas id="leaveChart"></canvas>
         </div>
 
-        <div class=" chart-container">
-            <canvas id="leaveTypeChart"></canvas>
-        </div>
 
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 

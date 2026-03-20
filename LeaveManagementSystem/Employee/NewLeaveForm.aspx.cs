@@ -31,6 +31,12 @@ namespace LeaveManagementSystem.Employee
                 txtFromDate.Attributes.Add("onchange", "calculateDays()");
                 txtToDate.Attributes.Add("onchange", "calculateDays()");
                 txtHalfDayDate.Attributes.Add("onchange", "calculateDays()");
+
+                DateTime today = DateTime.Today;
+
+                calFromDate.StartDate = today;
+                calToDate.StartDate = today;
+                calhalfDate.StartDate = today;
             }
         }
             

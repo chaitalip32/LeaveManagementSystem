@@ -153,5 +153,34 @@ namespace LeaveManagementSystem.DAL
                 throw new Exception("Error getting department count: " + ex.Message);
             }
         }
+
+        public DataTable GetDepartmentById(int departmentId)
+        {
+            DataTable dt = new DataTable();
+
+            try
+            {
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    string query = "SELECT * FROM Departments WHERE DepartmentId = @Id";
+
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@Id", departmentId);
+
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            da.Fill(dt);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error fetching department by ID: " + ex.Message);
+            }
+
+            return dt;
+        }
     }
 }

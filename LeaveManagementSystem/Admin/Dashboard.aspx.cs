@@ -23,6 +23,7 @@ namespace LeaveManagementSystem.Admin
             if(!IsPostBack)
             {
                 GetDashboardCounts();
+                LoadDepartmentChart();
             }
         }
 
@@ -51,6 +52,55 @@ namespace LeaveManagementSystem.Admin
             {
                 throw new Exception("Exception in getting count");
             }
+        }
+
+        protected void LoadDepartmentChart()
+        {
+            EmployeeBLL bll = new EmployeeBLL();
+
+            DataTable dt = bll.GetEmployeeCountByDepartment();
+
+            chartDept.DataSource = dt;
+
+            chartDept.Series["Departments"].XValueMember = "DepartmentName";
+            chartDept.Series["Departments"].YValueMembers = "TotalEmployees";
+
+            chartDept.DataBind();
+
+            var series = chartDept.Series["Departments"];
+
+            // Show values on bars
+            series.IsValueShownAsLabel = true;
+            series.LabelForeColor = System.Drawing.Color.White;
+            series.Font = new System.Drawing.Font("Segoe UI", 9, System.Drawing.FontStyle.Bold);
+
+            // Bar color
+            series.Color = System.Drawing.Color.FromArgb(37, 99, 235); // modern blue
+
+            // Remove border
+            series.BorderWidth = 0;
+
+            // Add rounded effect (pseudo)
+            series["BarLabelStyle"] = "Center";
+
+            // Chart area styling
+            var area = chartDept.ChartAreas[0];
+
+            area.BackColor = System.Drawing.Color.Transparent;
+            area.AxisX.MajorGrid.Enabled = false;
+            area.AxisY.MajorGrid.LineColor = System.Drawing.Color.LightGray;
+
+            // Axis styling
+            area.AxisX.LabelStyle.Font = new System.Drawing.Font("Segoe UI", 9);
+            area.AxisY.LabelStyle.Font = new System.Drawing.Font("Segoe UI", 9);
+
+            // Titles
+            area.AxisX.Title = "Departments";
+            area.AxisY.Title = "Employees";
+
+            // Remove border
+            chartDept.BorderlineWidth = 0;
+
         }
     }
 }

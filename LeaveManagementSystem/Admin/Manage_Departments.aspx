@@ -1,149 +1,115 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/AdminMaster.master" AutoEventWireup="true" CodeBehind="Manage_Departments.aspx.cs" Inherits="LeaveManagementSystem.Admin.Manage_Departments" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-</asp:Content>
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="container-fluid">
+<div class="container-fluid">
 
-        <h3 class="mb-4">Manage Departments</h3>
+    <h3 class="mb-4">Manage Departments</h3>
 
-        <!-- Add Department Card-->
-        <div class="card shadow-sm mb-4">
-            <div class="card-header card-header-theme">
-                Add New department
-            </div>
+    <!-- Add Button -->
+    <asp:Button ID="btnAddNew" runat="server"
+        Text="Add Department"
+        CssClass="btn btn-success mb-3"
+        OnClientClick="openAddModal(); return false;" />
 
-            <div class="card-body">
+    <!-- Message -->
+    <asp:Label ID="lblMessage" runat="server" CssClass="d-block mb-2"></asp:Label>
 
-                <div class="row g-3">
-                    <div class="col-md-6">
-                        <asp:TextBox ID="txtDepartmentName" runat="server"
-                            CssClass="form-control">
-                        </asp:TextBox>
+    <!-- Grid -->
+    <asp:GridView ID="gvDepartments" runat="server"
+        CssClass="table table-bordered table-hover"
+        AutoGenerateColumns="False"
+        DataKeyNames="DepartmentId"
+        OnRowCommand="gvDepartments_RowCommand"
+        OnRowDeleting="gvDepartments_RowDeleting">
 
-                        <asp:RequiredFieldValidator ID="rfvDepartment" 
-                            ControlToValidate="txtDepartmentName"
-                            CssClass="text-danger"
-                            runat="server" 
-                            ErrorMessage="Department name is required">
-                        </asp:RequiredFieldValidator>
+        <Columns>
 
-                    </div>
+            <asp:BoundField DataField="DepartmentId" HeaderText="ID" />
 
-                    <div class="col-md-6">
-                        <asp:TextBox ID="txtDescription" runat="server"
-                            CssClass="form-control">
-                        </asp:TextBox>
+            <asp:BoundField DataField="DepartmentName" HeaderText="Department Name" />
 
-                        <asp:RequiredFieldValidator ID="rfvDescription" 
-                            ControlToValidate="txtDescription"
-                            CssClass="text-danger"
-                            runat="server" 
-                            ErrorMessage="Description is required">
-                        </asp:RequiredFieldValidator>
+            <asp:BoundField DataField="Description" HeaderText="Description" />
 
-                    </div>
+            <asp:TemplateField HeaderText="Action">
+                <ItemTemplate>
 
-                    <div class="col-md-3">
-                        <asp:Button ID="btnAddepartment" runat="server" Text="Add Department"
-                            CssClass="btn btn-purple w-100" OnClick="btnAddepartment_Click" />
-                    </div>
-                </div>
+                    <asp:LinkButton ID="btnEdit" runat="server"
+                        CommandName="EditDept"
+                        CommandArgument='<%# Eval("DepartmentId") %>'
+                        CssClass="btn btn-primary btn-sm me-2">
+                        Edit
+                    </asp:LinkButton>
 
-                <asp:Label ID="lblMessage" runat="server"
-                    CssClass="text-success mt-2 d-block"></asp:Label>
+                    <asp:LinkButton ID="btnDelete" runat="server"
+                        CommandName="Delete"
+                        CssClass="btn btn-danger btn-sm"
+                        OnClientClick="return confirm('Delete this department?');">
+                        Delete
+                    </asp:LinkButton>
 
-            </div>
+                </ItemTemplate>
+            </asp:TemplateField>
+
+        </Columns>
+
+    </asp:GridView>
+
+</div>
+
+<!--  Modal -->
+<div class="modal fade" id="deptModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Department</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+
+        <asp:HiddenField ID="hfDepartmentId" runat="server" />
+
+        <div class="mb-3">
+            <asp:TextBox ID="txtDeptName" runat="server"
+                CssClass="form-control"
+                placeholder="Department Name"></asp:TextBox>
         </div>
 
-        <!-- Department Grid -->
-        <div class="card shadow-sm">
-            <div class="card-header card-header-theme">
-                Department List
-            </div>
-
-            <div class="card-body">
-
-                <asp:GridView ID="gvDepartments" runat="server"
-                    CssClass="table table-bordered table-hover"
-                    AutoGenerateColumns="False"
-                    DataKeyNames="DepartmentId"
-                    OnRowEditing="gvDepartments_RowEditing"
-                    OnRowCancelingEdit="gvDepartments_RowCancelingEdit"
-                    OnRowUpdating="gvDepartments_RowUpdating"
-                    OnRowDeleting="gvDepartments_RowDeleting" OnSelectedIndexChanged="gvDepartments_SelectedIndexChanged"
-                    >
-
-                    <Columns>
-
-                        <asp:BoundField DataField="DepartmentId"
-                            HeaderText="ID"
-                            ReadOnly="True"/>
-
-                        <asp:TemplateField HeaderText="Department Name">
-                            <ItemTemplate>
-                                <%# Eval("DepartmentName") %>
-                            </ItemTemplate>
-                            <EditItemTemplate>
-                                <asp:TextBox ID="txtEditName" runat="server"
-                                    CssClass="form-control"
-                                    Text='<%# Bind("DepartmentName") %>'>
-                                </asp:TextBox>
-                            </EditItemTemplate>
-                        </asp:TemplateField>
-
-                        <asp:TemplateField HeaderText="Description">
-                            <ItemTemplate>
-                                <%# Eval("Description") %>
-                            </ItemTemplate>
-                            <EditItemTemplate>
-                                <asp:TextBox ID="txtEditDescription" runat="server"
-                                    CssClass="form-control"
-                                    Text='<%# Bind("Description") %>'>
-
-                                </asp:TextBox>
-                            </EditItemTemplate>
-                        </asp:TemplateField>
-
-                        <asp:TemplateField HeaderText="Action">
-                             <ItemTemplate>
-                                <asp:LinkButton ID="btnEdit" runat="server"
-                                    CommandName="Edit"
-                                    CssClass="btn btn-purple btn-sm me-2"
-                                    CausesValidation="false">
-                                    Edit
-                                </asp:LinkButton>
-
-                                <asp:LinkButton ID="btnDelete" runat="server"
-                                    CommandName="Delete"
-                                    CssClass="btn btn-danger btn-sm"
-                                    CausesValidation="false"
-                                    OnClientClick="return confirm('Are you sure you want to delete?');">
-                                    Delete
-                                </asp:LinkButton>
-                            </ItemTemplate> 
-                            
-                            <EditItemTemplate>
-                                <asp:LinkButton ID="btnUpdate" runat="server"
-                                    CommandName="Update"
-                                    CausesValidation="false"
-                                    CssClass="btn btn-theme btn-sm me-2">
-                                    Update
-                                </asp:LinkButton>
-
-                                <asp:LinkButton ID="btnCancel" runat="server"
-                                    CommandName="Cancel"
-                                    CssClass="btn btn-secondary btn-sm me-2"
-                                    CausesValidation="false">
-                                    Cancel
-                                </asp:LinkButton>
-                            </EditItemTemplate>         
-                        </asp:TemplateField>
-                    </Columns>
-
-                </asp:GridView>
-            </div>
+        <div class="mb-3">
+            <asp:TextBox ID="txtDeptDesc" runat="server"
+                CssClass="form-control"
+                placeholder="Description"></asp:TextBox>
         </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <asp:Button ID="btnSave" runat="server"
+            Text="Save"
+            CssClass="btn btn-success"
+            OnClick="btnSave_Click" />
+
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Cancel
+        </button>
+      </div>
+
     </div>
+  </div>
+</div>
+
+<!-- JS -->
+<script>
+function openAddModal() {
+    document.getElementById('<%= hfDepartmentId.ClientID %>').value = "";
+    document.getElementById('<%= txtDeptName.ClientID %>').value = "";
+    document.getElementById('<%= txtDeptDesc.ClientID %>').value = "";
+
+    $('#deptModal').modal('show');
+}
+</script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </asp:Content>

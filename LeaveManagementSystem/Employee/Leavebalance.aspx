@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Leave Balance" Language="C#" MasterPageFile="~/Employee/EmployeeMaster.Master" AutoEventWireup="true" CodeBehind="LeaveBalance.aspx.cs" Inherits="LeaveManagementSystem.Employee.LeaveBalance" %>
+﻿<%@ Page Title="Leave Balance" Language="C#" MasterPageFile="~/Employee/Site1.Master" AutoEventWireup="true" CodeBehind="LeaveBalance.aspx.cs" Inherits="LeaveManagementSystem.Employee.LeaveBalance" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>

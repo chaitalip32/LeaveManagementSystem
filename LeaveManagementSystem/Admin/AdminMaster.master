@@ -212,6 +212,11 @@
                     <span class="nav-text">Manage Leaves</span>
                 </a>
 
+                <a class="nav-link" href="EmployeeList.aspx">
+                    <i class="bi bi-bar-chart me-2"></i>
+                    <span class="nav-text">Employee List</span>
+                </a>
+
                 <a class="nav-link" href="Reports.aspx">
                     <i class="bi bi-bar-chart me-2"></i>
                     <span class="nav-text">Reports</span>

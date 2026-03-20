@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.Data;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using LeaveManagementSystem.BLL;
@@ -19,133 +17,89 @@ namespace LeaveManagementSystem.Admin
             {
                 LoadDepartments();
             }
-
-            txtDepartmentName.Attributes["placeholder"] = "Enter Department Name";
-            txtDescription.Attributes["placeholder"] = "Enter Description";
         }
 
         private void LoadDepartments()
         {
-            try
-            {
-                gvDepartments.DataSource = bll.GetAllDepartments();
-                gvDepartments.DataBind();
-
-                //lblTotalDepartments.Text = bll.GetDepartmentCount().ToString();
-            }
-            catch (Exception ex)
-            {
-                lblMessage.Text = ex.Message;
-                lblMessage.CssClass = "text-danger";
-            }
-        }
-        protected void gvDepartments_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
+            gvDepartments.DataSource = bll.GetAllDepartments();
+            gvDepartments.DataBind();
         }
 
-        protected void gvDepartments_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        //   EDIT CLICK
+        protected void gvDepartments_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            try
+            if (e.CommandName == "EditDept")
             {
-                int id = Convert.ToInt32(gvDepartments.DataKeys[e.RowIndex].Value);
+                int id = Convert.ToInt32(e.CommandArgument);
 
-                bll.DeleteDepartment(id);
+                DataTable dt = bll.GetDepartmentById(id);
 
-                lblMessage.Text = "Department deleted Sucessfully.";
-                lblMessage.CssClass = "text-success";
-
-                LoadDepartments();
-            }
-            catch(Exception ex)
-            {
-                lblMessage.Text = ex.Message;
-                lblMessage.CssClass = "text-danger";
-            }
-        }
-
-        protected void gvDepartments_RowUpdating(object sender, GridViewUpdateEventArgs e)
-        {
-            try
-            {
-                int id = Convert.ToInt32(gvDepartments.DataKeys[e.RowIndex].Value);
-
-                GridViewRow row = gvDepartments.Rows[e.RowIndex];
-
-                //string name = ((TextBox)gvDepartments.Rows[e.RowIndex].FindControl("txtName")).Text;
-                //string desc = ((TextBox)gvDepartments.Rows[e.RowIndex].FindControl("TextDesc")).Text;
-
-                TextBox txtName = (TextBox)row.FindControl("txtEditName");
-                TextBox textDesc = (TextBox)row.FindControl("txtEditDescription");
-
-                int userId = Convert.ToInt32(Session["UserId"]);
-
-                Department dept = new Department
+                if (dt.Rows.Count > 0)
                 {
-                    DepartmentId = id,
-                    DepartmentName = txtName.Text.Trim(),
-                    Description = textDesc.Text.Trim(),
-                    IsActive = true,
-                    UpdatedBy = userId // Session ID
-                };
+                    hfDepartmentId.Value = id.ToString();
+                    txtDeptName.Text = dt.Rows[0]["DepartmentName"].ToString();
+                    txtDeptDesc.Text = dt.Rows[0]["Description"].ToString();
+
+                    btnSave.Text = "Update";
+
+                    ScriptManager.RegisterStartupScript(this, GetType(),
+    "Popup",
+    "var myModal = new bootstrap.Modal(document.getElementById('deptModal')); myModal.show();",
+    true);
+                }
+            }
+        }
+
+        //   SAVE / UPDATE
+        protected void btnSave_Click(object sender, EventArgs e)
+        {
+            int userId = Convert.ToInt32(Session["UserId"]);
+
+            Department dept = new Department
+            {
+                DepartmentName = txtDeptName.Text.Trim(),
+                Description = txtDeptDesc.Text.Trim(),
+                IsActive = true
+            };
+
+            if (string.IsNullOrEmpty(hfDepartmentId.Value))
+            {
+                // ADD
+                dept.CreatedBy = userId;
+                bll.AddDepartments(dept);
+
+                lblMessage.Text = "Department Added Successfully";
+            }
+            else
+            {
+                // UPDATE
+                dept.DepartmentId = Convert.ToInt32(hfDepartmentId.Value);
+                dept.UpdatedBy = userId;
 
                 bll.EditDepartments(dept);
 
-                gvDepartments.EditIndex = -1;
-                LoadDepartments();
-
-                lblMessage.Text = "Department updated successfully.";
-                lblMessage.CssClass = "text-success";
+                lblMessage.Text = "Department Updated Successfully";
             }
-            catch (Exception ex)
-            {
-                lblMessage.Text = ex.Message;
-                lblMessage.CssClass = "text-danger";
-            }
-        }
 
-        protected void gvDepartments_RowEditing(object sender, GridViewEditEventArgs e)
-        {
-            gvDepartments.EditIndex = e.NewEditIndex;
+            lblMessage.CssClass = "text-success";
+
             LoadDepartments();
+
+            ScriptManager.RegisterStartupScript(this, GetType(),
+                "Popup", "var myModal = bootstrap.Modal.getInstance(document.getElementById('deptModal')); if(myModal){myModal.hide();}", true);
         }
 
-        protected void gvDepartments_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        // DELETE
+        protected void gvDepartments_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            gvDepartments.EditIndex = -1;
+            int id = Convert.ToInt32(gvDepartments.DataKeys[e.RowIndex].Value);
+
+            bll.DeleteDepartment(id);
+
+            lblMessage.Text = "Deleted successfully";
+            lblMessage.CssClass = "text-success";
+
             LoadDepartments();
-        }
-
-        protected void btnAddepartment_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                int userId = Convert.ToInt32(Session["UserId"]);
-
-                Department dept = new Department
-                {
-                    DepartmentName = txtDepartmentName.Text.Trim(),
-                    Description = txtDescription.Text.Trim(),
-                    IsActive = true,
-                    CreatedBy = userId// Session User ID
-                };
-
-                bll.AddDepartments(dept);
-
-                lblMessage.Text = "Department Added Successfully.";
-                lblMessage.CssClass = "text-success";
-
-                txtDepartmentName.Text = "";
-                txtDescription.Text = "";
-
-                LoadDepartments();
-            }
-            catch(Exception ex)
-            {
-                lblMessage.Text = ex.Message;
-                lblMessage.CssClass = "text-danger";
-            }
-            
         }
     }
 }
