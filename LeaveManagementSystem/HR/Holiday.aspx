@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/HR/Site1.Master" CodeBehind="Holiday.aspx.cs" Inherits="LeaveManagementSystem.HR.Holiday" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.master" CodeBehind="Holiday.aspx.cs" Inherits="LeaveManagementSystem.HR.Holiday" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <asp:Content ContentPlaceHolderID="HeadContent" runat="server">

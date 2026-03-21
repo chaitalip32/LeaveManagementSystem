@@ -1,0 +1,156 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="LeaveManagementSystem.Site" %>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Leave Management System</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server"></asp:ContentPlaceHolder>
+
+    <!-- CSS -->
+    <link href="~/Styles/site.css" rel="stylesheet" runat="server" />
+    <link href="~/Styles/forms.css" rel="stylesheet" runat="server" />
+    <link href="~/Styles/GridViewStyle.css" rel="stylesheet" runat="server" />
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+        :root {
+            --card: #ffffff;
+            --text-light: #6b7280;
+            --text-dark: #111827;
+        }
+
+        body {
+            margin: 0;
+            background-color: #f8fafc;
+        }
+
+        .wrapper {
+            display: flex;
+        }
+
+        /* Sidebar */
+        #sidebar {
+            width: 250px;
+            background: #1e293b;
+            color: #fff;
+            min-height: 100vh;
+            transition: 0.3s;
+        }
+
+        #sidebar.collapsed {
+            width: 0;
+            overflow: hidden;
+        }
+
+        #sidebar .logo {
+            padding: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        #sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        #sidebar ul li {
+            padding: 12px 20px;
+        }
+
+        #sidebar ul li a {
+            color: #fff;
+            text-decoration: none;
+            display: block;
+        }
+
+        #sidebar ul li a:hover {
+            background: #334155;
+        }
+
+        /* Main */
+        .main {
+            flex: 1;
+            margin-left: 250px;
+            transition: 0.3s;
+        }
+
+        .main.expanded {
+            margin-left: 0;
+        }
+
+        /* Topbar */
+        .topbar {
+            background: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .menu-btn {
+            font-size: 22px;
+            cursor: pointer;
+        }
+
+        .page-content {
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+<form id="form1" runat="server">
+
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+
+    <div class="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar">
+            <div class="logo">Leave System</div>
+
+            <ul class="menu">
+                <asp:PlaceHolder ID="phMenu" runat="server"></asp:PlaceHolder>
+            </ul>
+        </div>
+
+        <!-- Main -->
+        <div class="main">
+
+            <!-- Topbar -->
+            <div class="topbar">
+                <div class="menu-btn" onclick="toggleSidebar()">☰</div>
+
+                <div>
+                    <img src="/images/profile.jpg" width="35" />
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="page-content">
+                <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
+            </div>
+
+        </div>
+
+    </div>
+
+</form>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    function toggleSidebar() {
+        document.getElementById("sidebar").classList.toggle("collapsed");
+        document.querySelector(".main").classList.toggle("expanded");
+    }
+</script>
+
+</body>
+</html>

@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using LeaveManagementSystem.BLL;
 using LeaveManagementSystem.Models;
 
@@ -15,7 +10,7 @@ namespace LeaveManagementSystem.Account
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["LoginError"]!=null)
+            if (Session["LoginError"] != null)
             {
                 lblMessage.Text = Session["LoginError"].ToString();
                 lblMessage.Visible = true;
@@ -36,47 +31,44 @@ namespace LeaveManagementSystem.Account
 
             UserModel user = bll.ValidateUsers(email, password);
 
-            if(user==null)
+            if (user == null)
             {
                 Session["LoginError"] = "Invalid Email or Password";
                 Response.Redirect("Login.aspx");
+                return;
             }
 
-            // Session Storing
+            // Store session
             Session["UserId"] = user.UserId;
             Session["Email"] = user.Email;
             Session["RoleId"] = user.RoleId;
 
-            //for employees while applying leave
+            // Role string
+            string role = "";
+            switch (user.RoleId)
+            {
+                case 1: role = "Admin"; break;
+                case 2: role = "HR"; break;
+                case 3: role = "Manager"; break;
+                case 4: role = "Employee"; break;
+            }
+            Session["Role"] = role;
+
             int employeeId = bll.GetEmployeeIdByUserId(user.UserId);
             Session["EmployeeId"] = employeeId;
 
-            // Role based redirection
-            switch (user.RoleId)
+            // Redirect
+            if (user.RoleId == 2 || user.RoleId == 3)
             {
-                case 1:
-                    /*Admin RoleId = 1*/
-                    Response.Redirect("~/Admin/Dashboard.aspx"); 
-                    break;
-
-                case 2:
-                    /*HR RoleId = 2*/
-                    Response.Redirect("~/HR/Dashboard.aspx");
-                    break;
-
-                case 3:
-                    /*manager RoleId = 3*/
-                    Response.Redirect("~/Manager/ManagerLeaveRequests.aspx");
-                    break;
-
-                case 4:
-                    /*Employee RoleId = 4*/
-                    Response.Redirect("~/Employee/Dashboard.aspx");
-                    break;
-
-                default:
-                    Response.Redirect("~/Unauthorized.aspx");
-                    break;
+                Response.Redirect("~/Common/LeaveRequests.aspx"); // ONE PAGE
+            }
+            else if (user.RoleId == 1)
+            {
+                Response.Redirect("~/Admin/Dashboard.aspx");
+            }
+            else
+            {
+                Response.Redirect("~/Employee/Dashboard.aspx");
             }
         }
     }

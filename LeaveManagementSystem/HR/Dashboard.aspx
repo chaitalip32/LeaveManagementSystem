@@ -1,16 +1,14 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Dashboard.aspx.cs" Inherits="LeaveManagementSystem.HR.Dashboard" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true"
+    MasterPageFile="~/Site.master"
+    CodeBehind="Dashboard.aspx.cs"
+    Inherits="LeaveManagementSystem.HR.Dashboard" %>
 
-<!DOCTYPE html>
+<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
-    <div>
-        <h2>HR Dashboard</h2>
-    </div>
-    </form>
-</body>
-</html>
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+
+    <h2>HR Dashboard</h2>
+
+</asp:Content>

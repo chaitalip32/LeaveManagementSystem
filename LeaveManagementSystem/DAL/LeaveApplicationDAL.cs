@@ -112,26 +112,34 @@ namespace LeaveManagementSystem.DAL
                 using (SqlConnection con = new SqlConnection(cs))
                 {
                     string query = @"SELECT 
-            LA.LeaveApplicationId,
-            CONCAT(E.FirstName,' ',E.LastName) AS EmployeeName,
-            D.DepartmentName,
-            LT.LeaveTypeName,
-            LA.FromDate,
-            LA.ToDate,
-            LA.TotalDays,
-            CASE
-                WHEN LA.DayType IS NULL THEN 'Full Day'
-                ELSE 'Half Day (' + LA.DayType + ')'
-            END AS DayType,
-            LA.Reason,
-            LA.Status
-            FROM LeaveApplications LA
-            INNER JOIN Employees E ON LA.EmployeeId = E.EmployeeId
-            INNER JOIN Departments D ON E.DepartmentId = D.DepartmentId
-            INNER JOIN LeaveTypes LT ON LA.LeaveTypeId = LT.LeaveTypeId
-            WHERE LA.ManagerId = @ManagerId
-            AND LA.Status = 'Pending_Manager'
-            ORDER BY LA.AppliedDate DESC";
+                                        LA.LeaveApplicationId,
+                                        CONCAT(E.FirstName,' ',E.LastName) AS EmployeeName,
+                                        D.DepartmentName,
+                                        LT.LeaveTypeName,
+                                        LA.FromDate,
+                                        LA.ToDate,
+                                        LA.TotalDays,
+                                        CASE
+                                            WHEN LA.DayType IS NULL THEN 'Full Day'
+                                            ELSE 'Half Day (' + LA.DayType + ')'
+                                        END AS DayType,
+                                        LA.Reason,
+                                        LA.Status
+                                    FROM LeaveApplications LA
+                                    INNER JOIN Employees E ON LA.EmployeeId = E.EmployeeId
+                                    INNER JOIN Departments D ON E.DepartmentId = D.DepartmentId
+                                    INNER JOIN LeaveTypes LT ON LA.LeaveTypeId = LT.LeaveTypeId
+                                    WHERE LA.ManagerId = @ManagerId
+
+                                    ORDER BY 
+                                        CASE 
+                                            WHEN LA.Status = 'Pending_Manager' THEN 1
+                                            WHEN LA.Status = 'Pending_HR' THEN 2
+                                            WHEN LA.Status = 'Approved' THEN 3
+                                            WHEN LA.Status = 'Rejected' THEN 4
+                                            ELSE 5
+                                        END,
+                                        LA.AppliedDate DESC";
 
                     SqlCommand cmd = new SqlCommand(query, con);
                     cmd.Parameters.AddWithValue("@ManagerId", managerId);
@@ -179,6 +187,93 @@ namespace LeaveManagementSystem.DAL
             }
         }
 
+        public DataTable GetHRLeaveRequests()
+        {
+            DataTable dt = new DataTable();
+
+            try
+            {
+                using (SqlConnection con = new SqlConnection(cs))
+                {
+                    string query = @"SELECT 
+                                        LA.LeaveApplicationId,
+                                        CONCAT(E.FirstName,' ',E.LastName) AS EmployeeName,
+                                        D.DepartmentName,
+                                        LT.LeaveTypeName,
+                                        LA.FromDate,
+                                        LA.ToDate,
+                                        LA.TotalDays,
+                                        CASE
+                                            WHEN LA.DayType IS NULL THEN 'Full Day'
+                                            ELSE 'Half Day (' + LA.DayType + ')'
+                                        END AS DayType,
+                                        LA.Reason,
+                                        LA.Status
+                                    FROM LeaveApplications LA
+                                    INNER JOIN Employees E ON LA.EmployeeId = E.EmployeeId
+                                    INNER JOIN Departments D ON E.DepartmentId = D.DepartmentId
+                                    INNER JOIN LeaveTypes LT ON LA.LeaveTypeId = LT.LeaveTypeId
+
+                                    ORDER BY 
+                                        CASE 
+                                            WHEN LA.Status = 'Pending_HR' THEN 1
+                                            WHEN LA.Status = 'Pending_Manager' THEN 2
+                                            WHEN LA.Status = 'Approved' THEN 3
+                                            WHEN LA.Status = 'Rejected' THEN 4
+                                            ELSE 5
+                                        END,
+                                        LA.AppliedDate DESC";
+
+                    SqlCommand cmd = new SqlCommand(query, con);
+
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    da.Fill(dt);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return dt;
+        }
+
+        public void UpdateHRLeaveStatus(int leaveId, string status, string comment, int hrId)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(cs))
+                {
+                    string query = @"UPDATE LeaveApplications 
+                             SET Status = @Status,
+                                 HRId=@HRId,
+                                 HRRemarks = @Remarks,
+                                 HRActionDate = GETDATE(),
+                                 LastUpdatedDate = GETDATE()
+                             WHERE LeaveApplicationId = @LeaveId";
+
+                    SqlCommand cmd = new SqlCommand(query, con);
+
+                    cmd.Parameters.AddWithValue("@Status", status); // Approved / Rejected
+                    cmd.Parameters.AddWithValue("@Remarks", comment);
+                    cmd.Parameters.AddWithValue("@LeaveId", leaveId);
+                    cmd.Parameters.AddWithValue("@HRId", hrId);
+
+                    con.Open();
+                    int rows=cmd.ExecuteNonQuery();
+
+                    if(rows==0)
+                    {
+                        throw new Exception("No rows updated! Check conditions.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error updating HR leave request " + ex.Message);
+            }
+        }
+
         public DataTable GetEmployeeLeaveHistory(int employeeId)
         {
             try
@@ -193,8 +288,8 @@ namespace LeaveManagementSystem.DAL
                                     LA.ToDate,
                                     LA.TotalDays,
                                     LA.Status,
-                                    LA.ManagerRemarks,
-                                    LA.HRRemarks
+                                    ISNULL(LA.ManagerRemarks, 'N/A') AS ManagerRemarks,
+                                    ISNULL(LA.HRRemarks, 'N/A') AS HRRemarks
                                     FROM LeaveApplications LA
                                     Inner Join LeaveTypes LT
                                     ON LA.LeaveTypeId=LT.LeaveTypeId

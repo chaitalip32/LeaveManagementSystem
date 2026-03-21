@@ -32,9 +32,19 @@ namespace LeaveManagementSystem.BLL
             return dal.GetManagerLeaveRequests(managerId);
         }
 
+        public DataTable GetHRLeaveRequests()
+        {
+            return dal.GetHRLeaveRequests();
+        }
+
         public void UpdateManagerLeaveStatus(int leaveId, string status, string comment, int managerId)
         {
             dal.UpdateManagerLeaveStatus(leaveId, status, comment, managerId);
+        }
+
+        public void UpdateHRLeaveStatus(int leaveId, string status, string comment, int hrId)
+        {
+            dal.UpdateHRLeaveStatus(leaveId, status, comment, hrId);
         }
 
         public DataTable GetEmployeeLeaveHistory(int employeeId)
@@ -46,5 +56,7 @@ namespace LeaveManagementSystem.BLL
         {
             return dal.GetEmployeeLeaveBalance(employeeId);
         }
+
+
     }
 }

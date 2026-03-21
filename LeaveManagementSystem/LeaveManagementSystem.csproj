@@ -106,15 +106,13 @@
     <Content Include="Account\ForgotPassword.aspx" />
     <Content Include="Account\SetPassword.aspx" />
     <Content Include="Account\login.jpg" />
-    <Content Include="Account\WebForm1.aspx" />
-    <Content Include="Account\WebForm2.aspx" />
     <Content Include="Admin\EmployeeList.aspx" />
     <Content Include="Admin\ManageLeaves.aspx" />
     <Content Include="Admin\Add_Employee.aspx" />
     <Content Include="Admin\Content\dashboard_summary_cards.css" />
     <Content Include="Admin\Manage_Departments.aspx" />
+    <Content Include="Common\LeaveRequests.aspx" />
     <Content Include="Employee\Dashboard.aspx" />
-    <Content Include="Employee\dummy_dashboard.aspx" />
     <Content Include="Employee\EmployeeLeaveHistory.aspx" />
     <Content Include="Employee\LeaveBalance.aspx" />
     <Content Include="Employee\NewLeaveForm.aspx" />
@@ -123,7 +121,6 @@
     <Content Include="Images\login.jpg" />
     <Content Include="Images\login2.png" />
     <Content Include="Images\profile.jpg" />
-    <Content Include="Manager\ManagerLeaveRequests.aspx" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -132,8 +129,8 @@
     <Content Include="Admin\AdminMaster.master" />
     <Content Include="Employee\EmpMaster.Master" />
     <Content Include="Manager\Site1.Master" />
-    <Content Include="Employee\Site1.Master" />
     <Content Include="HR\Site1.Master" />
+    <Content Include="Site.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -184,20 +181,6 @@
     </Compile>
     <Compile Include="Account\SetPassword.aspx.designer.cs">
       <DependentUpon>SetPassword.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Account\WebForm1.aspx.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Account\WebForm1.aspx.designer.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Account\WebForm2.aspx.cs">
-      <DependentUpon>WebForm2.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Account\WebForm2.aspx.designer.cs">
-      <DependentUpon>WebForm2.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\EmployeeList.aspx.cs">
       <DependentUpon>EmployeeList.aspx</DependentUpon>
@@ -250,6 +233,13 @@
     <Compile Include="BLL\LeaveTypeBLL.cs" />
     <Compile Include="BLL\LookupBLL.cs" />
     <Compile Include="BLL\UserBLL.cs" />
+    <Compile Include="Common\LeaveRequests.aspx.cs">
+      <DependentUpon>LeaveRequests.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Common\LeaveRequests.aspx.designer.cs">
+      <DependentUpon>LeaveRequests.aspx</DependentUpon>
+    </Compile>
     <Compile Include="DAL\AdminDashboardDAL.cs" />
     <Compile Include="DAL\DashboardDAL.cs" />
     <Compile Include="DAL\DepartmentDAL.cs" />
@@ -265,13 +255,6 @@
     </Compile>
     <Compile Include="Employee\Dashboard.aspx.designer.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Employee\dummy_dashboard.aspx.cs">
-      <DependentUpon>dummy_dashboard.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Employee\dummy_dashboard.aspx.designer.cs">
-      <DependentUpon>dummy_dashboard.aspx</DependentUpon>
     </Compile>
     <Compile Include="Employee\EmployeeLeaveHistory.aspx.cs">
       <DependentUpon>EmployeeLeaveHistory.aspx</DependentUpon>
@@ -300,13 +283,6 @@
     </Compile>
     <Compile Include="Employee\NewLeaveForm.aspx.designer.cs">
       <DependentUpon>NewLeaveForm.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Employee\Site1.Master.cs">
-      <DependentUpon>Site1.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Employee\Site1.Master.designer.cs">
-      <DependentUpon>Site1.Master</DependentUpon>
     </Compile>
     <Compile Include="GenerateHash.aspx.cs">
       <DependentUpon>GenerateHash.aspx</DependentUpon>
@@ -353,13 +329,6 @@
     <Compile Include="Manager\Dashboard.aspx.designer.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Manager\ManagerLeaveRequests.aspx.cs">
-      <DependentUpon>ManagerLeaveRequests.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Manager\ManagerLeaveRequests.aspx.designer.cs">
-      <DependentUpon>ManagerLeaveRequests.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Manager\Site1.Master.cs">
       <DependentUpon>Site1.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -380,6 +349,13 @@
     </Compile>
     <Compile Include="Shared\Site.master.designer.cs">
       <DependentUpon>Site.master</DependentUpon>
+    </Compile>
+    <Compile Include="Site.Master.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site.Master.designer.cs">
+      <DependentUpon>Site.Master</DependentUpon>
     </Compile>
     <Compile Include="Unauthorized.aspx.cs">
       <DependentUpon>Unauthorized.aspx</DependentUpon>

@@ -46,7 +46,7 @@ namespace LeaveManagementSystem.Employee
                 lblAllocated.Text = allocated.ToString();
                 lblTaken.Text = taken.ToString();
                 lblBalance.Text = remaining.ToString();
-                lblPending.Text = pending.ToString();
+                //lblPending.Text = pending.ToString();
                 lblApproved.Text = approved.ToString();
 
             }

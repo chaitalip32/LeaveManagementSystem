@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Employee/Site1.master" CodeBehind="NewLeaveForm.aspx.cs" Inherits="LeaveManagementSystem.Employee.NewLeaveForm" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.master" CodeBehind="NewLeaveForm.aspx.cs" Inherits="LeaveManagementSystem.Employee.NewLeaveForm" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <asp:Content ContentPlaceHolderID="HeadContent" runat="server">
@@ -279,25 +279,27 @@
                                     ValidationGroup="LeaveForm"/>
                             </div>
 
+              
+                            <div class="text-center mt-4">
+                                <asp:Button 
+                                    ID="btnSubmit" 
+                                    runat="server" 
+                                    Text="Submit"
+                                    CssClass="btn btn-success px-4 w-25 me-2"
+                                    ValidationGroup="LeaveForm" OnClick="btnSubmit_Click" />
+
+                                <asp:Button ID="btnCancel"
+                                    runat="server"
+                                    Text="Cancel"
+                                    CssClass="btn btn-secondary w-25 px-4"
+                                    CausesValidation="false" />
+                            </div>
+
                         </div>
                     </div>
                         
                 </div>
-                    <!-- Buttons -->
-                    <div class="text-center mt-4">
-                        <asp:Button 
-                            ID="btnSubmit" 
-                            runat="server" 
-                            Text="Submit"
-                            CssClass="btn btn-success px-4 w-25 me-2"
-                            ValidationGroup="LeaveForm" OnClick="btnSubmit_Click" />
-
-                        <asp:Button ID="btnCancel"
-                            runat="server"
-                            Text="Cancel"
-                            CssClass="btn btn-secondary w-25 px-4"
-                            CausesValidation="false" />
-                    </div>
+                    
             </div>
         </div>
     </div>

@@ -1,21 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.Data;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using LeaveManagementSystem.BLL;
-using System.Data;
 
-namespace LeaveManagementSystem.Manager
+namespace LeaveManagementSystem.Common
 {
-    public partial class ManagerLeaveRequests : System.Web.UI.Page
+    public partial class LeaveRequests : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
             try
             {
-                if(Session["EmployeeId"]==null)
+                if (Session["EmployeeId"] == null || Session["RoleId"] == null)
                 {
                     Response.Redirect("~/Account/Login.aspx");
                 }
@@ -25,22 +22,35 @@ namespace LeaveManagementSystem.Manager
                     BindLeaveRequests();
                 }
             }
-            catch(Exception)
+            catch
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(),
                     "error", "alert('Error loading page');", true);
             }
-
         }
 
         private void BindLeaveRequests()
         {
             try
             {
-                int managerId = Convert.ToInt32(Session["EmployeeId"]);
-                LeaveApplicationBLL bll = new LeaveApplicationBLL();
+                int userId = Convert.ToInt32(Session["EmployeeId"]);
+                int roleId = Convert.ToInt32(Session["RoleId"]);
 
-                DataTable dt = bll.GetManagerLeaveRequests(managerId);
+                LeaveApplicationBLL bll = new LeaveApplicationBLL();
+                DataTable dt;
+
+                if (roleId == 3) // Manager
+                {
+                    dt = bll.GetManagerLeaveRequests(userId);
+                }
+                else if (roleId == 2) // HR
+                {
+                    dt = bll.GetHRLeaveRequests(); 
+                }
+                else
+                {
+                    dt = null;
+                }
 
                 gvLeaveRequests.DataSource = dt;
                 gvLeaveRequests.DataBind();
@@ -48,23 +58,21 @@ namespace LeaveManagementSystem.Manager
             catch
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(),
-                    "error","alert('Error loading leave requests');", true);
+                    "error", "alert('Error loading leave requests');", true);
             }
         }
 
         protected void gvLeaveRequests_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            if(e.CommandName=="EditStatus")
+            if (e.CommandName == "EditStatus")
             {
                 GridViewRow row = ((LinkButton)e.CommandSource).NamingContainer as GridViewRow;
 
-                //getting leaveid for specific user record to pass in the hidden field to update it
                 int leaveId = Convert.ToInt32(e.CommandArgument);
 
                 txtEmployeeName.Text = row.Cells[0].Text;
                 txtDepartment.Text = row.Cells[1].Text;
                 txtLeaveType.Text = row.Cells[2].Text;
-
                 txtFromDate.Text = row.Cells[4].Text;
                 txtToDate.Text = row.Cells[5].Text;
                 txtTotalDays.Text = row.Cells[6].Text;
@@ -74,40 +82,56 @@ namespace LeaveManagementSystem.Manager
 
                 hfLeaveRequestId.Value = leaveId.ToString();
 
-                ScriptManager.RegisterStartupScript(this, this.GetType(),
-                    "Popup", "$('#leaveModal').modal('show')", true);
+                //int roleId = Convert.ToInt32(Session["RoleId"]);
+
+                ddlStatus.Items.Clear();
+                ddlStatus.Items.Add("Approved");
+                ddlStatus.Items.Add("Rejected");
+
+                ClientScript.RegisterStartupScript(this.GetType(), "Popup",
+    "setTimeout(function(){ var myModal = new bootstrap.Modal(document.getElementById('leaveModal')); myModal.show(); }, 100);",
+    true);
             }
         }
 
-        protected void btnUpdate_Click(object sender,EventArgs e)
+        protected void btnUpdate_Click(object sender, EventArgs e)
         {
             try
             {
                 int leaveId = Convert.ToInt32(hfLeaveRequestId.Value);
-                string managerComment = txtManagerComment.Text;
+                string comment = txtManagerComment.Text;
                 string selectedStatus = ddlStatus.SelectedValue;
 
-                string status = "";
-
-                if(selectedStatus=="Approved")
-                {
-                    status = "Pending_HR";
-                }
-                else if(selectedStatus=="Rejected")
-                {
-                    status = "Rejected";
-                }
-
-                int managerId = Convert.ToInt32(Session["EmployeeId"]);
+                int userId = Convert.ToInt32(Session["EmployeeId"]);
+                int roleId = Convert.ToInt32(Session["RoleId"]);
 
                 LeaveApplicationBLL bll = new LeaveApplicationBLL();
 
-                bll.UpdateManagerLeaveStatus(leaveId,status,managerComment,managerId);
+                if (roleId == 3) // Manager
+                {
+                    string status = "";
+
+                    if (selectedStatus == "Approved")
+                    {
+                        status = "Pending_HR";
+                    }
+                    else if (selectedStatus == "Rejected")
+                    {
+                        status = "Rejected";
+                    }
+
+                    bll.UpdateManagerLeaveStatus(leaveId, status, comment, userId);
+                }
+                else if (roleId == 2) // HR
+                {
+                    // Final decision
+                    bll.UpdateHRLeaveStatus(leaveId, selectedStatus, comment, userId);
+                }
 
                 BindLeaveRequests();
 
                 ScriptManager.RegisterStartupScript(this, this.GetType(),
-                    "success", "alert('Leave status updated successfully');",true);
+                    "success", "alert('Leave status updated successfully');", true);
             }
             catch
             {
