@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Web.UI.WebControls;
-
+using System.Web;
 namespace LeaveManagementSystem
 {
     public partial class Site : System.Web.UI.MasterPage
@@ -9,6 +9,12 @@ namespace LeaveManagementSystem
         {
 
             if (Session["RoleId"] == null)
+            {
+                Response.Redirect("~/Account/Login.aspx");
+                return;
+            }       
+
+            if (Session["UserId"] == null)
             {
                 Response.Redirect("~/Account/Login.aspx");
                 return;
@@ -51,6 +57,19 @@ namespace LeaveManagementSystem
             // Loading menu
             phMenu.Controls.Clear();
             phMenu.Controls.Add(new Literal { Text = menuHtml });
+        }
+
+        protected void btnLogout_Click(object sender, EventArgs e)
+        {
+            Session.Clear();
+            Session.Abandon();
+
+            //for preventing browser back button caching
+            Response.Cache.SetCacheability(HttpCacheability.NoCache); //browser will rerequest page from server
+            Response.Cache.SetNoStore(); //page will not stored in cache
+            Response.Cache.SetExpires(DateTime.UtcNow.AddMinutes(-1)); //page expiry
+
+            Response.Redirect("~/Account/Login.aspx");
         }
     }
 }

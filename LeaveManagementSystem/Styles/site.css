@@ -125,6 +125,17 @@
             padding:20px;
         }
 
+
+        .modal {
+            z-index: 3000 !important;
+        }
+
+
+        .modal-backdrop {
+            z-index: 2500 !important;
+        }
+
+
         @media (max-width:768px){
 
             #sidebar{

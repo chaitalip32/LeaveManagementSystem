@@ -157,7 +157,7 @@
                                     CssClass="d-flex gap-3">
 
                                     <asp:ListItem Text="Active" Value="1" Selected="True" class="me-4"></asp:ListItem>
-                                    <asp:ListItem Text="Inactive" Value="0"></asp:ListItem>
+                                    <asp:ListItem Text="Deactive" Value="0"></asp:ListItem>
 
                                 </asp:RadioButtonList>
                             </div>

@@ -22,84 +22,14 @@
             --card: #ffffff;
             --text-light: #6b7280;
             --text-dark: #111827;
+
+            --primary: #2563eb;
+            --border: #e5e7eb;
         }
 
         body {
             margin: 0;
             background-color: #f8fafc;
-        }
-
-        .wrapper {
-            display: flex;
-        }
-
-        /* Sidebar */
-        #sidebar {
-            width: 250px;
-            background: #1e293b;
-            color: #fff;
-            min-height: 100vh;
-            transition: 0.3s;
-        }
-
-        #sidebar.collapsed {
-            width: 0;
-            overflow: hidden;
-        }
-
-        #sidebar .logo {
-            padding: 20px;
-            text-align: center;
-            font-weight: bold;
-        }
-
-        #sidebar ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        #sidebar ul li {
-            padding: 12px 20px;
-        }
-
-        #sidebar ul li a {
-            color: #fff;
-            text-decoration: none;
-            display: block;
-        }
-
-        #sidebar ul li a:hover {
-            background: #334155;
-        }
-
-        /* Main */
-        .main {
-            flex: 1;
-            margin-left: 250px;
-            transition: 0.3s;
-        }
-
-        .main.expanded {
-            margin-left: 0;
-        }
-
-        /* Topbar */
-        .topbar {
-            background: #fff;
-            padding: 10px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-
-        .menu-btn {
-            font-size: 22px;
-            cursor: pointer;
-        }
-
-        .page-content {
-            padding: 20px;
         }
     </style>
 </head>
@@ -113,6 +43,8 @@
 
         <!-- Sidebar -->
         <div id="sidebar">
+            <div class="close-btn" onclick="closeSidebar()">&times;</div>
+
             <div class="logo">Leave System</div>
 
             <ul class="menu">
@@ -129,6 +61,12 @@
 
                 <div>
                     <img src="/images/profile.jpg" width="35" />
+
+                    <asp:LinkButton ID="btnLogout" runat="server" 
+                        CssClass="btn btn-danger btn-sm ms-2"
+                        OnClick="btnLogout_Click">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </asp:LinkButton>
                 </div>
             </div>
 

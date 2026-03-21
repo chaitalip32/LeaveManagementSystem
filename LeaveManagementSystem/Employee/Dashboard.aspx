@@ -155,6 +155,10 @@
                             '#6b7280'
                         ]
                     }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
                 }
             });
         };
