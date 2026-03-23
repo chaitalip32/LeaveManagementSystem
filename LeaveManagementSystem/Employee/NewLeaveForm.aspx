@@ -3,15 +3,35 @@
 
 <asp:Content ContentPlaceHolderID="HeadContent" runat="server">
     <style>
-        .form-card { background: white; border-radius: 8px; }
-        .btn-theme { background-color: #E2A63A; border-color: #E2A63A; color: white; }
-        .btn-theme:hover { background-color: #F9B12B; border-color: #F9B12B; color: white; }
+        .form-card { 
+            background: white;
+            border-radius: 8px; }
 
-        body { font-family: 'Inter', sans-serif; background-color: #f8f9fa; }
-        .form-control, .form-select { border-radius: 4px; border: 1px solid #ced4da; padding: 0.6rem; }
-        .required { color: red; }
+        .btn-theme { 
+            background-color: #E2A63A; 
+            border-color: #E2A63A; color: white; }
 
-        .text-danger { font-size: 12px; display: block; margin-top: 4px; line-height: 1; }
+        .btn-theme:hover { 
+            background-color: #F9B12B; 
+            border-color: #F9B12B; color: white; }
+
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #f8f9fa; }
+
+        .form-control, .form-select { 
+            border-radius: 4px; 
+            border: 1px solid #ced4da; 
+            padding: 0.6rem; }
+
+        .required { 
+            color: red; }
+
+        .text-danger { 
+            font-size: 12px; 
+            display: block; 
+            margin-top: 4px; 
+            line-height: 1; }
 
         .form-card .col-md-6, .form-card .col-md-12 {
             margin-bottom: 20px !important; /*this creates the exact same vertical gap for every field */
@@ -60,7 +80,7 @@
 
                 <h4 class="mb-4 fw-semibold text-center">Send Leave Email</h4>
 
-                <div class="form-card shadow p-5">
+                <div class="form-card shadow-sm p-5">
                     <div class="row">
                         
                         <div class="col-md-6">

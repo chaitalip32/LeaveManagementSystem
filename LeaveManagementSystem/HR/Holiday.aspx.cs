@@ -60,8 +60,9 @@ namespace LeaveManagementSystem.HR
 
                 bll.UpdateHoliday(id,name,date,desc,status);
 
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "success",
-                    "alert('Holiday updated successfully');", true);
+                ClientScript.RegisterStartupScript(this.GetType(), "success",
+"window.onload=function(){Swal.fire('Success','Holiday updated successfully','success');};",
+true);
             }
             else
             {
@@ -77,8 +78,9 @@ namespace LeaveManagementSystem.HR
 
                 bll.AddHoliday(hl);
 
-                ScriptManager.RegisterStartupScript(this, this.GetType(),
-            "success", "alert('Holiday added successfully');", true);
+                ClientScript.RegisterStartupScript(this.GetType(), "success",
+"window.onload=function(){Swal.fire('Success','Holiday added successfully','success');};",
+true);
 
                 txtHolidayName.Text = "";
                 txtHolidayDate.Text = "";

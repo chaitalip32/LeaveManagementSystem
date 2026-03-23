@@ -54,10 +54,10 @@ namespace LeaveManagementSystem.Admin
                 bll.AddLeaveType(lt);
                 LoadLeaveTypes();
 
-                ScriptManager.RegisterStartupScript(this, GetType(), "toastMessage",
-                    "toastr.success('Leave Type saved successfully');", true);
+                ClientScript.RegisterStartupScript(this.GetType(), "saveAlert",
+"window.onload=function(){Swal.fire('Success','Leave Type saved successfully','success');};",
+true);
 
-                lblMessage.Visible = true;
 
                 txtLeaveType.Text = "";
                 txtDefaultDays.Text = "";
@@ -155,11 +155,12 @@ namespace LeaveManagementSystem.Admin
                 gvLeaveTypes.EditIndex = -1;
                 LoadLeaveTypes();
 
-                ScriptManager.RegisterStartupScript(this, GetType(), "toastMessage",
-                   "toastr.info('Leave Type updated successfully');", true);
+                ClientScript.RegisterStartupScript(this.GetType(), "updateAlert",
+"window.onload=function(){Swal.fire('Updated','Leave Type updated successfully','success');};",
+true);
 
                 //ScriptManager.RegisterStartupScript(Page, Page.GetType(), "toast",
-//"showToast('Leave Type updated successfully','info');", true);
+                //"showToast('Leave Type updated successfully','info');", true);
 
 
                 lblMessage.Visible = true;
@@ -182,9 +183,10 @@ namespace LeaveManagementSystem.Admin
 
                 LoadLeaveTypes();
 
-                ScriptManager.RegisterStartupScript(this, GetType(), "toast",
-                    "toastr.warning('Leave Type deleted successfully');", true);
-                lblMessage.Visible = true;
+                ClientScript.RegisterStartupScript(this.GetType(), "deleteAlert",
+"window.onload=function(){Swal.fire('Deleted','Leave Type deleted successfully','success');};",
+true);
+             
             }
             catch(Exception)
             {

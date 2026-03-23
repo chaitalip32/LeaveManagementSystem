@@ -68,7 +68,9 @@ namespace LeaveManagementSystem.Admin
                 dept.CreatedBy = userId;
                 bll.AddDepartments(dept);
 
-                lblMessage.Text = "Department Added Successfully";
+                ScriptManager.RegisterStartupScript(this, GetType(), "addAlert",
+    "Swal.fire('Success','Department added successfully','success');",
+    true);
             }
             else
             {
@@ -78,10 +80,10 @@ namespace LeaveManagementSystem.Admin
 
                 bll.EditDepartments(dept);
 
-                lblMessage.Text = "Department Updated Successfully";
+                ScriptManager.RegisterStartupScript(this, GetType(), "updateAlert",
+    "Swal.fire('Success','Department updated successfully','success');",
+    true);
             }
-
-            lblMessage.CssClass = "text-success";
 
             LoadDepartments();
 
@@ -96,7 +98,9 @@ namespace LeaveManagementSystem.Admin
 
             bll.DeleteDepartment(id);
 
-            lblMessage.Text = "Deleted successfully";
+            ScriptManager.RegisterStartupScript(this, GetType(), "updateAlert",
+    "Swal.fire('Success','Department deleted successfully','success');",
+    true);
             lblMessage.CssClass = "text-success";
 
             LoadDepartments();

@@ -160,22 +160,26 @@ namespace LeaveManagementSystem.Admin
 
                 bool emailSent= EmailHelper.SendPasswordSetupEmail(emp.Email, token,out emailError);
 
-                if(emailSent)
+                if (emailSent)
                 {
-                    lblMessage.Text = "Employee added successfully. Password setup email sent.";
-                    lblMessage.CssClass = "text-success";
+                    ClientScript.RegisterStartupScript(this.GetType(), "success",
+                    "window.onload=function(){Swal.fire({title:'Success',text:'Employee added successfully. Password setup email sent.',icon:'success'});};",
+                    true);
                 }
                 else
                 {
-                    lblMessage.Text = "Employee added but email could not be sent. "+emailError;
-                    lblMessage.CssClass = "text-warning";  
+                    ClientScript.RegisterStartupScript(this.GetType(), "warning",
+                    "window.onload=function(){Swal.fire({title:'Warning',text:'Employee added but email failed: " + emailError + "',icon:'warning'});};",
+                    true);
                 }
 
-                lblMessage.Visible = true;
+        
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                throw new Exception("Error while saving the employeee: " + ex.Message);
+                ClientScript.RegisterStartupScript(this.GetType(), "error",
+                "window.onload=function(){Swal.fire({title:'Error',text:'Error while saving employee: " + ex.Message.Replace("'", "") + "',icon:'error'});};",
+                true);
             }
         }
     }

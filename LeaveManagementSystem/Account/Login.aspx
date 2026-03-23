@@ -64,14 +64,7 @@
     <form id="form1" runat="server">
     <div class="container d-flex align-items-center justify-content-center vh-100">
         
-        <div class="card shadow-lg login-card w-100" style="max-width:900px;">
-
-            <asp:ValidationSummary 
-                ID="ValidationSummary1"
-                runat="server"
-                CssClass="alert alert-danger"
-                HeaderText="Please fix the following errors:"
-                DisplayMode="List" />
+        <div class="card shadow login-card w-100" style="max-width:900px;">
 
             <div class="row g-5 align-items-center">
                 

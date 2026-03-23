@@ -25,7 +25,7 @@ namespace LeaveManagementSystem.Common
             catch
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(),
-                    "error", "alert('Error loading page');", true);
+    "error", "Swal.fire('Error','Error loading leave requests','error');", true);
             }
         }
 
@@ -58,7 +58,7 @@ namespace LeaveManagementSystem.Common
             catch
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(),
-                    "error", "alert('Error loading leave requests');", true);
+    "error", "Swal.fire('Error','Error loading leave requests','error');", true);
             }
         }
 
@@ -130,13 +130,14 @@ namespace LeaveManagementSystem.Common
 
                 BindLeaveRequests();
 
-                ScriptManager.RegisterStartupScript(this, this.GetType(),
-                    "success", "alert('Leave status updated successfully');", true);
+                ClientScript.RegisterStartupScript(this.GetType(), "success",
+    "window.onload = function(){ Swal.fire('Success','Leave status updated successfully','success'); };",
+    true);
             }
             catch
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(),
-                    "error", "alert('Error updating leave status');", true);
+    "error", "Swal.fire('Error','Error loading leave requests','error');", true);
             }
         }
     }

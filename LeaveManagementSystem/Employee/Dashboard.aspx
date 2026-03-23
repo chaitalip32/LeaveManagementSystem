@@ -84,7 +84,7 @@
         </div>
 
         <!-- CHARTS -->
-        <div class="row mt-4">
+        <div class="row mt-4 g-3">
 
             <div class="col-lg-6 col-md-12">
                 <div class="chart-container">

@@ -74,8 +74,9 @@ namespace LeaveManagementSystem.Employee
             }
             catch(Exception)
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(),
-        "error", "alert('Error loading managers');", true);
+                ClientScript.RegisterStartupScript(this.GetType(), "error",
+"window.onload=function(){Swal.fire('Error','Error loading managers','error');};",
+true);
             }
         }
 
@@ -96,8 +97,9 @@ namespace LeaveManagementSystem.Employee
             }
             catch (Exception)
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(),
-        "error", "alert('Error loading leave types');", true);
+                ClientScript.RegisterStartupScript(this.GetType(), "error",
+"window.onload=function(){Swal.fire('Error','Error loading leave types','error');};",
+true);
             }
         }
 
@@ -121,8 +123,10 @@ namespace LeaveManagementSystem.Employee
                     if (!DateTime.TryParse(txtFromDate.Text, out fromDate) ||
                         !DateTime.TryParse(txtToDate.Text, out toDate))
                     {
-                        ScriptManager.RegisterStartupScript(this, this.GetType(),
-                            "dateerror", "alert('Please select valid dates');", true);
+                        ClientScript.RegisterStartupScript(this.GetType(), "dateerror",
+"window.onload=function(){Swal.fire('Error','Please select valid dates','error');};",
+true);
+
                         return;
                     }
 
@@ -141,8 +145,10 @@ namespace LeaveManagementSystem.Employee
 
                     if (!DateTime.TryParse(txtHalfDayDate.Text, out halfDate))
                     {
-                        ScriptManager.RegisterStartupScript(this, this.GetType(),
-                            "dateerror", "alert('Please select a valid date');", true);
+                        ClientScript.RegisterStartupScript(this.GetType(), "dateerror",
+"window.onload=function(){Swal.fire('Error','Please select a valid date','error');};",
+true);
+                      
                         return;
                     }
 
@@ -203,11 +209,15 @@ namespace LeaveManagementSystem.Employee
 
                 if(sent)
                 {
-                    Response.Write("<script>alert('Leave applied and email sent successfully')</script>");
+                    ClientScript.RegisterStartupScript(this.GetType(), "success",
+"window.onload=function(){Swal.fire('Success','Leave applied and email sent successfully','success');};",
+true);
                 }
                 else
-               { 
-                    Response.Write("<script>alert('Leave applied but email failed:+"+ error +"')</script>");
+               {
+                    ClientScript.RegisterStartupScript(this.GetType(), "error",
+"window.onload=function(){Swal.fire('Warning','Leave applied but email failed: " + error + "','warning');};",
+true);
                 }
             }
         }

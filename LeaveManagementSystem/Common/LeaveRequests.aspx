@@ -20,6 +20,15 @@
                 text-overflow:ellipsis;
             }
 
+            .modal {
+                z-index: 3000 !important;
+            }
+
+
+            .modal-backdrop {
+                z-index: 2500 !important;
+            }
+
         </style>
 </asp:Content>
 
@@ -214,6 +223,7 @@
             </div>
         </div>
 </div>
+
 </asp:Content>
 
         

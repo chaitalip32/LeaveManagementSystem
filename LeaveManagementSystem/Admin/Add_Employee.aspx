@@ -300,8 +300,6 @@
             </div>
         </div>
 
-        <asp:Label ID="lblMessage" runat="server" Text="Label" Visible="false"></asp:Label>
-
         <!-- Buttons -->
         <div class="text-end mb-5">
             <asp:Button ID="btnSave" runat="server"
