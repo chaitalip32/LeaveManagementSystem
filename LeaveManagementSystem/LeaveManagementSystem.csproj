@@ -114,7 +114,6 @@
     <Content Include="Common\LeaveRequests.aspx" />
     <Content Include="Employee\Dashboard.aspx" />
     <Content Include="Employee\EmployeeLeaveHistory.aspx" />
-    <Content Include="Employee\LeaveBalance.aspx" />
     <Content Include="Employee\NewLeaveForm.aspx" />
     <Content Include="HR\Holiday.aspx" />
     <Content Include="HR\HolidayList.aspx" />
@@ -125,7 +124,6 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Shared\Site.master" />
     <Content Include="Admin\AdminMaster.master" />
     <Content Include="Employee\EmpMaster.Master" />
     <Content Include="Site.Master" />
@@ -268,13 +266,6 @@
     <Compile Include="Employee\EmpMaster.Master.designer.cs">
       <DependentUpon>EmpMaster.Master</DependentUpon>
     </Compile>
-    <Compile Include="Employee\LeaveBalance.aspx.cs">
-      <DependentUpon>LeaveBalance.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Employee\LeaveBalance.aspx.designer.cs">
-      <DependentUpon>LeaveBalance.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Employee\NewLeaveForm.aspx.cs">
       <DependentUpon>NewLeaveForm.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -291,7 +282,6 @@
     </Compile>
     <Compile Include="Helpers\EmailHelper.cs" />
     <Compile Include="Helpers\PasswordHelper.cs" />
-    <Compile Include="Helpers\SessionHelper.cs" />
     <Compile Include="HR\Dashboard.aspx.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -327,13 +317,6 @@
     <Compile Include="Models\LeaveType.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Shared\Site.master.cs">
-      <DependentUpon>Site.master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Shared\Site.master.designer.cs">
-      <DependentUpon>Site.master</DependentUpon>
-    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

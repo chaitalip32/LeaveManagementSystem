@@ -34,17 +34,17 @@ namespace LeaveManagementSystem.DAL
                     cmd.Parameters.AddWithValue("@FromDate", leave.FromDate);
                     cmd.Parameters.AddWithValue("@ToDate", leave.ToDate);
                     cmd.Parameters.AddWithValue("@TotalDays", leave.TotalDays);
-                    cmd.Parameters.AddWithValue("@DayType", string.IsNullOrEmpty(leave.DayType)?(object)DBNull.Value : leave.DayType);
+                    cmd.Parameters.AddWithValue("@DayType", string.IsNullOrEmpty(leave.DayType) ? (object)DBNull.Value : leave.DayType);
                     cmd.Parameters.AddWithValue("@Reason", leave.Reason);
                     cmd.Parameters.AddWithValue("@ManagerId", leave.ManagerId);
 
                     con.Open();
                     cmd.ExecuteNonQuery();
                 }
-            }     
-            catch(Exception ex)
+            }
+            catch (Exception ex)
             {
-                throw new Exception("Error while inserting leave application record"+ex.Message);
+                throw new Exception("Error while inserting leave application record" + ex.Message);
             }
         }
 
@@ -67,9 +67,9 @@ namespace LeaveManagementSystem.DAL
                     return dt;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                throw new Exception("Error fetching ManagerId"+ ex.Message);
+                throw new Exception("Error fetching ManagerId" + ex.Message);
             }
         }
 
@@ -96,9 +96,9 @@ namespace LeaveManagementSystem.DAL
                     return dt;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                throw new Exception("Error while fetching name and department of employee" + ex.Message);   
+                throw new Exception("Error while fetching name and department of employee" + ex.Message);
             }
         }
 
@@ -156,7 +156,7 @@ namespace LeaveManagementSystem.DAL
             return dt;
         }
 
-        public void UpdateManagerLeaveStatus(int leaveId,string status, string comment, int managerId)
+        public void UpdateManagerLeaveStatus(int leaveId, string status, string comment, int managerId)
         {
             try
             {
@@ -172,18 +172,18 @@ namespace LeaveManagementSystem.DAL
 
                     SqlCommand cmd = new SqlCommand(query, con);
 
-                    cmd.Parameters.AddWithValue("@Status",status);
+                    cmd.Parameters.AddWithValue("@Status", status);
                     cmd.Parameters.AddWithValue("@Remarks", comment);
                     cmd.Parameters.AddWithValue("@LeaveId", leaveId);
                     cmd.Parameters.AddWithValue("@ManagerId", managerId);
 
                     con.Open();
-                    cmd.ExecuteNonQuery();                                 
+                    cmd.ExecuteNonQuery();
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                throw new Exception("Error updating leave request "+ex.Message);
+                throw new Exception("Error updating leave request " + ex.Message);
             }
         }
 
@@ -260,9 +260,9 @@ namespace LeaveManagementSystem.DAL
                     cmd.Parameters.AddWithValue("@HRId", hrId);
 
                     con.Open();
-                    int rows=cmd.ExecuteNonQuery();
+                    int rows = cmd.ExecuteNonQuery();
 
-                    if(rows==0)
+                    if (rows == 0)
                     {
                         throw new Exception("No rows updated! Check conditions.");
                     }
@@ -305,7 +305,7 @@ namespace LeaveManagementSystem.DAL
                 return dt;
             }
 
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception("Error in loading leave records " + ex.Message);
             }
@@ -338,7 +338,7 @@ namespace LeaveManagementSystem.DAL
                 }
                 return dt;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception("Error in fetching leave balance " + ex.Message);
             }

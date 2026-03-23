@@ -34,6 +34,30 @@
             box-shadow:none;
             border-bottom: 2px solid #0d6efd;
         }
+        
+        .form-check.d-flex {
+            padding-left: 0 !important; 
+        }
+
+        
+        .custom-chk input {
+            margin: 0 8px 0 0 !important; /* Top:0, Right:8px, Bottom:0, Left:0 */
+            vertical-align: middle;
+            cursor: pointer;
+            width: 17px;
+            height: 17px;
+            position: relative;
+            top: -1px;
+        }
+
+        .custom-chk label {
+            display: inline-block;
+            vertical-align: middle;
+            line-height: 1;
+            margin-bottom: 0;
+            cursor: pointer;
+            user-select: none;
+        }
     </style>
 </head>
 <body>
@@ -118,12 +142,11 @@
                     </div>
 
                     <div class="d-flex justify-content-between align-items-center mb-4">
-                        <div class="form-check">
+                        <div class="form-check d-flex align-items-center p-0">
                             <asp:CheckBox ID="chkRemember" 
-                                runat="server"
-                                CssClass="form-check-input" />
-
-                            <label class="form-check-label">Remember me</label>
+                                runat="server" 
+                                Text="Remember me" 
+                                CssClass="custom-chk" />
                         </div>
 
                         <div>
