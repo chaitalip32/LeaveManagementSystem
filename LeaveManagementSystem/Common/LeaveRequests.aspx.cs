@@ -68,29 +68,29 @@ namespace LeaveManagementSystem.Common
             {
                 GridViewRow row = ((LinkButton)e.CommandSource).NamingContainer as GridViewRow;
 
-                int leaveId = Convert.ToInt32(e.CommandArgument);
+                int rowIndex = row.RowIndex;
 
-                txtEmployeeName.Text = row.Cells[0].Text;
-                txtDepartment.Text = row.Cells[1].Text;
-                txtLeaveType.Text = row.Cells[2].Text;
-                txtFromDate.Text = row.Cells[4].Text;
-                txtToDate.Text = row.Cells[5].Text;
-                txtTotalDays.Text = row.Cells[6].Text;
+                var data = gvLeaveRequests.DataKeys[rowIndex];
 
-                Label lblReason = (Label)row.FindControl("lblReason");
-                txtReason.Text = lblReason.Text;
+                int leaveId = Convert.ToInt32(data["LeaveApplicationId"]);
+
+                txtEmployeeName.Text = data["EmployeeName"].ToString();
+                txtDepartment.Text = data["DepartmentName"].ToString();
+                txtLeaveType.Text = data["LeaveTypeName"].ToString();
+                txtFromDate.Text = Convert.ToDateTime(data["FromDate"]).ToString("dd MMM yyyy");
+                txtToDate.Text = Convert.ToDateTime(data["ToDate"]).ToString("dd MMM yyyy");
+                txtTotalDays.Text = data["TotalDays"].ToString();
+                txtReason.Text = data["Reason"].ToString();
 
                 hfLeaveRequestId.Value = leaveId.ToString();
-
-                //int roleId = Convert.ToInt32(Session["RoleId"]);
 
                 ddlStatus.Items.Clear();
                 ddlStatus.Items.Add("Approved");
                 ddlStatus.Items.Add("Rejected");
 
                 ClientScript.RegisterStartupScript(this.GetType(), "Popup",
-    "setTimeout(function(){ var myModal = new bootstrap.Modal(document.getElementById('leaveModal')); myModal.show(); }, 100);",
-    true);
+                    "setTimeout(function(){ var myModal = new bootstrap.Modal(document.getElementById('leaveModal')); myModal.show(); }, 100);",
+                    true);
             }
         }
 
