@@ -24,8 +24,7 @@ namespace LeaveManagementSystem.Common
             }
             catch
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(),
-    "error", "Swal.fire('Error','Error loading leave requests','error');", true);
+                ShowAlert("error", "Error loading leave requests");
             }
         }
 
@@ -37,28 +36,34 @@ namespace LeaveManagementSystem.Common
                 int roleId = Convert.ToInt32(Session["RoleId"]);
 
                 LeaveApplicationBLL bll = new LeaveApplicationBLL();
-                DataTable dt;
+                DataTable dt = null;
 
                 if (roleId == 3) // Manager
-                {
                     dt = bll.GetManagerLeaveRequests(userId);
-                }
                 else if (roleId == 2) // HR
-                {
-                    dt = bll.GetHRLeaveRequests(); 
-                }
-                else
-                {
-                    dt = null;
-                }
+                    dt = bll.GetHRLeaveRequests();
 
                 gvLeaveRequests.DataSource = dt;
                 gvLeaveRequests.DataBind();
             }
             catch
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(),
-    "error", "Swal.fire('Error','Error loading leave requests','error');", true);
+                ShowAlert("error", "Error fetching data from server");
+            }
+        }
+
+        protected void gvLeaveRequests_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                for (int i = 0; i < e.Row.Cells.Count; i++)
+                {
+                    string headerText = gvLeaveRequests.HeaderRow.Cells[i].Text;
+                    if (!string.IsNullOrEmpty(headerText))
+                    {
+                        e.Row.Cells[i].Attributes.Add("data-label", headerText);
+                    }
+                }
             }
         }
 
@@ -67,12 +72,8 @@ namespace LeaveManagementSystem.Common
             if (e.CommandName == "EditStatus")
             {
                 GridViewRow row = ((LinkButton)e.CommandSource).NamingContainer as GridViewRow;
-
                 int rowIndex = row.RowIndex;
-
                 var data = gvLeaveRequests.DataKeys[rowIndex];
-
-                int leaveId = Convert.ToInt32(data["LeaveApplicationId"]);
 
                 txtEmployeeName.Text = data["EmployeeName"].ToString();
                 txtDepartment.Text = data["DepartmentName"].ToString();
@@ -81,16 +82,13 @@ namespace LeaveManagementSystem.Common
                 txtToDate.Text = Convert.ToDateTime(data["ToDate"]).ToString("dd MMM yyyy");
                 txtTotalDays.Text = data["TotalDays"].ToString();
                 txtReason.Text = data["Reason"].ToString();
+                hfLeaveRequestId.Value = data["LeaveApplicationId"].ToString();
 
-                hfLeaveRequestId.Value = leaveId.ToString();
+                ddlStatus.SelectedIndex = 0;
+                txtManagerComment.Text = "";
 
-                ddlStatus.Items.Clear();
-                ddlStatus.Items.Add("Approved");
-                ddlStatus.Items.Add("Rejected");
-
-                ClientScript.RegisterStartupScript(this.GetType(), "Popup",
-                    "setTimeout(function(){ var myModal = new bootstrap.Modal(document.getElementById('leaveModal')); myModal.show(); }, 100);",
-                    true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Popup",
+                    "setTimeout(function(){ var myModal = new bootstrap.Modal(document.getElementById('leaveModal')); myModal.show(); }, 100);", true);
             }
         }
 
@@ -102,6 +100,12 @@ namespace LeaveManagementSystem.Common
                 string comment = txtManagerComment.Text;
                 string selectedStatus = ddlStatus.SelectedValue;
 
+                if (string.IsNullOrEmpty(selectedStatus))
+                {
+                    ShowAlert("warning", "Please select a status action");
+                    return;
+                }
+
                 int userId = Convert.ToInt32(Session["EmployeeId"]);
                 int roleId = Convert.ToInt32(Session["RoleId"]);
 
@@ -109,36 +113,27 @@ namespace LeaveManagementSystem.Common
 
                 if (roleId == 3) // Manager
                 {
-                    string status = "";
-
-                    if (selectedStatus == "Approved")
-                    {
-                        status = "Pending_HR";
-                    }
-                    else if (selectedStatus == "Rejected")
-                    {
-                        status = "Rejected";
-                    }
-
-                    bll.UpdateManagerLeaveStatus(leaveId, status, comment, userId);
+                    string finalStatus = (selectedStatus == "Approved") ? "Pending_HR" : "Rejected";
+                    bll.UpdateManagerLeaveStatus(leaveId, finalStatus, comment, userId);
                 }
                 else if (roleId == 2) // HR
                 {
-                    // Final decision
                     bll.UpdateHRLeaveStatus(leaveId, selectedStatus, comment, userId);
                 }
 
                 BindLeaveRequests();
-
-                ClientScript.RegisterStartupScript(this.GetType(), "success",
-    "window.onload = function(){ Swal.fire('Success','Leave status updated successfully','success'); };",
-    true);
+                ShowAlert("success", "Leave status updated successfully");
             }
             catch
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(),
-    "error", "Swal.fire('Error','Error loading leave requests','error');", true);
+                ShowAlert("error", "Failed to update leave request");
             }
+        }
+
+        private void ShowAlert(string type, string msg)
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "sweetalert",
+                $"Swal.fire('{type.ToUpper()}', '{msg}', '{type}');", true);
         }
     }
 }
