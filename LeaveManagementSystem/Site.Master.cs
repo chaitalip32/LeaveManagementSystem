@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Web.UI.WebControls;
 using System.Web;
+using System.Web.Security;
+
 namespace LeaveManagementSystem
 {
     public partial class Site : System.Web.UI.MasterPage
@@ -48,10 +50,16 @@ namespace LeaveManagementSystem
                     <li><a href='/HR/Dashboard.aspx'>Dashboard</a></li>
                     <li><a href='/Common/LeaveRequests.aspx'>Manage Leaves</a></li>";
             }
-            else if (roleId == 1)
+            else if (roleId == 1) // Admin
             {
                 menuHtml = @"
-                    <li><a href='/Admin/Dashboard.aspx'>Dashboard</a></li>";
+                <li><a href='/Admin/Dashboard.aspx'>Dashboard</a></li>
+                <li><a href='/Admin/Add_Employee.aspx'>Add Employee</a></li>
+                <li><a href='/Admin/Add_Department.aspx'>Add Department</a></li>
+                <li><a href='/Admin/Manage_Departments.aspx'>Manage Department</a></li>
+                <li><a href='/Admin/ManageLeaves.aspx'>Manage Leaves</a></li>
+                <li><a href='/Admin/Add_LeaveType.aspx'>Add Leave</a></li>
+                <li><a href='/Admin/EmployeeList.aspx'>Employee List</a></li>";
             }
 
             // Loading menu

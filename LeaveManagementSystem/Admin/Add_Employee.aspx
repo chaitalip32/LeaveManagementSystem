@@ -1,19 +1,14 @@
 ﻿<%@ Page Language="C#" 
-    MasterPageFile="~/Admin/AdminMaster.master" 
+    MasterPageFile="~/Site.master" 
     AutoEventWireup="true" 
     CodeBehind="Add_Employee.aspx.cs"
     Inherits="LeaveManagementSystem.Admin.Add_Employee" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
+
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
     <div>
-
-        <asp:ValidationSummary 
-            ID="ValidationSummary1" 
-            runat="server"
-            CssClass="alert alert-danger"
-            HeaderText="Please fix the following errors:"
-            ValidationGroup="EmployeeForm" />
 
         <h4 class="mb-4 fw-semibold text-center">Add New Employee</h4>
 
@@ -26,7 +21,7 @@
                 <div class="row g-3">
 
                     <div class="col-md-6">
-                        <label class="form-label required">Email</label>
+                        <label class="form-label">Email</label>
                         <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="rfvtxtEmail" runat="server"
                             ControlToValidate="txtEmail"
@@ -45,7 +40,7 @@
                     </div>
 
                     <div class="col-md-6">
-                        <label class="form-label required">Role</label>
+                        <label class="form-label">Role</label>
                         <asp:DropDownList ID="ddlRole" runat="server" CssClass="form-select"></asp:DropDownList>
                         <asp:RequiredFieldValidator 
                             ID="rfvddlRole" 
@@ -70,7 +65,7 @@
             <div class="card-body">
                 <div class="row g-3"> <!--gutter spacing between columns and rows, without g-3 fields will stuck together-->
                     <div class="col-md-6">
-                        <label class="form-label required">Department<span class="text-danger">*</span></label>
+                        <label class="form-label">Department<span class="text-danger">*</span></label>
                         <asp:DropDownList ID="ddlDepartment" runat="server" CssClass="form-select"></asp:DropDownList>
 
                         <asp:RequiredFieldValidator 
@@ -86,7 +81,7 @@
                     </div> 
 
                     <div class="col-md-6">
-                        <label class="form-label required">Manager</label>
+                        <label class="form-label">Manager</label>
                         <asp:DropDownList ID="ddlManager" runat="server" CssClass="form-select"></asp:DropDownList>
                         
                         <asp:RequiredFieldValidator 
@@ -99,7 +94,7 @@
                             ValidationGroup="EmployeeForm" />
                     </div> 
                     <div class="col-md-6">
-                        <label class="form-label required">Employee Code</label>
+                        <label class="form-label">Employee Code</label>
                         <asp:TextBox ID="txtEmployeeCode" runat="server" CssClass="form-control"></asp:TextBox>
                         
                         <asp:RequiredFieldValidator 
@@ -112,8 +107,21 @@
                     </div> 
                     
                     <div class="col-md-6">
-                        <label class="form-label required">Date of Joining</label>
+                        <label class="form-label">Date of Joining</label>
                         <asp:TextBox ID="txtDOJ" runat="server" TextMode="Date" CssClass="form-control"></asp:TextBox>
+                        
+                        <ajaxToolkit:CalendarExtender 
+                            ID="calFromDate" runat="server"
+                            TargetControlId="txtDOJ" 
+                            Format="yyyy-MM-dd" />
+
+                        <asp:RequiredFieldValidator Id="rfvFromDate" runat="server"
+                             ControlToValidate="txtDOJ"
+                             CssClass="text-danger"
+                             Display="Dynamic"
+                             ErrorMessage="Date of Joining is required"
+                        />                  
+
                         
                         <asp:RequiredFieldValidator 
                             ID="rfvDOJ" 
@@ -136,7 +144,7 @@
             <div class="card-body">
                 <div class="row g-3"> <!--gutter spacing between columns and rows, without g-3 fields will stuck together-->
                     <div class="col-md-6">
-                        <label class="form-label required">First Name</label>
+                        <label class="form-label">First Name</label>
                         <asp:TextBox ID="txtFirstName" runat="server" CssClass="form-control"></asp:TextBox>
                         
                         <asp:RequiredFieldValidator 
@@ -149,7 +157,7 @@
                             ValidationGroup="EmployeeForm" />
                     </div> 
                     <div class="col-md-6">
-                        <label class="form-label required">Last Name</label>
+                        <label class="form-label">Last Name</label>
                         <asp:TextBox ID="txtLastName" runat="server" CssClass="form-control"></asp:TextBox>
                     
                         <asp:RequiredFieldValidator ID="rfvlastName" runat="server"
@@ -160,25 +168,32 @@
                             ValidationGroup="EmployeeForm" />
                     </div> 
                     <div class="col-md-6">
-                        <label class="form-label required">Gender</label>
-                        <asp:RadioButtonList ID="rblgender" runat="server" RepeatDirection="Horizontal" 
-                            CssClass="d-flex gap-3">
+                        <label class="form-label">Gender</label>
+                        <asp:RadioButtonList ID="rblgender" runat="server" 
+                            RepeatDirection="Horizontal" 
+                            RepeatLayout="Flow" 
+                            CssClass="custom-rbl">
                             <asp:ListItem Text="Male" Value="Male" class="me-4"></asp:ListItem>
                             <asp:ListItem Text="Female" Value="Female"></asp:ListItem>
                         </asp:RadioButtonList>
-                    
+    
                         <asp:RequiredFieldValidator ID="rfvGender" runat="server"
                             ControlToValidate="rblgender"
                             CssClass="text-danger"
                             Display="Dynamic"
                             ErrorMessage="Please select the gender"
                             ValidationGroup="EmployeeForm" />
-                    </div> 
+                    </div>
 
                     <div class="col-md-6">
-                        <label class="form-label required">Date of Birth</label>
+                        <label class="form-label">Date of Birth</label>
                         <asp:TextBox ID="txtDOB" runat="server" TextMode="Date" CssClass="form-control"></asp:TextBox>
                     
+                        <ajaxToolkit:CalendarExtender 
+                            ID="CalendarExtender1" runat="server"
+                            TargetControlId="txtDOB" 
+                            Format="yyyy-MM-dd" />
+                 
                         <asp:RequiredFieldValidator ID="rfvDOB" runat="server"
                             ControlToValidate="txtDOB"
                             CssClass="text-danger"
@@ -187,7 +202,7 @@
                             ValidationGroup="EmployeeForm" />
                     </div> 
                     <div class="col-md-6">
-                        <label class="form-label required">Phone</label>
+                        <label class="form-label">Phone</label>
                         <asp:TextBox ID="txtPhone" runat="server" CssClass="form-control"></asp:TextBox>
 
                         <asp:RequiredFieldValidator 
@@ -216,7 +231,7 @@
                         <asp:TextBox ID="txtAadhar" runat="server" CssClass="form-control"></asp:TextBox>
                     </div>--> 
                     <div class="col-md-12">
-                        <label class="form-label required">Address</label>
+                        <label class="form-label">Address</label>
                         <asp:TextBox ID="txtAddress" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="3"></asp:TextBox>
                     
                         <asp:RequiredFieldValidator 
@@ -233,7 +248,7 @@
                         <ContentTemplate>
 
                             <div class="col-md-6 mb-3">
-                                <label class="form-label required">State</label>
+                                <label class="form-label">State</label>
                                 <asp:DropDownList ID="ddlState" 
                                     runat="server" 
                                     CssClass="form-select"
@@ -251,7 +266,7 @@
                             </div> 
 
                             <div class="col-md-6">
-                                <label class="form-label required">City</label>
+                                <label class="form-label">City</label>
                                 <asp:DropDownList ID="ddlCity" runat="server" 
                                     CssClass="form-select"></asp:DropDownList>
                     
@@ -280,7 +295,7 @@
             <div class="card-body">
                 <div class="row g-3"> <!--gutter spacing between columns and rows, without g-3 fields will stuck together-->
                     <div class="col-md-6">
-                        <label class="form-label required">Profile Image</label>
+                        <label class="form-label">Profile Image</label>
                         <asp:FileUpload ID="FileUpload1" runat="server" CssClass="form-control"/>
                     
                         <asp:RequiredFieldValidator 
@@ -303,7 +318,7 @@
         <!-- Buttons -->
         <div class="text-end mb-5">
             <asp:Button ID="btnSave" runat="server"
-                Text="Save Employee"
+                Text="Save"
                 ValidationGroup="EmployeeForm"
                 CssClass="btn btn-theme px-4 me-2" OnClick="btnSave_Click" />
 

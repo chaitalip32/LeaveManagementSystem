@@ -144,18 +144,17 @@ namespace LeaveManagementSystem.DAL
             {
                 using (SqlConnection con = new SqlConnection(cs))
                 {
-                    string query = @"DELETE FROM LeaveTypes
-                                    WHERE LeaveTypeId=@LeavetypeId";
+
+                    string query = @"DELETE FROM LeaveTypes WHERE LeaveTypeId=@LeaveTypeId";
 
                     SqlCommand cmd = new SqlCommand(query, con);
-
                     cmd.Parameters.AddWithValue("@LeaveTypeId", id);
 
                     con.Open();
                     return cmd.ExecuteNonQuery();
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception("Error Deleting leave type: " + ex.Message);
             }

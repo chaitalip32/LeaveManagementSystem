@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Admin/AdminMaster.master" CodeBehind="EmployeeList.aspx.cs" Inherits="LeaveManagementSystem.Admin.EmployeeList" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.master" CodeBehind="EmployeeList.aspx.cs" Inherits="LeaveManagementSystem.Admin.EmployeeList" %>
 
 <asp:Content ContentPlaceHolderID="HeadContent" runat="server">
     <style>

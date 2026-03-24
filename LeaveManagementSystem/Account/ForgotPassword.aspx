@@ -11,29 +11,44 @@
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
+    body {
+        background:white !important;
+    }
 
-        body{
-            background:#f5f6fa;
-        }
+    .card {
+        border-radius: 12px;
+    }
 
-        .card{
-            border-radius:12px;
-        }
+    .form-control {
+        border: none;
+        border-bottom: 1px solid #ccc;
+        border-radius: 0;
+    }
 
-        .form-control{
-            border:none;
-            border-bottom:1px solid #ccc;
-            border-radius:0;
-        }
+    .form-control:focus {
+        box-shadow: none;
+        border-bottom: 2px solid #4F46E5; 
+    }
 
-        .form-control:focus{
-            box-shadow:none;
-            border-bottom:2px solid #0d6efd;
-        }
+    .btn-custom {
+        background-color: #5B35CD !important;
+        border-color: #6366F1 !important;
+        color: white !important;
+        font-weight: 500;
+        padding: 10px 20px;
+        border-radius: 8px; 
+        transition: all 0.2s ease-in-out;
+    }
 
-    </style>
+    .btn-custom:hover {
+        background-color: #4F46E5 !important;
+        border-color: #4F46E5 !important;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        transform: translateY(-1px); 
+    }
+</style>
 
 </head>
 
@@ -82,7 +97,7 @@
                     ID="btnSendLink" 
                     runat="server" 
                     Text="Send Reset Link"
-                    CssClass="btn btn-primary btn-lg"
+                    CssClass="btn btn-custom btn-lg"
                     OnClick="btnSendLink_Click" />
 
             </div>
@@ -90,7 +105,7 @@
             <!-- Back to Login -->
             <div class="text-center">
 
-                <a href="WebForm1.aspx" class="small text-decoration-none">
+                <a href="Login.aspx" class="small text-decoration-none">
                     <i class="fa fa-arrow-left"></i> Back to Login
                 </a>
 

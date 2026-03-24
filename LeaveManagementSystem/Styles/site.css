@@ -33,12 +33,10 @@ html, body {
     overflow-y: auto;      
 }
 
-/* HIDDEN STATE (works for all devices) */
 #sidebar.active{
     transform: translateX(-100%);
 }
 
-/* HEADER */
 .sidebar-header{
     display:flex;
     justify-content:space-between;
@@ -52,14 +50,12 @@ html, body {
     color: var(--primary);
 }
 
-/* CLOSE BUTTON */
 .close-btn{
     font-size:26px;
     cursor:pointer;
     display:none;
 }
 
-/* MENU */
 .menu{
     list-style:none;
 }
@@ -79,7 +75,6 @@ html, body {
     color: var(--primary);
 }
 
-/* MAIN */
 .main{
     margin-left:250px;
     width:100%;
@@ -87,12 +82,10 @@ html, body {
     transition: margin-left 0.3s ease;
 }
 
-/* WHEN SIDEBAR HIDDEN */
 .main.full{
     margin-left:0;
 }
 
-/* TOPBAR */
 .topbar{
     height:60px;
     background: var(--card);
@@ -110,12 +103,10 @@ html, body {
     cursor:pointer;
 }
 
-/* CONTENT */
 .page-content{
     padding:20px;
 }
 
-/* MOBILE */
 @media (max-width:768px){
 
     #sidebar{
@@ -133,4 +124,100 @@ html, body {
     .close-btn{
         display:block;
     }
+}
+
+/*Form styles */
+
+/* ROOT VARIABLES */
+:root {
+    --primary-purple: #773CA2;
+    --dark-purple: #6A3394;
+    --theme-gold: #E2A63A;
+    --theme-gold-hover: #F9B12B;
+    --text-dark: #111827;
+    --border-color: #e5e7eb;
+}
+
+/* GENERAL LABEL STYLING (Fixes Red Labels & Alignment) */
+label, .form-label {
+    display: flex !important;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--text-dark) !important; /* Forces labels to be dark, not red */
+}
+
+/* Fix for labels inside RadioButtonLists (They should NOT be flex) */
+.custom-rbl label {
+    display: inline-block !important;
+    font-weight: 400 !important;
+    margin-right: 20px;
+    margin-bottom: 0;
+    cursor: pointer;
+    color: var(--text-dark) !important;
+}
+
+.custom-rbl input {
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+/* CARD & THEME STYLING */
+.card-header-theme {
+    background-color: var(--primary-purple) !important;
+    color: white !important;
+    font-weight: 600;
+}
+
+/* BUTTONS */
+.btn-theme {
+    background-color: var(--theme-gold) !important;
+    border-color: var(--theme-gold) !important;
+    color: white !important;
+}
+
+.btn-theme:hover {
+    background-color: var(--theme-gold-hover) !important;
+    color: white !important;
+}
+
+.btn-purple {
+    background-color: var(--primary-purple) !important;
+    border-color: var(--primary-purple) !important;
+    color: white !important;
+}
+
+.btn-purple:hover {
+    background-color: var(--dark-purple) !important;
+    color: white !important;
+}
+
+.btn-secondary {
+    background-color: #6c757d !important;
+    border: none !important;
+}
+
+/* GRIDVIEW / TABLE ALIGNMENT */
+.table {
+    width: 100% !important;
+    margin-top: 15px;
+    border-collapse: collapse;
+}
+
+.table th {
+    background-color: #f3f4f6 !important;
+    color: var(--text-dark);
+    text-align: center !important;
+}
+
+.table td {
+    text-align: center !important;
+    vertical-align: middle !important;
+}
+
+/* REQUIRED STAR STYLING */
+.text-danger {
+    color: #dc3545 !important;
+    font-weight: bold;
 }

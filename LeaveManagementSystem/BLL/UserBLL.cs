@@ -37,6 +37,15 @@ namespace LeaveManagementSystem.BLL
             return dal.GetEmployeeIdByUserId(userId);
         }
 
+        public UserModel ValidateUsersByEmailOnly(string email)
+        {
+            UserModel user = dal.GetUsersByEmail(email); // only using email to validate bacause it is authenticated by cookie
+
+            if (user == null || !user.IsActive)
+                return null;
+
+            return user;
+        }
         public bool ResetPassword(string token, string password)
         {
             try

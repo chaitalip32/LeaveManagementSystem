@@ -171,7 +171,7 @@
                         <asp:Button 
                             ID="btnSubmit" 
                             runat="server" 
-                            Text="Submit"
+                            Text="Save"
                             CssClass="btn btn-success px-4 w-25 me-2"
                             ValidationGroup="LeaveForm" OnClick="btnSubmit_Click"/>
 

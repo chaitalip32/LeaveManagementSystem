@@ -33,7 +33,7 @@ namespace LeaveManagementSystem.Account
 
             if (user == null)
             {
-                Session["LoginError"] = "Invalid Email or Password";
+                //Session["LoginError"] = "Invalid Email or Password";
                 Response.Redirect("Login.aspx");
                 return;
             }

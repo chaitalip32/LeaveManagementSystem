@@ -33,7 +33,7 @@
 
     .form-control:focus{
         box-shadow:none;
-        border-bottom:2px solid #0d6efd;
+        border-bottom:2px solid #4F46E5;
     }
 
     .title{
@@ -41,6 +41,22 @@
         margin-bottom:30px;
     }
 
+    .btn-confirm-password{
+        background-color: #5B35CD !important;
+            border-color: #6366F1 !important;
+            color: white !important;
+            font-weight: 500;
+            padding: 10px 20px;
+            border-radius: 8px; 
+            transition: all 0.2s ease-in-out;
+    }
+
+     .btn-confirm-password:hover, .btn-confirm-password:hover {
+            background-color: #4F46E5 !important;
+            border-color: #4F46E5 !important;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transform: translateY(-1px); 
+        }
 </style>
 
 </head>
@@ -56,13 +72,6 @@
             <h3 class="text-center title">Set New Password</h3>
 
             <!-- Validation Summary -->
-
-            <asp:ValidationSummary
-            ID="ValidationSummary1"
-            runat="server"
-            CssClass="alert alert-danger"
-            HeaderText="Please fix the following errors:"
-            DisplayMode="List" />
 
             <!-- Server Message -->
 
@@ -159,7 +168,7 @@
                 ID="btnResetPassword"
                 runat="server"
                 Text="Update Password"
-                CssClass="btn btn-primary btn-lg"
+                CssClass="btn btn-lg btn-confirm-password"
                 OnClick="btnResetPassword_Click" />
 
             </div>

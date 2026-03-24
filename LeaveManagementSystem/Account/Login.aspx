@@ -12,7 +12,7 @@
     <style>
 
         body{
-            background-color:#f5f6fa;
+          /*background-color:#f5f6fa;*/  
             height:100vh;
         }
         .login-card{
@@ -32,7 +32,7 @@
         }
         .form-control:focus{
             box-shadow:none;
-            border-bottom: 2px solid #0d6efd;
+            border-bottom: 2px solid #4F46E5;
         }
         
         .form-check.d-flex {
@@ -58,6 +58,26 @@
             cursor: pointer;
             user-select: none;
         }
+
+        
+        .btn-login, .btn-purple {
+            background-color: #5B35CD !important;
+            border-color: #6366F1 !important;
+            color: white !important;
+            font-weight: 500;
+            padding: 10px 20px;
+            border-radius: 8px; 
+            transition: all 0.2s ease-in-out;
+        }
+
+        .btn-login:hover, .btn-purple:hover {
+            background-color: #4F46E5 !important;
+            border-color: #4F46E5 !important;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transform: translateY(-1px); 
+        }
+
+
     </style>
 </head>
 <body>
@@ -75,7 +95,7 @@
 
                 <!--Right form part-->
                 <div class="col-md-6">
-                    <h3 class="login-title text-center">Log In</h3>
+                    <h3 class="login-title text-center display-6">Log In</h3>
 
                      <!--Error Message label-->
                     <asp:Label ID="lblMessage" 
@@ -156,7 +176,7 @@
                         <asp:Button ID="btnLogin" 
                         runat="server" 
                         Text="Log In"
-                        CssClass="btn btn-primary btn-lg" OnClick="btnLogin_Click" />
+                        CssClass="btn btn-lg btn-login" OnClick="btnLogin_Click" />
                     </div>
 
                 </div>

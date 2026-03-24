@@ -106,10 +106,11 @@
     <Content Include="Account\ForgotPassword.aspx" />
     <Content Include="Account\SetPassword.aspx" />
     <Content Include="Account\login.jpg" />
+    <Content Include="Admin\Add_Department.aspx" />
+    <Content Include="Admin\Add_LeaveType.aspx" />
     <Content Include="Admin\EmployeeList.aspx" />
     <Content Include="Admin\ManageLeaves.aspx" />
     <Content Include="Admin\Add_Employee.aspx" />
-    <Content Include="Admin\Content\dashboard_summary_cards.css" />
     <Content Include="Admin\Manage_Departments.aspx" />
     <Content Include="Common\LeaveRequests.aspx" />
     <Content Include="Employee\Dashboard.aspx" />
@@ -177,6 +178,20 @@
     </Compile>
     <Compile Include="Account\SetPassword.aspx.designer.cs">
       <DependentUpon>SetPassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Add_Department.aspx.cs">
+      <DependentUpon>Add_Department.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Add_Department.aspx.designer.cs">
+      <DependentUpon>Add_Department.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Add_LeaveType.aspx.cs">
+      <DependentUpon>Add_LeaveType.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Add_LeaveType.aspx.designer.cs">
+      <DependentUpon>Add_LeaveType.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\EmployeeList.aspx.cs">
       <DependentUpon>EmployeeList.aspx</DependentUpon>

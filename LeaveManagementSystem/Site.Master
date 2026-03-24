@@ -33,8 +33,73 @@
 
         body {
             margin: 0;
-            background-color: #f8fafc;
+            /*background-color: #f8fafc;*/
         }
+
+
+        label {
+            display: flex !important;
+            align-items: center;
+            gap: 4px;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+       
+        .table {
+            width: 100% !important;
+            margin-top: 15px;
+        }
+
+        .table th, .table td {
+            text-align: center !important;
+            vertical-align: middle !important;
+        }
+
+        .btn-purple {
+            background-color: #773CA2 !important;
+            border-color: #773CA2 !important;
+            color: white !important;
+        }
+
+        .btn-purple:hover {
+            background-color: #6A3394 !important;
+            color: white !important;
+        }
+
+        .btn-outline-primary {
+            border-color: #2563eb;
+            color: #2563eb;
+        }
+
+        .custom-rbl input {
+            margin-right: 5px;
+            cursor: pointer;
+        }
+
+        .custom-rbl label {
+            margin-right: 20px;
+            display: inline-block !important;
+            cursor: pointer;
+            font-weight: normal !important;
+        }
+
+        .btn-theme {
+            background-color: #E2A63A !important;
+            border-color: #E2A63A !important;
+            color: white !important;
+        }
+
+        .btn-theme:hover {
+            background-color: #F9B12B !important;
+            color: white !important;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d !important;
+            border: none !important;
+        }
+
     </style>
 </head>
 
@@ -90,10 +155,10 @@ function toggleSidebar() {
     const main = document.querySelector(".main");
 
     if (window.innerWidth <= 768) {
-        // MOBILE
+
         sidebar.classList.toggle("show");
     } else {
-        // DESKTOP
+
         sidebar.classList.toggle("active");
         main.classList.toggle("full");
     }
@@ -115,7 +180,7 @@ function closeSidebar() {
 window.addEventListener("pageshow", function () {
     const sidebar = document.getElementById("sidebar");
 
-    // Always ensure sidebar is hidden on mobile after navigation
+    // sidebar will hidden on mobile after navigation
     if (window.innerWidth <= 768) {
         sidebar.classList.remove("show");
     }

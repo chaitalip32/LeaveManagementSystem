@@ -1,115 +1,89 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/AdminMaster.master" AutoEventWireup="true" CodeBehind="Manage_Departments.aspx.cs" Inherits="LeaveManagementSystem.Admin.Manage_Departments" %>
+﻿<%@ Page Title="Manage Departments" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeBehind="Manage_Departments.aspx.cs" Inherits="LeaveManagementSystem.Admin.Manage_Departments" %>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="HeadContent" runat="server">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    
+    <style>
+        .action-col {
+            width: 120px;
+            text-align: center;
+        }
+        
+        .custom-table {
+            width: 100% !important;
+            border-collapse: collapse;
+        }
+
+        .action-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6px 10px;
+            border-radius: 4px;
+            transition: 0.2s;
+            text-decoration: none !important;                       
+            font-size: 14px;
+        }
+
+        /* Hover effect for Edit */
+        .btn-edit-style { color: #0d6efd; background-color: rgba(13, 110, 253, 0.1); }
+        .btn-edit-style:hover { background-color: #0d6efd; color: #fff !important; }
+
+        /* Hover effect for Delete */
+        .btn-delete-style { color: #dc3545; background-color: rgba(220, 53, 69, 0.1); }
+        .btn-delete-style:hover { background-color: #dc3545; color: #fff !important; }
+    </style>
+</asp:Content>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <div class="container-fluid mt-4">
+        <h4 class="mb-4 fw-semibold">Manage Departments</h4>
 
-<div class="container-fluid">
+        <asp:LinkButton ID="btnAddNew" runat="server" PostBackUrl="~/Admin/Add_Department.aspx" CssClass="btn btn-theme mb-3">
+            <i class="fas fa-plus me-1"></i> Add New Department
+        </asp:LinkButton>
 
-    <h3 class="mb-4">Manage Departments</h3>
+        <div class="table-responsive bg-white p-3 shadow-sm rounded-3">
 
-    <!-- Add Button -->
-    <asp:Button ID="btnAddNew" runat="server"
-        Text="Add Department"
-        CssClass="btn btn-success mb-3"
-        OnClientClick="openAddModal(); return false;" />
+            <asp:GridView ID="gvDepartments" runat="server"
+                CssClass="table custom-table"
+                AutoGenerateColumns="False"
+                DataKeyNames="DepartmentId"
+                GridLines="None"
+                OnRowCommand="gvDepartments_RowCommand"
+                OnRowDeleting="gvDepartments_RowDeleting">
 
-    <!-- Message -->
-    <asp:Label ID="lblMessage" runat="server" CssClass="d-block mb-2"></asp:Label>
+                <Columns>
+                    <asp:BoundField DataField="DepartmentId" HeaderText="ID" ItemStyle-Width="50px" />
+                    <asp:BoundField DataField="DepartmentName" HeaderText="Name" />
+                    <asp:BoundField DataField="Description" HeaderText="Description" />
+        
+                    <asp:TemplateField HeaderText="Action">
 
-    <!-- Grid -->
-    <asp:GridView ID="gvDepartments" runat="server"
-        CssClass="table table-bordered table-hover"
-        AutoGenerateColumns="False"
-        DataKeyNames="DepartmentId"
-        OnRowCommand="gvDepartments_RowCommand"
-        OnRowDeleting="gvDepartments_RowDeleting">
+                        <ItemStyle CssClass="action-col" />
 
-        <Columns>
+                        <ItemTemplate>
+                            <div class="d-flex gap-2 justify-content-center">
+                                <asp:LinkButton ID="btnEdit" runat="server"
+                                    CommandName="EditDept"
+                                    CommandArgument='<%# Eval("DepartmentId") %>'
+                                    CssClass="action-btn btn-edit-style" ToolTip="Edit">
+                                    <i class="fas fa-edit"></i>
+                                </asp:LinkButton>
+                                
+                                <asp:LinkButton ID="btnDelete" runat="server"
+                                    CommandName="Delete"
+                                    CssClass="action-btn btn-delete-style" 
+                                    OnClientClick="return confirm('Are you sure you want to delete this department?');" ToolTip="Delete">
+                                    <i class="fas fa-trash-alt"></i>
+                                </asp:LinkButton>
+                            </div>
+                        </ItemTemplate>
 
-            <asp:BoundField DataField="DepartmentId" HeaderText="ID" />
+                    </asp:TemplateField>
 
-            <asp:BoundField DataField="DepartmentName" HeaderText="Department Name" />
-
-            <asp:BoundField DataField="Description" HeaderText="Description" />
-
-            <asp:TemplateField HeaderText="Action">
-                <ItemTemplate>
-
-                    <asp:LinkButton ID="btnEdit" runat="server"
-                        CommandName="EditDept"
-                        CommandArgument='<%# Eval("DepartmentId") %>'
-                        CssClass="btn btn-primary btn-sm me-2">
-                        Edit
-                    </asp:LinkButton>
-
-                    <asp:LinkButton ID="btnDelete" runat="server"
-                        CommandName="Delete"
-                        CssClass="btn btn-danger btn-sm"
-                        OnClientClick="return confirm('Delete this department?');">
-                        Delete
-                    </asp:LinkButton>
-
-                </ItemTemplate>
-            </asp:TemplateField>
-
-        </Columns>
-
-    </asp:GridView>
-
-</div>
-
-<!--  Modal -->
-<div class="modal fade" id="deptModal" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-
-      <div class="modal-header">
-        <h5 class="modal-title">Department</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-
-      <div class="modal-body">
-
-        <asp:HiddenField ID="hfDepartmentId" runat="server" />
-
-        <div class="mb-3">
-            <asp:TextBox ID="txtDeptName" runat="server"
-                CssClass="form-control"
-                placeholder="Department Name"></asp:TextBox>
+                </Columns>
+            </asp:GridView>
         </div>
-
-        <div class="mb-3">
-            <asp:TextBox ID="txtDeptDesc" runat="server"
-                CssClass="form-control"
-                placeholder="Description"></asp:TextBox>
-        </div>
-
-      </div>
-
-      <div class="modal-footer">
-        <asp:Button ID="btnSave" runat="server"
-            Text="Save"
-            CssClass="btn btn-success"
-            OnClick="btnSave_Click" />
-
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-            Cancel
-        </button>
-      </div>
-
     </div>
-  </div>
-</div>
-
-<!-- JS -->
-<script>
-function openAddModal() {
-    document.getElementById('<%= hfDepartmentId.ClientID %>').value = "";
-    document.getElementById('<%= txtDeptName.ClientID %>').value = "";
-    document.getElementById('<%= txtDeptDesc.ClientID %>').value = "";
-
-    $('#deptModal').modal('show');
-}
-</script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </asp:Content>
