@@ -21,26 +21,26 @@
                 <div class="row g-3">
 
                     <div class="col-md-6">
-                        <label class="form-label">Email</label>
+                        <label class="form-label">Email <span class="text-danger">*</span></label>
                         <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="rfvtxtEmail" runat="server"
                             ControlToValidate="txtEmail"
                             CssClass="text-danger"
-                            Display="Dynamic"
+                            Display="None"
                             ErrorMessage="Email is required"
-                            ValidationGroup="EmployeeForm" />
+                           />
 
                         <asp:RegularExpressionValidator ID="revEmail" runat="server"
                             ControlToValidate="txtEmail"
                             CssClass="text-danger"
-                            Display="Dynamic"
+                            Display="None"
                             ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"
                             ErrorMessage="Invalid email format"
-                            ValidationGroup="EmployeeForm" />
+                             />
                     </div>
 
                     <div class="col-md-6">
-                        <label class="form-label">Role</label>
+                        <label class="form-label">Role<span class="text-danger">*</span></label>
                         <asp:DropDownList ID="ddlRole" runat="server" CssClass="form-select"></asp:DropDownList>
                         <asp:RequiredFieldValidator 
                             ID="rfvddlRole" 
@@ -48,9 +48,9 @@
                             ControlToValidate="ddlRole"
                             InitialValue=""
                             CssClass="text-danger"
-                            Display="Dynamic"
+                            Display="None"
                             ErrorMessage="Role is required"
-                            ValidationGroup="EmployeeForm" />
+                           />
                     </div>
  
                 </div>
@@ -75,13 +75,13 @@
                             InitialValue=""
                             ErrorMessage="Please select the Department"
                             CssClass="text-danger"
-                            Display="Dynamic"
-                            ValidationGroup="EmployeeForm">
+                            Display="None"
+                            >
                         </asp:RequiredFieldValidator>
                     </div> 
 
                     <div class="col-md-6">
-                        <label class="form-label">Manager</label>
+                        <label class="form-label">Manager <span class="text-danger">*</span></label>
                         <asp:DropDownList ID="ddlManager" runat="server" CssClass="form-select"></asp:DropDownList>
                         
                         <asp:RequiredFieldValidator 
@@ -89,25 +89,24 @@
                             ControlToValidate="ddlManager"
                             InitialValue=""
                             CssClass="text-danger"
-                            Display="Dynamic"
+                            Display="None"
                             ErrorMessage="Please select the Manager"
-                            ValidationGroup="EmployeeForm" />
+                            />
                     </div> 
                     <div class="col-md-6">
-                        <label class="form-label">Employee Code</label>
+                        <label class="form-label">Employee Code<span class="text-danger">*</span></label>
                         <asp:TextBox ID="txtEmployeeCode" runat="server" CssClass="form-control"></asp:TextBox>
                         
                         <asp:RequiredFieldValidator 
                             ID="rfvEmployeeCode" runat="server"
                             ControlToValidate="txtEmployeeCode"
                             CssClass="text-danger"
-                            Display="Dynamic"
-                            ErrorMessage="Employee Code is required"
-                            ValidationGroup="EmployeeForm" />
+                            Display="None"
+                            ErrorMessage="Employee Code is required" />
                     </div> 
                     
                     <div class="col-md-6">
-                        <label class="form-label">Date of Joining</label>
+                        <label class="form-label">Date of Joining<span class="text-danger">*</span></label>
                         <asp:TextBox ID="txtDOJ" runat="server" TextMode="Date" CssClass="form-control"></asp:TextBox>
                         
                         <ajaxToolkit:CalendarExtender 
@@ -118,7 +117,7 @@
                         <asp:RequiredFieldValidator Id="rfvFromDate" runat="server"
                              ControlToValidate="txtDOJ"
                              CssClass="text-danger"
-                             Display="Dynamic"
+                             Display="None"
                              ErrorMessage="Date of Joining is required"
                         />                  
 
@@ -128,9 +127,9 @@
                             runat="server"
                             ControlToValidate="txtDOJ"
                             CssClass="text-danger"
-                            Display="Dynamic"
+                            Display="None"
                             ErrorMessage="Date of Joining is required"
-                            ValidationGroup="EmployeeForm" />
+                            />
                     </div> 
 
                 </div>
@@ -144,7 +143,7 @@
             <div class="card-body">
                 <div class="row g-3"> <!--gutter spacing between columns and rows, without g-3 fields will stuck together-->
                     <div class="col-md-6">
-                        <label class="form-label">First Name</label>
+                        <label class="form-label">First Name<span class="text-danger">*</span></label>
                         <asp:TextBox ID="txtFirstName" runat="server" CssClass="form-control"></asp:TextBox>
                         
                         <asp:RequiredFieldValidator 
@@ -152,23 +151,23 @@
                             runat="server"
                             ControlToValidate="txtFirstName"
                             CssClass="text-danger"
-                            Display="Dynamic"
+                            Display="None"
                             ErrorMessage="First Name is required"
-                            ValidationGroup="EmployeeForm" />
+                            />
                     </div> 
                     <div class="col-md-6">
-                        <label class="form-label">Last Name</label>
+                        <label class="form-label">Last Name<span class="text-danger">*</span></label>
                         <asp:TextBox ID="txtLastName" runat="server" CssClass="form-control"></asp:TextBox>
                     
                         <asp:RequiredFieldValidator ID="rfvlastName" runat="server"
                             ControlToValidate="txtLastName"
                             CssClass="text-danger"
-                            Display="Dynamic"
+                            Display="None"
                             ErrorMessage="Last Name is required"
-                            ValidationGroup="EmployeeForm" />
+                            />
                     </div> 
                     <div class="col-md-6">
-                        <label class="form-label">Gender</label>
+                        <label class="form-label">Gender<span class="text-danger">*</span></label>
                         <asp:RadioButtonList ID="rblgender" runat="server" 
                             RepeatDirection="Horizontal" 
                             RepeatLayout="Flow" 
@@ -180,13 +179,13 @@
                         <asp:RequiredFieldValidator ID="rfvGender" runat="server"
                             ControlToValidate="rblgender"
                             CssClass="text-danger"
-                            Display="Dynamic"
+                            Display="None"
                             ErrorMessage="Please select the gender"
-                            ValidationGroup="EmployeeForm" />
+                            />
                     </div>
 
                     <div class="col-md-6">
-                        <label class="form-label">Date of Birth</label>
+                        <label class="form-label">Date of Birth<span class="text-danger">*</span></label>
                         <asp:TextBox ID="txtDOB" runat="server" TextMode="Date" CssClass="form-control"></asp:TextBox>
                     
                         <ajaxToolkit:CalendarExtender 
@@ -197,12 +196,12 @@
                         <asp:RequiredFieldValidator ID="rfvDOB" runat="server"
                             ControlToValidate="txtDOB"
                             CssClass="text-danger"
-                            Display="Dynamic"
+                            Display="None"
                             ErrorMessage="Date of Birth is required"
-                            ValidationGroup="EmployeeForm" />
+                            />
                     </div> 
                     <div class="col-md-6">
-                        <label class="form-label">Phone</label>
+                        <label class="form-label">Phone<span class="text-danger">*</span></label>
                         <asp:TextBox ID="txtPhone" runat="server" CssClass="form-control"></asp:TextBox>
 
                         <asp:RequiredFieldValidator 
@@ -211,8 +210,8 @@
                             ControlToValidate="txtPhone"
                             ErrorMessage="Phone is required"
                             CssClass="text-danger"
-                            Display="Dynamic"
-                            ValidationGroup="EmployeeForm">
+                            Display="None"
+                           >
                         </asp:RequiredFieldValidator>
 
                         <asp:RegularExpressionValidator 
@@ -221,9 +220,9 @@
                             ControlToValidate="txtPhone"
                             ErrorMessage="Enter valid 10 digit phone number"
                             CssClass="text-danger"
-                            Display="Dynamic"                           
+                            Display="None"                           
                             ValidationExpression="^[0-9]{10}$"
-                            ValidationGroup="EmployeeForm"></asp:RegularExpressionValidator>
+                            ></asp:RegularExpressionValidator>
                     </div> 
                     <!--
                     <div class="col-md-6">
@@ -231,7 +230,7 @@
                         <asp:TextBox ID="txtAadhar" runat="server" CssClass="form-control"></asp:TextBox>
                     </div>--> 
                     <div class="col-md-12">
-                        <label class="form-label">Address</label>
+                        <label class="form-label">Address<span class="text-danger">*</span></label>
                         <asp:TextBox ID="txtAddress" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="3"></asp:TextBox>
                     
                         <asp:RequiredFieldValidator 
@@ -239,16 +238,16 @@
                             runat="server"
                             ControlToValidate="txtAddress"
                             CssClass="text-danger"
-                            Display="Dynamic"
+                            Display="None"
                             ErrorMessage="Address is required"
-                            ValidationGroup="EmployeeForm" />
+                            />
                     </div> 
 
                     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                         <ContentTemplate>
 
                             <div class="col-md-6 mb-3">
-                                <label class="form-label">State</label>
+                                <label class="form-label">State<span class="text-danger">*</span></label>
                                 <asp:DropDownList ID="ddlState" 
                                     runat="server" 
                                     CssClass="form-select"
@@ -260,13 +259,13 @@
                                     ControlToValidate="ddlState"
                                     InitialValue="0"
                                     CssClass="text-danger"
-                                    Display="Dynamic"
+                                    Display="None"
                                     ErrorMessage="Please select the state"
-                                    ValidationGroup="EmployeeForm" />
+                                    />
                             </div> 
 
                             <div class="col-md-6">
-                                <label class="form-label">City</label>
+                                <label class="form-label">City<span class="text-danger">*</span></label>
                                 <asp:DropDownList ID="ddlCity" runat="server" 
                                     CssClass="form-select"></asp:DropDownList>
                     
@@ -276,9 +275,9 @@
                                     ControlToValidate="ddlCity"
                                     InitialValue="0"
                                     CssClass="text-danger"
-                                    Display="Dynamic"
+                                    Display="None"
                                     ErrorMessage="Please select the City"
-                                    ValidationGroup="EmployeeForm" />
+                                    />
                             </div> 
                         </ContentTemplate>
                     </asp:UpdatePanel>
@@ -295,16 +294,16 @@
             <div class="card-body">
                 <div class="row g-3"> <!--gutter spacing between columns and rows, without g-3 fields will stuck together-->
                     <div class="col-md-6">
-                        <label class="form-label">Profile Image</label>
+                        <label class="form-label">Profile Image<span class="text-danger">*</span></label>
                         <asp:FileUpload ID="FileUpload1" runat="server" CssClass="form-control"/>
                     
                         <asp:RequiredFieldValidator 
                             ID="rfvProfileImage" runat="server"
                             ControlToValidate="FileUpload1"
                             CssClass="text-danger"
-                            Display="Dynamic"
+                            Display="None"
                             ErrorMessage="Profile Image is required"
-                            ValidationGroup="EmployeeForm" />
+                            />
                     </div> 
                     <!--div class="col-md-6">
                         <label class="form-label">Aadhar Image</label>
@@ -317,9 +316,16 @@
 
         <!-- Buttons -->
         <div class="text-end mb-5">
+            <asp:ValidationSummary 
+                ID="EmployeeForm" 
+                runat="server" 
+                ShowSummary="false" 
+                ShowMessageBox="true" 
+                HeaderText="Please correct the following errors:" 
+                CssClass="text-danger" />
+
             <asp:Button ID="btnSave" runat="server"
-                Text="Save"
-                ValidationGroup="EmployeeForm"
+                Text="Save"            
                 CssClass="btn btn-theme px-4 me-2" OnClick="btnSave_Click" />
 
             <asp:Button ID="btnCancel" runat="server"

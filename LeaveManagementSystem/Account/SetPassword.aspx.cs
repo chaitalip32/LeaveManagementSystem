@@ -22,7 +22,7 @@ namespace LeaveManagementSystem.Account
 
                     if (string.IsNullOrEmpty(token))
                     {
-                        ShowError("Invalid password reset link.");
+                        ShowAlert("Invalid password reset link.");
                         btnResetPassword.Enabled = false;
                         return;
                     }
@@ -30,7 +30,7 @@ namespace LeaveManagementSystem.Account
                 }
                 catch
                 {
-                    ShowError("Error loading the page. Please try again.");
+                    ShowAlert("Error loading the page. Please try again.");
                 }
             }           
         }
@@ -46,7 +46,7 @@ namespace LeaveManagementSystem.Account
 
                 if (string.IsNullOrEmpty(token))
                 {
-                    ShowError("Invalid password reset request.");
+                    ShowAlert("Invalid password reset request.");
                     return;
                 }
 
@@ -55,29 +55,35 @@ namespace LeaveManagementSystem.Account
 
                 if(result)
                 {
-                    lblMessage.CssClass = "alert alert-success text-center";
-                    lblMessage.Text = "Password reset successfully. Please login.";
-                    lblMessage.Visible = true;
 
-                    //lblMessage.Text = "";
-                    txtConfirmPassword.Text = "";
+                    ShowAlert("Password reset successfully. Please login.");
                 }
                 else
                 {
-                    ShowError("Reset link is invalid or exprired.");
+                    ShowAlert("Reset link is invalid or exprired.");
                 }
             }
             catch(Exception ex)
             {
-                ShowError(ex.Message);
+                ShowAlert(ex.Message);
             }
         }
 
-        private void ShowError(string message)
+        private void ShowAlert(string message, string redirectUrl = null)
         {
-            lblMessage.CssClass = "alert alert-danger text-center";
-            lblMessage.Text = message;
-            lblMessage.Visible = true;
+            string cleanMessage = message.Replace("'", "\\'");
+            string script;
+
+            if (!string.IsNullOrEmpty(redirectUrl))
+            {
+                script = $"alert('{cleanMessage}'); window.location='{redirectUrl}';";
+            }
+            else
+            {
+                script = $"alert('{cleanMessage}');";
+            }
+
+            ScriptManager.RegisterStartupScript(this, GetType(), "PopupScript", script, true);
         }
     }
 }

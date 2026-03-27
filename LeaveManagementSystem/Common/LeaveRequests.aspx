@@ -51,9 +51,18 @@
         font-size: 11px;
     }
 
-    .bg-pending { background: #fef3c7 !important; color: #92400e !important; }
-    .bg-approved { background: #dcfce7 !important; color: #166534 !important; }
-    .bg-rejected { background: #fee2e2 !important; color: #991b1b !important; }
+    .bg-pending { 
+        background: #fef3c7 !important; 
+        color: #92400e !important; 
+    }
+    .bg-approved { 
+        background: #dcfce7 !important; 
+        color: #166534 !important; 
+    }
+    .bg-rejected { 
+        background: #fee2e2 !important; 
+        color: #991b1b !important; 
+    }
 
     .action-btn {
         width: 32px;
@@ -61,13 +70,12 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background: #f1f5f9;
+        /*background: #f1f5f9;*/
         color: #2563eb;
         border-radius: 8px;
         transition: 0.2s;
     }
 
-    /* card view style- at 992px */
     @media (max-width: 992px) {
         .table-responsive {
             padding: 5px !important;
@@ -77,7 +85,6 @@
             overflow-x: hidden !important;
         }
 
-        /*targetting the header of any row*/
         .custom-table thead, 
         .custom-table tr:first-child, 
         .custom-table th { 
@@ -271,7 +278,7 @@
                     <asp:HiddenField ID="hfLeaveRequestId" runat="server" />
                 </div>
                 <div class="modal-footer">
-                    <asp:Button ID="btnUpdate" runat="server" Text="Update Request" CssClass="btn btn-primary" OnClick="btnUpdate_Click" />
+                    <asp:Button ID="btnUpdate" runat="server" Text="Submit" CssClass="btn btn-success" OnClick="btnUpdate_Click" />
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                 </div>
             </div>

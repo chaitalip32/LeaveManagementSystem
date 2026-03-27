@@ -17,10 +17,15 @@ namespace LeaveManagementSystem.Admin
             if (Session["UserId"] == null)
                 Response.Redirect("~/Account/Login.aspx");
 
+            // if (Convert.ToInt32(Session["RoleId"]) != 1)
+            //  Response.Redirect("~/Unauthorized.aspx");
             if (Convert.ToInt32(Session["RoleId"]) != 1)
-                Response.Redirect("~/Unauthorized.aspx");
+            {
+                string script = "alert('Access Denied: Admins Only'); window.location='/Account/Login.aspx';";
+                ClientScript.RegisterStartupScript(this.GetType(), "Redirect", script, true);
+            }
 
-            if(!IsPostBack)
+            if (!IsPostBack)
             {
                 GetDashboardCounts();
                 LoadDepartmentChart();
@@ -69,18 +74,16 @@ namespace LeaveManagementSystem.Admin
 
             var series = chartDept.Series["Departments"];
 
-            // Show values on bars
+            // values on bars
             series.IsValueShownAsLabel = true;
             series.LabelForeColor = System.Drawing.Color.White;
             series.Font = new System.Drawing.Font("Segoe UI", 9, System.Drawing.FontStyle.Bold);
 
-            // Bar color
             series.Color = System.Drawing.Color.FromArgb(37, 99, 235); // modern blue
-
-            // Remove border
+          
             series.BorderWidth = 0;
 
-            // Add rounded effect (pseudo)
+            // rounded effect (pseudo)
             series["BarLabelStyle"] = "Center";
 
             // Chart area styling
@@ -90,15 +93,12 @@ namespace LeaveManagementSystem.Admin
             area.AxisX.MajorGrid.Enabled = false;
             area.AxisY.MajorGrid.LineColor = System.Drawing.Color.LightGray;
 
-            // Axis styling
             area.AxisX.LabelStyle.Font = new System.Drawing.Font("Segoe UI", 9);
             area.AxisY.LabelStyle.Font = new System.Drawing.Font("Segoe UI", 9);
 
-            // Titles
             area.AxisX.Title = "Departments";
             area.AxisY.Title = "Employees";
 
-            // Remove border
             chartDept.BorderlineWidth = 0;
 
         }

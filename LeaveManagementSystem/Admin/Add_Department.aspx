@@ -25,7 +25,7 @@
                             <label class="form-label fw-bold">Department Name <span class="text-danger">*</span></label>
                             <asp:TextBox ID="txtDeptName" runat="server" CssClass="form-control" placeholder="e.g. Human Resources"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="rfvName" runat="server" ControlToValidate="txtDeptName"
-                                CssClass="text-danger small" Display="Dynamic" ErrorMessage="Department name is required" />
+                                CssClass="text-danger small" Display="None" ErrorMessage="Department name is required" />
                         </div>
 
                         <div class="mb-4">
@@ -34,6 +34,15 @@
                         </div>
 
                         <div class="text-end pt-3">
+
+                            <asp:ValidationSummary 
+                                ID="addDepartmentForm" 
+                                runat="server" 
+                                ShowSummary="false" 
+                                ShowMessageBox="true" 
+                                HeaderText="Please correct the following errors:" 
+                                CssClass="text-danger" />
+
                             <asp:Button ID="btnCancel" runat="server" Text="Back to List" CssClass="btn btn-secondary px-4 me-2" 
                                 CausesValidation="false" PostBackUrl="~/Admin/Manage_Departments.aspx" />
                             <asp:Button ID="btnSave" runat="server" Text="Save" CssClass="btn btn-theme px-4" OnClick="btnSave_Click" />

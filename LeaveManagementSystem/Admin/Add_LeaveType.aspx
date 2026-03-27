@@ -19,13 +19,13 @@
                             <div class="col-md-6 mb-3">
                                 <label class="form-label fw-bold">Leave Name <span class="text-danger">*</span></label>
                                 <asp:TextBox ID="txtLeaveType" runat="server" CssClass="form-control" placeholder="e.g. Sick Leave"></asp:TextBox>
-                                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtLeaveType" CssClass="text-danger small" ErrorMessage="Required" ValidationGroup="vgLeave" />
+                                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtLeaveType" CssClass="text-danger small" Display="None" ErrorMessage="Enter Leave type" />
                             </div>
 
                             <div class="col-md-6 mb-3">
                                 <label class="form-label fw-bold">Default Days <span class="text-danger">*</span></label>
                                 <asp:TextBox ID="txtDefaultDays" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
-                                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtDefaultDays" CssClass="text-danger small" ErrorMessage="Required" ValidationGroup="vgLeave" />
+                                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtDefaultDays" CssClass="text-danger small" Display="None" ErrorMessage="Days are required" />
                             </div>
 
                             <div class="col-md-12 mb-3">
@@ -46,10 +46,18 @@
                         </div>
 
                         <div class="text-end pt-3 border-top mt-3">
+                            <asp:ValidationSummary 
+                                ID="addLeaveForm" 
+                                runat="server" 
+                                ShowSummary="false" 
+                                ShowMessageBox="true" 
+                                HeaderText="Please correct the following errors:" 
+                                CssClass="text-danger" />
+
                             <asp:Button ID="btnCancel" runat="server" Text="Back to List" CssClass="btn btn-secondary px-4 me-2" 
                                 CausesValidation="false" PostBackUrl="~/Admin/ManageLeaves.aspx" />
                             <asp:Button ID="btnSave" runat="server" Text="Save" CssClass="btn btn-theme px-4" 
-                                OnClick="btnSave_Click" ValidationGroup="vgLeave" />
+                                OnClick="btnSave_Click"  />
                         </div>
                     </div>
                 </div>

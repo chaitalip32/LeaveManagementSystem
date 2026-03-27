@@ -36,7 +36,7 @@ namespace LeaveManagementSystem.Admin
                 rblStatus.SelectedValue = lt.IsActive ? "1" : "0";
 
                 litTitle.Text = "Update Leave Type";
-                btnSave.Text = "Update Leave Type";
+                btnSave.Text = "Update";
             }
         }
 

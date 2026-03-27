@@ -25,22 +25,33 @@
             font-size: 14px;
         }
 
-        /* Hover effect for Edit */
-        .btn-edit-style { color: #0d6efd; background-color: rgba(13, 110, 253, 0.1); }
-        .btn-edit-style:hover { background-color: #0d6efd; color: #fff !important; }
+        .btn-edit-style { 
+            color: #0d6efd;
+            background-color: transparent; 
+        }
 
-        /* Hover effect for Delete */
-        .btn-delete-style { color: #dc3545; background-color: rgba(220, 53, 69, 0.1); }
-        .btn-delete-style:hover { background-color: #dc3545; color: #fff !important; }
+        .btn-edit-style:hover { 
+            background-color: transparent; 
+        }
+
+       .btn-delete-style { 
+            color: #dc3545; 
+            background-color: transparent; 
+    }
+
+    .btn-delete-style:hover { 
+        background-color: transparent;
+    }
     </style>
 </asp:Content>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container-fluid mt-4">
+        <!--
         <h4 class="mb-4 fw-semibold">Manage Departments</h4>
-
+        -->
         <asp:LinkButton ID="btnAddNew" runat="server" PostBackUrl="~/Admin/Add_Department.aspx" CssClass="btn btn-theme mb-3">
-            <i class="fas fa-plus me-1"></i> Add New Department
+            <i class="fas fa-plus me-1"></i> Add Department
         </asp:LinkButton>
 
         <div class="table-responsive bg-white p-3 shadow-sm rounded-3">

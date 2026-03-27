@@ -1,5 +1,4 @@
-﻿/* RESET */
-html, body {
+﻿html, body {
     height: 100%;
     overflow-x: hidden;
 }
@@ -23,14 +22,15 @@ html, body {
     left:0;
     bottom:0;             
     
-    background: var(--card);
-    border-right: 1px solid var(--border);
+    background: var(--sidebar-bg);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
 
     transform: translateX(0);
     transition: transform 0.3s ease;
     z-index:2000;
 
     overflow-y: auto;      
+    overflow-x: hidden;
 }
 
 #sidebar.active{
@@ -47,7 +47,9 @@ html, body {
 .logo{
     font-size:22px;
     font-weight:600;
-    color: var(--primary);
+    color: #FFFFFF;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
 }
 
 .close-btn{
@@ -58,21 +60,28 @@ html, body {
 
 .menu{
     list-style:none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.menu li {
+    width: 100%; 
 }
 
 .menu li a{
     text-decoration:none;
-    color: var(--text-dark);
+    color: rgba(255, 255, 255, 0.8);
     font-size:15px;
     display:block;
-    padding:14px 20px;
+    padding:14px 25px;
+    transition: all 0.3s ease;
 }
 
 .menu li a:hover,
 .menu li a.active{
-    background:#eef2ff;
-    border-radius:5px;
-    color: var(--primary);
+    background: rgba(255, 255, 255, 0.15);
+    color: #ffffff !important;
+    border-radius: 0;
 }
 
 .main{
@@ -88,8 +97,8 @@ html, body {
 
 .topbar{
     height:60px;
-    background: var(--card);
-    border-bottom:1px solid var(--border);
+    background: #ffffff;
+    border-bottom:1px solid var(--border-color);
     display:flex;
     align-items:center;
     justify-content:space-between;
@@ -126,29 +135,37 @@ html, body {
     }
 }
 
-/*Form styles */
-
-/* ROOT VARIABLES */
 :root {
-    --primary-purple: #773CA2;
-    --dark-purple: #6A3394;
-    --theme-gold: #E2A63A;
-    --theme-gold-hover: #F9B12B;
-    --text-dark: #111827;
-    --border-color: #e5e7eb;
+  
+    --sidebar-bg: #4F46E5;        
+    --primary-purple: #6366F1;     
+    --dark-purple: #4338CA;       
+    
+    /* Accents & Actions 
+    --theme-gold: #F59E0B;        
+    --theme-gold-hover: #D97706;  
+    */
+
+    /* instead of gold green changed */
+    --theme-gold: #10B981;       
+    --theme-gold-hover: #059669;  
+
+    --text-dark: #1F2937;         
+    --border-color: #E5E7EB;      
+    --body-bg: #F9FAFB;     
+
+    --border-color: #D1D5DB;     /*for topbar bottom border*/
 }
 
-/* GENERAL LABEL STYLING (Fixes Red Labels & Alignment) */
 label, .form-label {
     display: flex !important;
     align-items: center;
     gap: 4px;
     margin-bottom: 8px;
     font-weight: 600;
-    color: var(--text-dark) !important; /* Forces labels to be dark, not red */
+    color: var(--text-dark) !important;
 }
 
-/* Fix for labels inside RadioButtonLists (They should NOT be flex) */
 .custom-rbl label {
     display: inline-block !important;
     font-weight: 400 !important;
@@ -163,9 +180,12 @@ label, .form-label {
     cursor: pointer;
 }
 
-/* CARD & THEME STYLING */
+
 .card-header-theme {
     background-color: var(--primary-purple) !important;
+    border-bottom: 1px solid rgba(0,0,0,0.05) !important;
+
+    font-size: 0.95rem;
     color: white !important;
     font-weight: 600;
 }
@@ -174,7 +194,10 @@ label, .form-label {
 .btn-theme {
     background-color: var(--theme-gold) !important;
     border-color: var(--theme-gold) !important;
+    border: none !important;
     color: white !important;
+    font-weight: 500 !important;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
 }
 
 .btn-theme:hover {
@@ -198,7 +221,7 @@ label, .form-label {
     border: none !important;
 }
 
-/* GRIDVIEW / TABLE ALIGNMENT */
+
 .table {
     width: 100% !important;
     margin-top: 15px;
@@ -216,7 +239,6 @@ label, .form-label {
     vertical-align: middle !important;
 }
 
-/* REQUIRED STAR STYLING */
 .text-danger {
     color: #dc3545 !important;
     font-weight: bold;

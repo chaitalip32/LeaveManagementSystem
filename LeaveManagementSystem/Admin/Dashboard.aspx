@@ -102,6 +102,8 @@
                 </div>
             </div>
 
+
+            <!--
             <div class="col-lg-3 col-md-6">
                 <div class="dashboard-card">
                     <h6>Total Requests</h6>
@@ -149,7 +151,11 @@
                     </span>
                 </div>
             </div>
+
+                -->
         </div>
+
+
 
         <div class="chart-container w-100 mt-4">
             <asp:Chart ID="chartDept" runat="server" Height="300px" Width="600px">

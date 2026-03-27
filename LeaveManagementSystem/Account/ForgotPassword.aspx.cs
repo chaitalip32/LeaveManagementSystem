@@ -25,7 +25,7 @@ namespace LeaveManagementSystem.Account
 
                 if (string.IsNullOrEmpty(email))
                 {
-                    ShowError("Please enter email.");
+                    ShowAlert("Please enter email.");
                     return;
                 }
 
@@ -33,26 +33,25 @@ namespace LeaveManagementSystem.Account
 
                 if (result)
                 {
-                    lblMessage.CssClass = "alert alert-success text-center";
-                    lblMessage.Text = "Password reset link sent to your email.";
-                    lblMessage.Visible = true;
+                    ShowAlert("Password reset link sent to your email.");
                 }
                 else
                 {
-                    ShowError("Email not found.");
+                    ShowAlert("Email not found.");
                 }
             }
             catch(Exception ex)
             {
-                ShowError(ex.Message);
+                ShowAlert(ex.Message);
             }
         }
 
-        private void ShowError(string message)
+        private void ShowAlert(string message)
         {
-            lblMessage.CssClass = "alert alert-danger text-center";
-            lblMessage.Text = message;
-            lblMessage.Visible = true;
+            string Message = message.Replace("'", "\\'");
+            string script = $"alert('{Message}');";
+
+            ScriptManager.RegisterStartupScript(this, GetType(), "ServerControlScript", script, true);
         }
     }
 }

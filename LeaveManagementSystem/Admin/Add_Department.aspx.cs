@@ -14,7 +14,6 @@ namespace LeaveManagementSystem.Admin
         {
             if (!IsPostBack)
             {
-                // Check if ID exists in URL (Edit Mode)
                 if (Request.QueryString["id"] != null)
                 {
                     int deptId;
@@ -35,10 +34,8 @@ namespace LeaveManagementSystem.Admin
                 txtDeptName.Text = dt.Rows[0]["DepartmentName"].ToString();
                 txtDeptDesc.Text = dt.Rows[0]["Description"].ToString();
 
-                // Update UI for Edit Mode
                 litTitle.Text = "Update Department";
-                btnSave.Text = "Update Department";
-                btnSave.CssClass = "btn btn-purple px-4"; // Change color for update if desired
+                btnSave.Text = "Update";
             }
         }
 
@@ -56,14 +53,14 @@ namespace LeaveManagementSystem.Admin
 
                 if (string.IsNullOrEmpty(hfDepartmentId.Value))
                 {
-                    // ADD MODE
+
                     dept.CreatedBy = userId;
                     bll.AddDepartments(dept);
                     ShowAlertAndRedirect("Department added successfully!");
                 }
                 else
                 {
-                    // UPDATE MODE
+
                     dept.DepartmentId = Convert.ToInt32(hfDepartmentId.Value);
                     dept.UpdatedBy = userId;
                     bll.EditDepartments(dept);

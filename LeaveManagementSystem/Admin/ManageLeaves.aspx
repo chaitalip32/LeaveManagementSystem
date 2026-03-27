@@ -26,13 +26,14 @@
         }
 
         .btn-edit-style { 
-            color: #0d6efd; 
-            background-color: rgba(13, 110, 253, 0.1); 
+            color: #0d6efd;
+            background-color: transparent; 
         }
 
         .btn-edit-style:hover { 
-            background-color: #0d6efd; 
-            color: #fff !important; 
+            background-color: transparent; 
+          /*background-color: #0d6efd; */  
+          /*  color: #fff !important; */
         }
         
     </style>
@@ -40,11 +41,13 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container-fluid mt-4">
+        <!--
         <h4 class="mb-4 fw-semibold">Manage Leave Types</h4>
+        -->
 
         <div class="d-flex justify-content-between align-items-center mb-3">
             <asp:LinkButton ID="btnAddNew" runat="server" PostBackUrl="~/Admin/Add_LeaveType.aspx" CssClass="btn btn-theme">
-                <i class="fas fa-plus me-1"></i> Add New Leave Type
+                <i class="fas fa-plus me-1"></i> Add Leave
             </asp:LinkButton>
             
             <div class="d-flex gap-2">
@@ -80,7 +83,7 @@
                         <ItemTemplate>
                             <div class="d-flex gap-2 justify-content-center">
                                 <asp:LinkButton ID="btnEdit" runat="server" CommandName="EditLeave" CommandArgument='<%# Eval("LeaveTypeId") %>' CssClass="action-btn btn-edit-style">
-                                    <i class="fas fa-edit"></i>
+                                    <i class="fa fa-edit"></i>
                                 </asp:LinkButton>
                                 
                             </div>

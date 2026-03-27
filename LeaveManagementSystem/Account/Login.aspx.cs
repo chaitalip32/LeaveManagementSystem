@@ -60,7 +60,7 @@ namespace LeaveManagementSystem.Account
             // Redirect
             if (user.RoleId == 2 || user.RoleId == 3)
             {
-                Response.Redirect("~/Common/LeaveRequests.aspx"); // ONE PAGE
+                Response.Redirect("~/Common/LeaveRequests.aspx"); 
             }
             else if (user.RoleId == 1)
             {

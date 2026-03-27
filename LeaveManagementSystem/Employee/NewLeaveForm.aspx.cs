@@ -193,117 +193,57 @@ true);
 
                 string subject = txtSubject.Text;
 
-                string body = @"
-                <!DOCTYPE html>
-                <html>
-                <head>
-                <meta name='viewport' content='width=device-width, initial-scale=1.0'/>
-                </head>
+                string body = $@"
+                    <!DOCTYPE html>
+                    <html>
+                    <head>
+                        <meta name='viewport' content='width=device-width, initial-scale=1.0'/>
+                        <style>
+                            body {{ font-family: 'Segoe UI', Arial, sans-serif; color: #333; line-height: 1.6; background-color: #f9f9f9; margin: 0; padding: 20px; }}
+                            .container {{ max-width: 600px; margin: auto; background: #ffffff; padding: 30px; border-radius: 10px; border: 1px solid #eee; }}
+                            .header {{ border-bottom: 2px solid #7E72FA; padding-bottom: 15px; margin-bottom: 20px; }}
+                            .header h2 {{ margin: 0; color: #7E72FA; font-size: 22px; }}
+                            .details-section {{ margin-bottom: 25px; }}
+                            .detail-item {{ margin-bottom: 10px; font-size: 15px; }}
+                            .label {{ font-weight: bold; color: #666; width: 140px; display: inline-block; }}
+                            .value {{ color: #111; }}
+                            .reason-box {{ background: #f4f6f8; padding: 15px; border-left: 4px solid #7E72FA; font-style: italic; margin-top: 10px; }}
+                            .footer {{ margin-top: 30px; font-size: 12px; color: #999; border-top: 1px solid #eee; padding-top: 15px; }}
+                            .status-badge {{ display: inline-block; padding: 4px 12px; background: #fff3cd; color: #856404; border-radius: 4px; font-weight: bold; font-size: 13px; }}
+                        </style>
+                    </head>
+                    <body>
+                        <div class='container'>
+                            <div class='header'>
+                                <h2>Leave Application Received</h2>
+                            </div>
 
-                <body style='margin:0;padding:0;background-color:#f4f6f8;font-family:Segoe UI,Arial,sans-serif;'>
+                            <p>Hello,</p>
+                            <p>A team member has submitted a new leave request. Please find the application details below:</p>
 
-                <table width='100%' cellpadding='0' cellspacing='0' style='background-color:#f4f6f8;padding:20px;'>
-                <tr>
-                <td align='center'>
+                            <div class='details-section'>
+                                <div class='detail-item'><span class='label'>Employee:</span> <span class='value'>{employeeName} (ID: {leave.EmployeeId})</span></div>
+                                <div class='detail-item'><span class='label'>Department:</span> <span class='value'>{departmentName}</span></div>
+                                <div class='detail-item'><span class='label'>Leave Type:</span> <span class='value'>{ddlLeaveType.SelectedItem.Text}</span></div>
+                                <div class='detail-item'><span class='label'>Duration:</span> <span class='value'>{leave.FromDate:dd MMM yyyy} to {leave.ToDate:dd MMM yyyy}</span></div>
+                                <div class='detail-item'><span class='label'>Total Days:</span> <span class='value'>{leave.TotalDays} Day(s)</span></div>
+                                <div class='detail-item'><span class='label'>Status:</span> <span class='status-badge'>Pending Approval</span></div>
+                            </div>
 
-                    <!-- MAIN CARD -->
-                    <table width='100%' cellpadding='0' cellspacing='0' style='max-width:600px;background:#ffffff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.05);'>
+                            <p><strong>Reason for Leave:</strong></p>
+                            <div class='reason-box'>
+                                {HttpUtility.HtmlEncode(leave.Reason)}
+                            </div>
 
-                        <!-- HEADER -->
-                        <tr>
-                            <td style='background:#7E72FA;color:#ffffff;padding:16px 20px;font-size:18px;font-weight:600;'>
-                                Leave Management System
-                            </td>
-                        </tr>
+                            <p>Please log in to the Leave Management portal to take the necessary action.</p>
 
-                        <!-- TITLE -->
-                        <tr>
-                            <td style='padding:20px 20px 10px 20px;'>
-                                <h2 style='margin:0;color:#111827;font-size:20px;'>New Leave Request</h2>
-                            </td>
-                        </tr>
-
-                        <!-- MESSAGE -->
-                        <tr>
-                            <td style='padding:0 20px 20px 20px;color:#4b5563;font-size:14px;line-height:1.5;'>
-                                A new leave request has been submitted. Below are the details:
-                            </td>
-                        </tr>
-
-                        <!-- DETAILS TABLE -->
-                        <tr>
-                            <td style='padding:0 20px 20px 20px;'>
-                                <table width='100%' cellpadding='0' cellspacing='0' style='border-collapse:collapse;font-size:14px;'>
-
-                                    <tr>
-                                        <td style='padding:10px;border-bottom:1px solid #e5e7eb;color:#6b7280;'>Employee ID</td>
-                                        <td style='padding:10px;border-bottom:1px solid #e5e7eb;font-weight:500;'>" + leave.EmployeeId + @"</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td style='padding:10px;border-bottom:1px solid #e5e7eb;color:#6b7280;'>Employee Name</td>
-                                        <td style='padding:10px;border-bottom:1px solid #e5e7eb;font-weight:500;'>" + employeeName + @"</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td style='padding:10px;border-bottom:1px solid #e5e7eb;color:#6b7280;'>Department</td>
-                                        <td style='padding:10px;border-bottom:1px solid #e5e7eb;font-weight:500;'>" + departmentName + @"</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td style='padding:10px;border-bottom:1px solid #e5e7eb;color:#6b7280;'>Leave Type</td>
-                                        <td style='padding:10px;border-bottom:1px solid #e5e7eb;font-weight:500;'>" + ddlLeaveType.SelectedItem.Text + @"</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td style='padding:10px;border-bottom:1px solid #e5e7eb;color:#6b7280;'>From Date</td>
-                                        <td style='padding:10px;border-bottom:1px solid #e5e7eb;font-weight:500;'>" + leave.FromDate.ToString("dd MMM yyyy") + @"</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td style='padding:10px;border-bottom:1px solid #e5e7eb;color:#6b7280;'>To Date</td>
-                                        <td style='padding:10px;border-bottom:1px solid #e5e7eb;font-weight:500;'>" + leave.ToDate.ToString("dd MMM yyyy") + @"</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td style='padding:10px;border-bottom:1px solid #e5e7eb;color:#6b7280;'>Total Days</td>
-                                        <td style='padding:10px;border-bottom:1px solid #e5e7eb;font-weight:500;'>" + leave.TotalDays + @"</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td style='padding:10px;vertical-align:top;color:#6b7280;'>Reason</td>
-                                        <td style='padding:10px;font-weight:500;'>" + HttpUtility.HtmlEncode(leave.Reason) + @"</td>
-                                    </tr>
-
-                                </table>
-                            </td>
-                        </tr>
-
-                        <!-- STATUS -->
-                        <tr>
-                            <td style='padding:0 20px 20px 20px;'>
-                                <span style='display:inline-block;padding:6px 12px;background:#fef3c7;color:#92400e;border-radius:20px;font-size:12px;font-weight:600;'>
-                                    Pending Approval
-                                </span>
-                            </td>
-                        </tr>
-
-                        <!-- FOOTER -->
-                        <tr>
-                            <td style='background:#f9fafb;padding:15px 20px;font-size:12px;color:#9ca3af;text-align:center;'>
-                                This is an automated email. Please do not reply.<br/>
-                                © Leave Management System
-                            </td>
-                        </tr>
-
-                    </table>
-
-                </td>
-                </tr>
-                </table>
-
-                </body>
-                </html>";
+                            <div class='footer'>
+                                This is an automated message from the Leave Management System.<br/>
+                                &copy; {DateTime.Now.Year} Leave Management System
+                            </div>
+                        </div>
+                    </body>
+                    </html>";
 
                 string employeeEmail = Session["Email"].ToString();
 
